@@ -69,9 +69,9 @@ class Form extends BaseForm
                 Col::make()->schema([
                     Card::make('Description')->schema([
                         Row::make()->schema([
-//                            RichEditor::make('short_description')->label(__('Short Description'))->required(),
-//                            RichEditor::make('description')->label(__('Description'))->required(),
-                            Upload::make('media.file_path')->label(__('Image'))->beforeSave(function ($data) {
+                            RichEditor::make('short_description')->label(__('Short Description'))->required(),
+                            RichEditor::make('description')->label(__('Description'))->required(),
+                            Upload::make('fileManagers.file_path')->label(__('Image'))->beforeSave(function ($data) {
                                 return $data;
                             }),
                         ]),

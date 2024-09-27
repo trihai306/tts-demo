@@ -35,7 +35,9 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-
+        $this->publishes([
+            __DIR__.'../resources/assets' => public_path('vendor/future'),
+        ], 'future.assets');
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -63,10 +65,6 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'future.migrations');
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/future'),
-        ], 'core.views');*/
 
         // Publishing assets.
         $this->publishes([

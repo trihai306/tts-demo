@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Adminftr\Core\Http\Models\FileManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -63,8 +64,9 @@ class Product extends Model
     /**
      * Get the product media associated with the product.
      */
-    public function media(){
-        return $this->hasMany(ProductMedia::class);
+    public function fileManagers()
+    {
+        return $this->belongsToMany(FileManager::class, 'product_file_manager');
     }
 
     /**

@@ -23,21 +23,21 @@ class FutureServiceProvider extends ServiceProvider
         $this->autoRegisterLivewireComponents(app_path('Future'));
         Blade::directive('futureStyles', function () {
             return <<<'HTML'
-        <link href="{{ asset('dist/css/tabler.css') }}?v={{ time() }}" rel="stylesheet"/>
-        <link href="{{ asset('dist/css/tabler-flags.min.css') }}?v={{ time() }}" rel="stylesheet"/>
-        <link href="{{ asset('dist/css/tabler-payments.min.css') }}?v={{ time() }}" rel="stylesheet"/>
-        <link href="{{ asset('dist/css/tabler-vendors.min.css') }}?v={{ time() }}" rel="stylesheet"/>
-        <link href="{{ asset('dist/css/tabler-vendors.rtl.min.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/tabler.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/tabler-flags.min.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/tabler-payments.min.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/tabler-vendors.min.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/tabler-vendors.rtl.min.css') }}?v={{ time() }}" rel="stylesheet"/>
         <link href="{{ asset('vendor/future/css/app.css') }}?v={{ time() }}" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
-        <link href="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/libs/star-rating.js/dist/star-rating.min.css') }}?v={{ time() }}" rel="stylesheet"/>
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css?v={{ time() }}"
               integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link href="{{ asset('dist/css/demo.min.css') }}?v={{ time() }}" rel="stylesheet"/>
-        <link href="{{ asset('dist/css/app.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/demo.min.css') }}?v={{ time() }}" rel="stylesheet"/>
+        <link href="{{ asset('vendor/future/dist/css/app.css') }}?v={{ time() }}" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/lightgallery/css/lightgallery.min.css" rel="stylesheet">
         HTML;
         });

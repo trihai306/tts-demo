@@ -61,6 +61,7 @@
 @include('notifications::toast')
 @include('notifications::alerts')
 @include('notifications::modal')
+@include('future::modal.file-manager')
 @vite(['resources/js/app.js'])
 @vite(['packages/adminftr/core/resources/assets/js/app.js'])
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
@@ -70,19 +71,17 @@
 <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 <script data-navigate-once src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script data-navigate-once src="https://cdn.jsdelivr.net/npm/lightgallery/lightgallery.min.js"></script>
-<script data-navigate-once src="{{ asset('dist/js/tabler.min.js') }}"></script>
-<script data-navigate-once src="{{ asset('dist/js/demo.min.js') }}"></script>
-<script data-navigate-once src="{{ asset('dist/js/custom.js') }}"></script>
-<script data-navigate-once src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script data-navigate-once src="{{ asset('dist/libs/nouislider/dist/nouislider.min.js') }}"></script>
-<script data-navigate-once src="{{ asset('dist/libs/litepicker/dist/litepicker.js') }}"></script>
-<script data-navigate-once src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script data-navigate-once
-        src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
-<script data-navigate-once src="{{asset('dist/libs/tinymce/tinymce.min.js')}}"></script>
-<script data-navigate-once src="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.js') }}"></script>
-<script data-navigate-once src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery/lightgallery.min.js"></script>
+<script src="{{ asset('vendor/future/dist/js/tabler.min.js') }}"></script>
+<script src="{{ asset('vendor/future/dist/js/demo.min.js') }}"></script>
+<script src="{{ asset('vendor/future/dist/js/custom.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="{{ asset('vendor/future/dist/libs/nouislider/dist/nouislider.min.js') }}"></script>
+<script src="{{ asset('vendor/future/dist/libs/litepicker/dist/litepicker.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script src="{{asset('vendor/future/dist/libs/tinymce/tinymce.min.js')}}"></script>
+<script src="{{ asset('vendor/future/dist/libs/star-rating.js/dist/star-rating.min.js') }}"></script>
+<script src="{{ asset('vendor/future/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 
 @yield('script')
 <script>

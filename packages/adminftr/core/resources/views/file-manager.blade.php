@@ -6,7 +6,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        {{ __('Media') }}
+                        {{ __('File manager') }}
                     </h2>
                 </div>
             </div>
@@ -14,7 +14,9 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <livewire:future::admin.file-manager />
+            <div class="card card-filemanager position-relative"  style="overflow: hidden;  overflow-y: auto;">
+                <livewire:future::admin.file-manager />
+            </div>
         </div>
     </div>
 

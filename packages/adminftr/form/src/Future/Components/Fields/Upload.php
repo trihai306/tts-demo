@@ -10,7 +10,7 @@ class Upload extends Field
     public bool $canHide = false;
 
     public int $maxfiles = 5;
-    public string $path = 'public';
+    public string $path = '';
     public string $acceptedFileTypes = 'image/png, image/jpeg, image/gif';
     public string $namesave = '';
     public string $disk = 'public';

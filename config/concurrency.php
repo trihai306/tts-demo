@@ -15,6 +15,6 @@ return [
     |
     */
 
-    'driver' => env('CONCURRENCY_DRIVER', 'sync'),
+    'driver' => env('CONCURRENCY_DRIVER', 'process'),
 
 ];

@@ -7,21 +7,25 @@ if (strpos($name, '.') !== false) {
     $keyName = $name;
 }
 @endphp
-<div    x-data="{{ $name }}filepond" wire:ignore>
-    <label for="{{ $name }}" class="form-label ">{{ $label }}</label>
+<div x-data="{{ $name }}filepond" wire:ignore>
+    <div  class="row justify-content-between mb-2">
+        <label for="{{ $name }}" class="form-label col-auto">{{ $label }}</label>
+        <a type="button" class="col-auto" data-bs-toggle="modal" data-bs-target="#file-manager">
+            <i class="fa fa-folder-open"></i>
+        </a>
+    </div>
     <input type="file"
-           class="filepond"
+           class="form-control"
            name="{{ $name }}"
            accept="{{$acceptedFileTypes}}"
            id="{{ $name }}"
-           multiple="{{$multiple}}"
-    >
-    @error('data.'.$name)
-    <div class="invalid-feedback d-block">
-        {{ $message }}
-    </div>
-    @enderror
+           multiple="{{$multiple}}">
 </div>
+@error('data.'.$name)
+<div class="invalid-feedback d-block">
+    {{ $message }}
+</div>
+@enderror
 
 <script>
     document.addEventListener('livewire:init', () => {

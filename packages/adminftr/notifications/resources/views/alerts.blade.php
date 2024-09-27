@@ -71,7 +71,7 @@
                 clearTimeout(this.autoHideTimeout);
                 this.autoHideTimeout = setTimeout(() => {
                     this.show = false;
-                }, 3000);
+                }, 2000);
             },
 
             showSuccess(title, message) {

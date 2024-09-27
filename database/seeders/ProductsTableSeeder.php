@@ -43,7 +43,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-            $media_product = DB::table('media')->insert([
+            $media_product = DB::table('file_managers')->insert([
                 'model_id' => $product,
                 'collection_name' => 'default',
                 'file_name' => 'product.jpg',

@@ -28,7 +28,7 @@ trait DataInitializationTrait
                 }
             }
         } else {
-            $this->data = [];
+          return redirect()->route('404');
         }
     }
 

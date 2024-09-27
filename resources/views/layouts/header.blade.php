@@ -38,45 +38,24 @@
                 <div class="offcanvas-body">
                     <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link me-4 active" href="index.html">Home</a>
+                            <a class="nav-link me-4
+                            @if(request()->routeIs('home'))
+                                active
+                               @endif
+                            " href="{{route('home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="about.html">About</a>
+                            <a class="nav-link me-4
+                             @if(request()->routeIs('about'))
+                                active
+                               @endif
+                            " href="{{route('about')}}">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" href="shop.html">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" href="blog.html">Blogs</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu animate slide border">
-                                <li>
-                                    <a href="about.html" class="dropdown-item fw-light">About <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="shop.html" class="dropdown-item fw-light">Shop <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="single-product.html" class="dropdown-item fw-light">Single Product <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="cart.html" class="dropdown-item fw-light">Cart <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="checkout.html" class="dropdown-item fw-light">Checkout <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="blog.html" class="dropdown-item fw-light">Blog <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="single-post.html" class="dropdown-item fw-light">Single Post <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                                <li>
-                                    <a href="contact.html" class="dropdown-item fw-light">Contact <span class="badge bg-primary">Pro</span></a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" href="contact.html">Contact</a>
