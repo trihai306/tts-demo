@@ -144,7 +144,7 @@
                     <template x-for="file in files">
                         <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3" x-sort:item>
                             <div class="card folder-card">
-                                <input type="checkbox" :value="file" x-model="selectedFolders" class="form-check-input mt-2 ms-2">
+                                <input type="checkbox" :value="file"  class="form-check-input mt-2 ms-2">
                                 <div class="card-body text-center">
                                     <template x-if="checkFileType(file) === 'Image'">
                                         <div class="card-image" @click="showLinkFile(file)">
