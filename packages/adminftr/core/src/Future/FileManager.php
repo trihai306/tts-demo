@@ -4,7 +4,7 @@ namespace Adminftr\Core\Future;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
-#[Lazy]
+//#[Lazy]
 class FileManager extends Component
 {
     public int $limit = 20;

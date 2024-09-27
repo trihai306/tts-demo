@@ -111,7 +111,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-12 mb-4">
-                <div class="breadcrumb">
+                <div class="breadcrumb" x-ref="breadcrumb">
                 </div>
             </div>
         </div>
@@ -143,7 +143,7 @@
                     </template>
                     <template x-for="file in files">
                         <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3" x-sort:item>
-                            <div class="card folder-card">
+                            <div class="card folder-card" style="cursor: pointer;">
                                 <input type="checkbox" :value="file"  class="form-check-input mt-2 ms-2">
                                 <div class="card-body text-center">
                                     <template x-if="checkFileType(file) === 'Image'">
@@ -174,11 +174,17 @@
                 </div>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="linkfile" aria-labelledby="exampleOffcanvasLabel" >
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="label"></h5>
+                        <h5 class="offcanvas-title" x-text="
+                            file.file_name
+                            ? file.file_name
+                            : ''
+                        "></h5>
                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <div class="img-responsive img-responsive-21x9 card-img-top" id="show-img"></div>
+                        <div class="img-responsive img-responsive-21x9 card-img-top"
+                            x-bind:style="'background-image: url(' + renderUrl(file) + ');'">
+                        ></div>
                     </div>
                 </div>
             </template>
@@ -351,7 +357,7 @@
         },
 
         createBreadcrumbs(){
-            const breadcrumbs = document.querySelector('.breadcrumb');
+            const breadcrumbs = this.$refs.breadcrumb;
             breadcrumbs.innerHTML = '';
             this.breadcrumbs.forEach((folder, index) => {
                 const breadcrumb = document.createElement('a');
@@ -368,9 +374,9 @@
                 breadcrumbs.appendChild(breadcrumb);
             });
         },
-        showLinkFile(file){
-            document.getElementById('label').innerText = file.name;
-            document.getElementById('show-img').style.backgroundImage = 'url(' + file.path + ')';
+        showLinkFile(file) {
+            this.file = file;
+            console.log(document.getElementById('linkfile'))
             const offcanvas = new bootstrap.Offcanvas(document.getElementById('linkfile'));
             offcanvas.show();
         },
