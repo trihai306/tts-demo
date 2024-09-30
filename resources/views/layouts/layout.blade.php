@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -174,7 +173,64 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="{{asset('shoplite/js/script.js')}}"></script>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging.js";
 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDoTxLGWoZWj6cgh2fAi2KYPW1N7FDvwbE",
+        authDomain: "toanthinh-c4f70.firebaseapp.com",
+        projectId: "toanthinh-c4f70",
+        storageBucket: "toanthinh-c4f70.appspot.com",
+        messagingSenderId: "688027624511",
+        appId: "1:688027624511:web:630883f107a2813183048a",
+        measurementId: "G-694TZZN0ZH"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const messaging = getMessaging(app);
+
+    // Request permission and get token
+    function requestPermissionAndGetToken() {
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+                // Get the token
+                getToken(messaging, { vapidKey: 'BCpN1bONIXke8_0Zl3F4yWXMTdJjBIc4jVIsPsFOLHL33BtxoZrs9Qdmfl5tli77eA9TkyFwPX1zzepXTLlX7iw' }).then((currentToken) => {
+                    if (currentToken) {
+                        console.log('FCM Token:', currentToken);
+                        // Send the token to your server and update the UI if necessary
+                        // ...
+                    } else {
+                        console.log('No registration token available. Request permission to generate one.');
+                        // Show permission UI or error message
+                    }
+                }).catch((err) => {
+                    console.error('An error occurred while retrieving token. ', err);
+                    // Show error message
+                });
+            } else {
+                console.error('Unable to get permission to notify.');
+            }
+        });
+    }
+
+    // Call the function to request permission and get token
+    requestPermissionAndGetToken();
+
+    // Handle incoming messages
+    onMessage(messaging, (payload) => {
+        new Notification("Sample Notification", {
+            body: "This is an example notification",
+            icon: "https://example.com/icon.png"
+        });
+    });
+</script>
 @yield('scripts')
 </body>
 </html>

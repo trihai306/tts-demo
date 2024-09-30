@@ -8,7 +8,7 @@ class RichEditor extends Field
 {
     public $plugins = 'advlist autolink lists link image charmap preview anchor pagebreak table code media ';
 
-    public $toolbar = 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | table | code | media | form';
+    public $toolbar = 'undo redo | formatselect | bold italic backcolor  | bullist numlist outdent indent | removeformat | help | table | code | media | form';
 
     public $height = 500;
 
@@ -16,7 +16,7 @@ class RichEditor extends Field
 
     public $statusbar = true;
 
-    public $readonly = false;
+    public $readonly = true;
 
     public $onInit = null;
 

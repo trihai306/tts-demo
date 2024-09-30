@@ -158,11 +158,11 @@ if (urlParams.has('theme')) {
 }
 
 // Áp dụng theme
-if (theme === "dark") {
-    document.body.setAttribute('data-bs-theme', 'dark');
-} else {
-    document.body.removeAttribute('data-bs-theme');
-}
+// if (theme === "dark") {
+//     document.body.setAttribute('data-bs-theme', 'dark');
+// } else {
+//     document.body.removeAttribute('data-bs-theme');
+// }
 Alpine.plugin(mask)
 Alpine.plugin(sort)
 Alpine.plugin(intersect)

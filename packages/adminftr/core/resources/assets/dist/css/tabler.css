@@ -167,7 +167,7 @@
     --tblr-border-style: solid;
     --tblr-border-color: #dadfe5;
     --tblr-border-color-translucent: rgba(4, 32, 69, 0.14);
-    --tblr-border-radius: 4px;
+    --tblr-border-radius: .75rem;
     --tblr-border-radius-sm: 2px;
     --tblr-border-radius-lg: 8px;
     --tblr-border-radius-xl: 1rem;
@@ -3055,7 +3055,6 @@ progress {
     max-height: 70vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    min-height: 40vh;
 }
 
 .table-responsive-sm {
@@ -18152,7 +18151,7 @@ Navbar
     --tblr-navbar-border-color: var(--tblr-border-color);
     align-items: stretch;
     min-height: 3.5rem;
-    background: var(--tblr-body-bg);
+    background: var(--tblr-header-bg);
     color: var(--tblr-navbar-color);
 }
 
@@ -19250,7 +19249,7 @@ Navbar vertical
 @media (min-width: 992px) {
     .navbar-vertical.navbar-expand-lg {
         position: fixed;
-        top: 65px;
+        top: 0;
         left: 0;
         bottom: 0;
         width: 270px;
@@ -24306,10 +24305,15 @@ Icon input
     padding-left: 2.5rem;
 }
 
+.input-icon-addon:last-child {
+    right: 0;
+    left: auto;
+}
+
 .input-icon-addon {
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 7px;
     left: 0;
     display: flex;
     align-items: center;
@@ -24318,11 +24322,6 @@ Icon input
     color: var(--tblr-icon-color);
     pointer-events: none;
     font-size: 1.2em;
-}
-
-.input-icon-addon:last-child {
-    right: 0;
-    left: auto;
 }
 
 /*

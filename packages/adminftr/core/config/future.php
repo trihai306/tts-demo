@@ -2,6 +2,7 @@
 
 return [
     'future' => [
+        'title' => 'Future',
         'cache' => [
             'enabled' => true,
             'duration' => 60,

@@ -7,7 +7,7 @@ use Livewire\Component;
 //#[Lazy]
 class FileManager extends Component
 {
-    public int $limit = 20;
+    public int $limit = 48;
     public function getFiles(string $folderName='')
     {
         $this->skipRender();

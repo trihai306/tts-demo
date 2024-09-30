@@ -67,10 +67,8 @@ abstract class BaseTable extends Component
     public function resetTable(): void
     {
         $this->resetFilters();
-        $this->resetPage();
         $this->resetFiltersDate();
         $this->resetFiltersSelect();
-        $this->reset();
         $this->search = '';
     }
 

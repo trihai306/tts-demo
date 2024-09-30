@@ -7,6 +7,8 @@ use Adminftr\Table\Future\Components\Actions\Action;
 use Adminftr\Table\Future\Components\Actions\Actions;
 use Adminftr\Table\Future\Components\Columns\TextColumn;
 use Adminftr\Table\Future\Components\FilterInput;
+use Adminftr\Table\Future\Components\Filters\Filter;
+use Adminftr\Table\Future\Components\Filters\TextFilter;
 use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
 use Adminftr\Widgets\Future\Stat;
 use App\Future\PermissionResource\Modal\Form;
@@ -29,7 +31,9 @@ class Table extends BaseTable
 
     protected function filters(): array
     {
-        return [FilterInput::make('name')];
+        return [
+            TextFilter::make('name',__('permission_name'))
+        ];
     }
 
     protected function actions(Actions $actions)
@@ -57,6 +61,6 @@ class Table extends BaseTable
         $totalPermissions = Permission::count();
         $totalWebPermissions = Permission::where('guard_name', 'web')->count();
         $totalApiPermissions = Permission::where('guard_name', 'api')->count();
-        return [Stat::make('Total Permissions', $totalPermissions)->description('Quantity'), Stat::make('Total Web Permissions', $totalWebPermissions)->description('Quantity'), Stat::make('Total Api Permissions', $totalApiPermissions)->description('Quantity'),];
+        return [Stat::make('Total Permissions', $totalPermissions), Stat::make('Total Web Permissions', $totalWebPermissions), Stat::make('Total Api Permissions', $totalApiPermissions),];
     }
 }

@@ -73,7 +73,6 @@
 <script data-navigate-once src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightgallery/lightgallery.min.js"></script>
 <script src="{{ asset('vendor/future/dist/js/tabler.min.js') }}"></script>
-<script src="{{ asset('vendor/future/dist/js/demo.min.js') }}"></script>
 <script src="{{ asset('vendor/future/dist/js/custom.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="{{ asset('vendor/future/dist/libs/nouislider/dist/nouislider.min.js') }}"></script>

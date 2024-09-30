@@ -23,6 +23,7 @@
                 {{asset('shoplite/images/main-logo.png')}}
                 " class="logo">
             </a>
+            <div class="fcm"></div>
             <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <svg class="navbar-icon">
                     <use xlink:href="#navbar-icon"></use>

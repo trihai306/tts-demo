@@ -42,7 +42,19 @@
     <tr>
         <td colspan="{{ count($this->defineColumns()) + ($this->canSelect() ? 1 : 0) + ($this->getActions() ? 1 : 0) }}"
             class="text-center">
-            No data available
+            @if($data && count($data) == 0)
+                <div class="empty">
+                    <div class="empty-img"></div>
+                    <p class="empty-title">No results found</p>
+                    <p class="empty-subtitle text-secondary">
+                        Try adjusting your search or filter to find what you're looking for.
+                    </p>
+                    <div class="empty-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                        Search again
+                    </div>
+                </div>
+            @endif
         </td>
     </tr>
     </tbody>

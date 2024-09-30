@@ -1,7 +1,6 @@
-<div id="{{ $name }}_container" x-data="{{ $name }}editor" wire:ignore>
+<div id="{{ $name }}_container" x-data="{{ $name }}editor" >
     <label class="form-label {{$required ? 'required':''}}" for="{{$name}}">{{$label}}</label>
-    <textarea id="{{$name}}" name="{{$name}}" wire:model="data.{{$name}}" :class="classes" :required="required"
-              :attributes="attributes"></textarea>
+    <textarea id="{{$name}}" name="{{$name}}" :class="classes" :required="required" wire:model="data.{{$name}}"></textarea>
     @error('data.'.$name)
     <div class="invalid-feedback d-block">
         {{ $message }}
@@ -22,6 +21,7 @@
                 if (tinymce.get(this.name)) {
                     tinymce.remove('#' + this.name);
                 }
+                console.log(document.getElementById(this.name))
                 tinymce.init({
                     selector: '#' + this.name,
                     plugins: '{{ $plugins }}',
@@ -32,7 +32,6 @@
                     height: '{{ $height }}',
                     menubar: '{{ $menubar }}',
                     statusbar: true,
-                    readonly: '{{ $readonly }}',
                     setup: (editor) => {
                         editor.on('keyup', () => {
                         @this.set('data.' + this.name, editor.getContent(), false);

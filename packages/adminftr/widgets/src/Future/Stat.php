@@ -13,7 +13,7 @@ class Stat extends Widget
 
     public string $title;
 
-    public string $description;
+    public string $description = '';
 
     public array $subDescription = [];
 
@@ -64,7 +64,7 @@ class Stat extends Widget
         return $this;
     }
 
-    public function description(string $description)
+    public function description(string $description='')
     {
         $this->description = $description;
 

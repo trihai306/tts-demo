@@ -1619,5 +1619,11 @@ input.clr-color:focus {
     stroke: #007bff; /* Change the folder icon color on hover */
 }
 .card-filemanager{
-    min-height: 80vh;
+    min-height: 100vh;
+}
+.show-file{
+    min-height: 100vh;
+}
+.files{
+
 }

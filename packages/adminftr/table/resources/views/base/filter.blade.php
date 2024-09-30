@@ -17,9 +17,5 @@
         <div class="offcanvas-footer mt-auto py-3">
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </div>
-
-        <div class="offcanvas-footer mt-auto py-3">
-            <button type="button" wire:click.prevent="resetTable" class="btn btn-primary w-100">Reset</button>
-        </div>
     </form>
 </div>

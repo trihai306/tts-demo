@@ -1,27 +1,28 @@
 <div class="page-header mb-5">
     <div class="row align-items-center">
         <div class="col">
-            <div class="page-pretitle">
-                {{$description ?? 'Future'}}
-            </div>
-            <h2 class="page-title">
-                {{$title ?? 'Table'}}
-            </h2>
+            @if($description)
+                <div class="page-pretitle">
+                    {{$description ?? ''}}
+                </div>
+            @endif
+            @if($title)
+                <h2 class="page-title">
+                    {{$title ?? ''}}
+                </h2>
+            @endif
         </div>
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
                 @foreach( $this->headerActions() as $headerAction)
                     {{ $headerAction->render()}}
                 @endforeach
-                @if($data && count($data) > 0)
                     @if($this->filters())
                         <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button"
                            aria-controls="offcanvasEnd">
                             <i class="fa fa-filter"></i>
                         </a>
                     @endif
-                @endif
-                @if($data && count($data) > 0)
                     <div x-data="{ isToggled: false }">
                         <button type="button" class="btn btn-primary h-100"
                                 data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -45,7 +46,6 @@
                             @endforeach
                         </div>
                     </div>
-                @endif
             </div>
         </div>
     </div>

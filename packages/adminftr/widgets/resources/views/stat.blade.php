@@ -30,10 +30,11 @@
                 @endif
 
             </div>
-
-            <div class="d-flex mb-2">
-                <div>{{$data->description ?? ''}}</div>
-            </div>
+            @if($data->description)
+                <div class="d-flex mb-2">
+                    <div>{{$data->description ?? ''}}</div>
+                </div>
+            @endif
 {{--            <div class="progress progress-sm">--}}
 {{--                <div class="progress-bar bg-primary" style="width: 75%" role="progressbar" aria-valuenow="75"--}}
 {{--                     aria-valuemin="0" aria-valuemax="100" aria-label="75% Complete">--}}
