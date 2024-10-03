@@ -33,7 +33,7 @@
 }
 
 .radio-group label {
-margin-left: 43px;
+    margin-left: 43px;
 }
 .sub-radio {
     margin-left: 40px;
@@ -1604,8 +1604,8 @@ input.clr-color:focus {
     width: 33% !important;
 }
 .folder-card {
-     transition: transform 0.3s ease, box-shadow 0.3s ease;
- }
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 .folder-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -1625,5 +1625,9 @@ input.clr-color:focus {
     min-height: 100vh;
 }
 .files{
-
+    max-height: 100vh;
+    overflow-y: auto;
+}
+.table-loading{
+    background: var(--tblr-header-bg);
 }

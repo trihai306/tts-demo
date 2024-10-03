@@ -28,9 +28,9 @@ class TextInput extends Field
 
     public array $action = [];
 
-    public function __construct(string $name)
+    public function __construct(string $name, ?string $label = null)
     {
-        parent::__construct($name, UrlHelper::getUrl());
+        parent::__construct($name,$label, UrlHelper::getUrl());
     }
 
     public function email()

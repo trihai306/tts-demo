@@ -6,7 +6,7 @@
 
 @if(!$canHide)
     <div wire:ignore>
-        <div id="{{ $name }}_datepicker" x-data="{{ $name }}datepicker">
+        <div id="{{ $name }}_datepicker" x-data="{{ $name }}datepicker" >
             @if($label)
                 <label class="mb-2 form-label {{$required ? 'required':''}}" for="{{ $name }}">{{ $label }}</label>
             @endif

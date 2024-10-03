@@ -5,24 +5,6 @@
         @include('future::base.filter')
     @endif
     <div class="card rounded position-relative rounded-2" style="font-size: 12px">
-        <div wire:loading>
-            <div class="empty position-absolute w-100"
-                 style="
-              z-index: 1000;
-              background: var(--tblr-navbar-color);
-             "
-            >
-                <div class="empty-img"></div>
-                <p class="empty-title">
-                    Waiting for loading data
-                </p>
-                <div class="empty-action">
-                    <div class="spinner-border text-primary" role="status" wire:loading >
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         @include('future::table-header')
         <div class="table-responsive table-loading py-0">
             <table class="table card-table table-vcenter align-middle table-row-dashed gy-5 base-table">

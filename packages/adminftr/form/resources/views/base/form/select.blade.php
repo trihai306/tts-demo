@@ -1,16 +1,15 @@
 @php
     $required = $isRequired ? 'required' : '';
     $classes = !empty($classes) ? 'form-control ' . $classes : 'form-control';
-    $parts = str_replace('.', '_', $name);
 @endphp
 
 @if(!$canHide)
     <div wire:ignore>
         @if($label)
-            <label class="form-label {{$required}}" for="{{$parts}}">{{$label}}</label>
+            <label class="form-label {{$required}}" for="{{$name}}">{{$label}}</label>
         @endif
-        <div id="dropdown{{$parts}}" x-data="dropdown{{$parts}}" class="dropdown">
-            <select id="{{$parts}}"
+        <div id="dropdown{{$name}}" x-data="dropdown{{$name}}" class="dropdown">
+            <select id="{{$name}}"
                     {{$multiple ? 'multiple' : ''}} {{$required}} class="form-select {{ $classes }}"></select>
         </div>
         @error('data.'.$name)
@@ -20,15 +19,14 @@
         @enderror
         <script>
             document.addEventListener('livewire:init', () => {
-                Alpine.data('dropdown{{$parts}}', () => ({
+                Alpine.data('dropdown{{$name}}', () => ({
                     init() {
-                        if (!document.querySelector("#{{$parts}}").classList.contains("tomselected")) {
-                            const tomSelect{{$parts}} = new TomSelect("#{{$parts}}", {
+                        if (!document.querySelector("#{{$name}}").classList.contains("tomselected")) {
+                            const tomSelect{{$name}} = new TomSelect("#{{$name}}", {
                                 valueField: "{{$valueField}}",
                                 copyClassesToDropdown: false,
                                 dropdownParent: "body",
                                 onChange: value => this.onChange(value),
-                                options: this.options,
                                 searchField: ["{{$labelField}}"],
                                 plugins: {!! json_encode($plugins) !!},
                                 maxOptions: {{$maxOptions}},
@@ -42,12 +40,13 @@
                                     }
                                 },
                                 load: function (query, callback) {
-                                    if (this.liveSearch) {
-                                    @this.call('searchSelect', query, "{{$name}}")
+
+                                    if ({{$liveSearch ? 'true' : 'false'}}) {
+                                        @this.call('searchSelect', query, "{{$name}}")
                                         .then(response => {
                                             const data = response.map(item => ({
-                                                value: item["{{$valueField}}"],
-                                                label: item["{{$labelField}}"]
+                                            {{$valueField}}: item["{{$valueField}}"],
+                                            {{$labelField}}: item["{{$labelField}}"]
                                             }));
                                             callback(data);
                                         })
@@ -57,32 +56,42 @@
                                 }
                             });
 
-                            let dataParts = @this.get("data.{{$parts}}");
-                            if (dataParts instanceof Object) {
-                                dataParts.forEach(item => {
-                                    tomSelect{{$parts}}.addItem(item["{{$valueField}}"]);
+
+                            let dataParts = @this.get("relations.{{$name}}") ? @this.get("relations.{{$name}}") : @this.get("data.{{$name}}");
+                            if (this.isRelationship) {
+                            @this.call('searchSelect', '', "{{$name}}")
+                                .then(response => {
+                                    const data = response.map(item => ({
+                                        {{$valueField}}: item["{{$valueField}}"],
+                                        {{$labelField}}: item["{{$labelField}}"]
+                                    }));
+                                    tomSelect{{$name}}.addOption(data);
+                                    if (Array.isArray(dataParts)) {
+                                        dataParts.forEach(item => {
+                                            tomSelect{{$name}}.addItem(item["{{$valueField}}"]);
+                                        });
+                                    }else{
+                                        tomSelect{{$name}}.addItem(dataParts);
+                                    }
                                 });
                             } else {
-                                tomSelect{{$parts}}.addItem(@this.get("data.{{$name}}"));
+                                tomSelect{{$name}}.addOption(@json($options));
                             }
-                            document.querySelector("#{{$parts}}").classList.add("tomselected");
+
+                            if (!Array.isArray(dataParts)) {
+                                tomSelect{{$name}}.addItem(@this.get("data.{{$name}}"));
+                            }
+                            document.querySelector("#{{$name}}").classList.add("tomselected");
                         }
                     },
                     onChange(value) {
-                    @this.set("data.{{$parts}}", value, {{$reactive ? "true" : "false"}})
-                        ;
+                        if (@this.get("relations.{{$name}}")) {
+                            @this.set("relations.{{$name}}", value,{{$reactive ? "true" : "false"}});
+                        } else {
+                            @this.set("data.{{$name}}", value,{{$reactive ? "true" : "false"}});
+                        }
                     },
-                    searchSelect(query, name) {
-                    @this.call("searchSelect", query, name).then(response => {
-                        this.options = response.map(item => ({
-                            "{{$valueField}}": item["{{$valueField}}"],
-                            "{{$labelField}}": item["{{$labelField}}"]
-                        }));
-                    })
-                        ;
-                    },
-                    options: @json($options),
-                    liveSearch: @json($liveSearch),
+                    isRelationship: {{$isRelationship ? 'true' : 'false'}},
                 }));
             });
         </script>

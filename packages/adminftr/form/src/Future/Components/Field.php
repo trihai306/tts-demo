@@ -35,23 +35,30 @@ class Field
     public $afterStateUpdated = null;
     public $beforeSave = null;
 
+    public $relationshipName;
+    public $modifyQueryUsing;
 
-    public function __construct(string $name, ?string $url = null)
+    public function __construct(string $name,string $label, ?string $url = null)
     {
         $this->name = $name;
         $this->url = $url;
     }
 
-    public function beforeSave($beforeSave)
+    public function beforeSave(callable $beforeSave)
     {
         $this->beforeSave = $beforeSave;
 
         return $this;
     }
 
-    public static function make(string $name): self
+    public static function make(string $name,string $label=''): self
     {
-        return new static($name);
+        return new static($name,$label);
+    }
+
+    public function getRelationship()
+    {
+        return false;
     }
 
     public function required(): self

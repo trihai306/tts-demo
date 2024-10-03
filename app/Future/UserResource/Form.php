@@ -53,14 +53,9 @@ class Form extends BaseForm
                 Col::make()->schema([
                     Card::make()->schema([
                         Row::make()->schema([
-                            Select::make('roles.name')->label('Vai trò')->liveSearch(
-                                function ($query) {
-                                    if ($query === '') {
-                                        return Role::limit(20)->get();
-                                    }
-
-                                    return Role::where('name', 'like', '%' . $query . '%')->limit(20)->get();
-                                }
+                            Select::make('roles')->label('Vai trò')->relationship(
+                                'roles',
+                                'name'
                             )->multiple(),
                             Select::make('gender')->label('Giới tính')->options(
                                 [

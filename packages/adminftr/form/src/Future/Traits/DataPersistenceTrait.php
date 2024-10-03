@@ -2,34 +2,21 @@
 
 namespace Adminftr\Form\Future\Traits;
 
+use Adminftr\Core\Http\Models\FileManager;
 use Exception;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 trait DataPersistenceTrait
 {
+    /**
+     * Persist the form data by processing uploads and updating or creating the model.
+     * @throws Exception
+     */
     private function persistData()
     {
-        if ($this->getUploadFields()){
-            foreach ($this->getUploadFields() as $field) {
-                $name = str_replace('.', '_', $field->name);
-                if (!is_array($this->data[$name])) {
-                    if($this->data[$name] instanceof \Illuminate\Http\UploadedFile){
-                        $getClientOriginalName = str_replace(' ', '_', $this->data[$name]->getClientOriginalName());
-                        $this->data[$name]->storeAs($field->path, $getClientOriginalName, $field->disk);
-                        $this->data[$name] = $field->path . '/' . $getClientOriginalName;
-                    }
-                }
-                else{
-                    foreach ($this->data[$name] as $key => $file) {
-                        if($file instanceof \Illuminate\Http\UploadedFile){
-                            $getClientOriginalName = str_replace(' ', '_', $file->getClientOriginalName());
-                            $file->storeAs($field->path, $getClientOriginalName, $field->disk);
-                            $this->data[$name][] = $field->path . '/' . $getClientOriginalName;
-                            unset($this->data[$name][$key]);
-                        }
-                    }
-                }
-            }
-        }
+        $this->processUploads();
         if ($this->id) {
             $this->updateModel();
         } else {
@@ -37,103 +24,205 @@ trait DataPersistenceTrait
         }
     }
 
+    /**
+     * Process file uploads for the form.
+     */
+    private function processUploads()
+    {
+        $uploadFields = $this->getUploadFields();
+        if (!$uploadFields) {
+            return;
+        }
+
+        foreach ($uploadFields as $field) {
+            if ($field->isRelationship) {
+                $name = $field->relationshipName;
+                $dataItem = $this->relations[$name] ?? null;
+            } else {
+                $name = $field->name;
+                $dataItem = $this->data[$name] ?? null;
+            }
+            if (!$dataItem) {
+                continue;
+            }
+            if ($dataItem instanceof UploadedFile) {
+                if ($field->isRelationship) {
+                    $this->relations[$name] = $this->storeUploadedFile($dataItem, $field);
+                } else {
+                    $this->data[$name] = $this->storeUploadedFile($dataItem, $field);
+                }
+            } elseif (is_array($dataItem)) {
+                if ($field->isRelationship) {
+                    $this->relations[$name] = $this->storeUploadedFiles($dataItem, $field);
+                } else {
+                    $this->data[$name] = $this->storeUploadedFiles($dataItem, $field);
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Store a single uploaded file.
+     *
+     * @param UploadedFile $file The uploaded file.
+     * @param object $field The field configuration.
+     * @return int The ID of the stored file.
+     */
+    private function storeUploadedFile(UploadedFile $file, $field)
+    {
+        $filename = str_replace(' ', '_', $file->getClientOriginalName());
+        $file->storeAs($field->path, $filename, $field->disk);
+        return FileManager::updateOrCreate([
+            'file_path' => $field->disk.$field->path . '/' . $filename,
+            'file_name' => $filename,
+            'folder_path' => $field->disk.'/'.$field->path,
+            'user_id' => auth()->id() ?? null,
+            'file_type' => Storage::disk($field->disk)->mimeType($field->path . '/' . $filename),
+            'file_size' => $file->getSize(),
+        ])->id;
+    }
+
+    /**
+     * Store multiple uploaded files.
+     *
+     * @param array $files The array of uploaded files.
+     * @param object $field The field configuration.
+     * @return array The IDs of the stored files.
+     */
+    private function storeUploadedFiles(array $files, $field)
+    {
+        $uploadedPaths = [];
+        foreach ($files as $file) {
+            if ($file instanceof UploadedFile) {
+                $uploadedPaths[] = $this->storeUploadedFile($file, $field);
+            }
+        }
+        return $uploadedPaths;
+    }
+
+    /**
+     * Update the existing model with the form data.
+     *
+     * @throws Exception If the model is not found.
+     */
     private function updateModel()
     {
-        [$modelData, $relationshipData] = $this->separateData();
         $model = $this->model::find($this->id);
         if (!$model) {
             throw new Exception('Record not found.');
         }
-
-        //remove null values
-        $modelData = array_filter($modelData, function ($value) {
-            return $value !== null;
-        });
+        $modelData = $this->data;
+        $relationshipData = $this->relations;
+        // Remove null values
+        $modelData = array_filter($modelData, fn($value) => $value !== null && $value !== '');
         $model->update($modelData);
-        foreach ($relationshipData as $relation => $data) {
-            $relationParts = explode('_', $relation, 2);
-            $relationName = $relationParts[0];
-            $keyField = $relationParts[1];
-            $field = $this->findRelationshipField($relationName.'.'.$keyField);
-
-            if ($model->$relationName()) {
-                if ($model->$relationName() instanceof \Illuminate\Database\Eloquent\Relations\BelongsToMany) {
-                    if (is_array($data) && count($data) > 0) {
-                        $model->$relationName()->detach();
-                        foreach ($data as $value){
-                            if (is_callable($field->beforeSave)){
-                                $data = call_user_func($field->beforeSave, [$keyField => $value]);
-                            }
-                           $model->$relationName()->syncWithoutDetaching($value);
-                        }
-                    }
-                }
-                else{
-                    if (is_array($data) && count($data) > 0) {
-                        foreach ($data as $value) {
-                            if ($field->beforeSave){
-                                $data = call_user_func($field->beforeSave, [$keyField => $value]);
-                            }
-                            if (is_array($value)){
-                                $value = $value[$keyField];
-                                $data[$keyField] = $data[$keyField][$keyField];
-                            }
-                            $model->$relationName()->updateOrCreate(
-                                [$keyField => $value],
-                                $data
-                            );
-                        }
-                    }
-                    else{
-                        if ($model->$relationName()->exists()){
-                            $model->$relationName()->delete();
-                        }
-                    }
-                }
-
-            }
-        }
-        $inputs =$this->getInputFields();
-        [$fields, $relations, $with] = $this->getRelationship($inputs);
-        $this->data = $this->model::with($with)->select('*')->find($this->id)->toArray();
-        foreach ($relations as $relation => $fieldName) {
-            if (isset($this->data[$relation])) {
-                $this->data[$fieldName] = $this->data[$relation];
-                unset($this->data[$relation]);
-            }
-        }
+        $this->processRelationships($model, $relationshipData);
+        $this->refreshData();
     }
 
-    private function separateData()
-    {
-        $relationshipFields = $this->getRelationshipFields();
-        $relationshipFieldNames = array_map(function ($field) {
-            return str_replace('.', '_', $field->name);
-        }, $relationshipFields);
-        $modelData = [];
-        $relationshipData = [];
-        foreach ($this->data as $key => $value) {
-            if (in_array($key, $relationshipFieldNames)) {
-                $relationshipData[$key] = $value;
-            } else {
-                $modelData[$key] = $value;
-            }
-        }
-        return [$modelData, $relationshipData];
-    }
-
+    /**
+     * Create a new model with the form data.
+     */
     private function createModel()
     {
-        [$modelData, $relationshipData] = $this->separateData();
+        $modelData = $this->data;
+        $relationshipData = $this->relations;
         $model = $this->model::create($modelData);
+        $this->processRelationships($model, $relationshipData);
+    }
 
-        foreach ($relationshipData as $relation => $data) {
-            $relationParts = explode('_', $relation, 2);
-            $relation = $relationParts[0];
-            if ($model->$relation()) {
-                if (is_array($data)) {
-                    $model->$relation()->syncWithoutDetaching($data);
-                }
+    /**
+     * Process the relationships for the model.
+     *
+     * @param object $model The model instance.
+     * @param array $relationshipData The relationship data.
+     */
+    private function processRelationships($model, $relationshipData)
+    {
+        foreach ($relationshipData as $relationKey => $data) {
+            $relationName = $relationKey;
+            $relation = $model->$relationName();
+            if (!$relation) {
+                continue;
+            }
+            $filed = $this->findInputByRelationshipName($relationName);
+            if ($relation instanceof BelongsToMany) {
+                $this->processBelongsToMany($relation, $data, $filed);
+            } else {
+                $this->processHasOneOrMany($relation, $data, $filed);
+            }
+        }
+    }
+
+    /**
+     * Process a BelongsToMany relationship.
+     *
+     * @param BelongsToMany $relation The relationship instance.
+     * @param array $data The relationship data.
+     * @param object $field The field configuration.
+     */
+    private function processBelongsToMany($relation, $data, $field)
+    {
+        if (empty($data)) {
+            return;
+        }
+        $relation->detach();
+        $syncData = [];
+        foreach ($data as $value) {
+            if (is_callable($field->beforeSave)) {
+                $value = call_user_func($field->beforeSave, [$value]);
+            }
+            $syncData[] = $value;
+        }
+        $relation->attach($syncData);
+    }
+
+    /**
+     * Process a HasOne or HasMany relationship.
+     *
+     * @param object $relation The relationship instance.
+     * @param array $data The relationship data.
+     * @param object $field The field configuration.
+     * @param string $keyField The key field for the relationship.
+     */
+    private function processHasOneOrMany($relation, $data, $field, $keyField='id')
+    {
+        if (empty($data)) {
+            if ($relation->exists()) {
+                $relation->delete();
+            }
+            return;
+        }
+
+        foreach ($data as $value) {
+            if (is_callable($field->beforeSave)) {
+                $value = call_user_func($field->beforeSave, $value);
+            }
+
+            $keyValue = is_array($value) ? ($value[$keyField] ?? null) : $value;
+
+            $relation->updateOrCreate(
+                [$keyField => $keyValue],
+                $value
+            );
+        }
+    }
+
+    /**
+     * Refresh the form data from the model.
+     */
+    private function refreshData()
+    {
+        $inputs = $this->getInputFields();
+        [$fields, $with] = $this->getRelationship($inputs);
+
+        $this->data = $this->model::with($with)->find($this->id)->toArray();
+
+        foreach ($with as $relation) {
+            if (isset($this->data[$relation])) {
+                $this->relations[$relation] = $this->data[$relation];
+                unset($this->data[$relation]);
             }
         }
     }

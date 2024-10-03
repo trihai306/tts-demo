@@ -116,7 +116,7 @@
             </div>
         </div>
        <template x-if="loading">
-           <div class="position-absolute row top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-opacity-50" style="z-index: 1050;">
+           <div class="position-absolute row top-50 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-opacity-50" style="z-index: 1050;">
                <div class="col text-center text-muted">
                    <div class="spinner-border" role="status">
                        <span class="visually-hidden">{{ __('Loading...') }}</span>
@@ -124,10 +124,10 @@
                </div>
            </div>
        </template>
-        <div class="row">
+        <div class="row list-file">
             <template x-if="!loading">
                 <template x-if="folders.length > 0 || files.length > 0 ">
-                    <div class="col-md-9 col-sm-12 col-lg-9">
+                    <div :class="setfiles.length > 0 ? 'col-md-9 col-sm-12 col-lg-9' : 'col-md-12 col-lg-12'">
                         <div class="row files" x-sort >
                             <template x-for="item in folders">
                                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3">
@@ -157,12 +157,12 @@
                                                 <div x-html="getFileIconClass(file)" @click="showLinkFile(file)"></div>
                                             </template>
                                             <template x-if="file.category === 'Video'">
-                                                <img :src="file.path" loading="lazy" alt="Video" class="img-fluid" @click="showLinkFile(file)" />
+                                                <img :src="renderUrl(file)" loading="lazy" alt="Video" class="img-fluid" @click="showLinkFile(file)" />
                                             </template>
                                             <h3 class="card-text text-truncate mb-1" x-text="file.file_name" @click="showLinkFile(file)"></h3>
                                             <div class="d-flex justify-content-between align-items-center mt-2 ms-2 me-2">
                                                 <p class="card-text mb-0" x-text="formatFileSize(file.file_size)"></p>
-                                                <a :href="'{{ asset('storage') }}/' + file.file_path" download style="z-index: 999">
+                                                <a :href="renderUrl(file)" download style="z-index: 999">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                         <path d="M12 5v13m-4 -4l4 4l4 -4" />
@@ -173,17 +173,30 @@
                                     </div>
                                 </div>
                             </template>
+                            <div></div>
                         </div>
                     </div>
                 </template>
             </template>
-            <div class="col-md-3 col-sm-12 col-lg-3">
-                <div class="card show-file">
-                    <div class="card-body">
-                        hello
+            <template x-if="!loading">
+                <template x-if="setfiles.length > 0">
+                    <div class="col-md-3 col-sm-12 col-lg-3" x-show="folders.length > 0 || files.length > 0">
+                        <div class="card show-file">
+                            <div class="card-header">
+                                <h2>{{ __('File Information') }}</h2>
+                                <!-- Icon X để đóng card, sử dụng FontAwesome -->
+                                <button class="btn btn-sm btn-secondary" style="position: absolute; top: 10px; right: 10px;">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+
+                </template>
+            </template>
+
         </div>
 
         <template x-if="
@@ -288,7 +301,7 @@
         search: '',
         loading: false,
         files: [],
-        file:[],
+        setfiles:[],
         limit:$wire.entangle('limit'),
         viewMode: 'grid',
         folders: [],
@@ -312,8 +325,7 @@
             this.getFileManager();
         },
         renderUrl(file){
-            file.file_path = file.file_path.replace('public/','');
-            return '{{asset('storage')}}/' + file.file_path;
+            return '{{asset('storage')}}/' + file.file_path.replace('public/','');
         },
         reloadFiles(){
             this.getFileManager(this.folder);
@@ -331,6 +343,9 @@
                })
            }
         },
+
+
+
         formatFileSize(size) {
             let i = Math.floor(Math.log(size) / Math.log(1024));
             let sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -338,7 +353,6 @@
         },
         createFolder(){
             this.loading = true;
-
             let path = this.breadcrumbs.join('/').replace('Home/', '');
             path = this.breadcrumbs.join('/').replace('Home', '');
             $wire.call('createFolder', this.folderName,path).then((res) => {
@@ -370,10 +384,8 @@
             });
         },
         showLinkFile(file) {
-            this.file = file;
-            console.log(document.getElementById('linkfile'))
-            const offcanvas = new bootstrap.Offcanvas(document.getElementById('linkfile'));
-            offcanvas.show();
+            this.setfiles = [];
+            this.setfiles.push(file);
         },
 
         checkFileType(file){

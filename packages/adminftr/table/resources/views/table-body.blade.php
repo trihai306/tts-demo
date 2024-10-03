@@ -1,5 +1,22 @@
 @if($data && count($data) > 0)
     <tbody>
+    <div >
+        <div class="empty position-absolute table-loading w-100" wire:loading
+             style="
+              z-index: 1000;
+             "
+        >
+            <div class="empty-img"></div>
+            <p class="empty-title">
+                Waiting for loading data
+            </p>
+            <div class="empty-action">
+                <div class="spinner-border text-primary" role="status"  >
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
     @foreach($data as $item)
         <tr wire:key="data-{{$item->id}}">
             {{--            <td>--}}
@@ -38,6 +55,23 @@
     @endforeach
     </tbody>
 @else
+    <div >
+        <div class="empty position-absolute table-loading w-100" wire:loading
+             style="
+              z-index: 1000;
+             "
+        >
+            <div class="empty-img"></div>
+            <p class="empty-title">
+                Waiting for loading data
+            </p>
+            <div class="empty-action">
+                <div class="spinner-border text-primary" role="status"  >
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <tbody>
     <tr>
         <td colspan="{{ count($this->defineColumns()) + ($this->canSelect() ? 1 : 0) + ($this->getActions() ? 1 : 0) }}"

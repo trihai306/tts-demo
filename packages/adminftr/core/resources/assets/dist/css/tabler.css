@@ -168,9 +168,9 @@
     --tblr-border-color: #dadfe5;
     --tblr-border-color-translucent: rgba(4, 32, 69, 0.14);
     --tblr-border-radius: .75rem;
-    --tblr-border-radius-sm: 2px;
-    --tblr-border-radius-lg: 8px;
-    --tblr-border-radius-xl: 1rem;
+    --tblr-border-radius-sm: 5px;
+    --tblr-border-radius-lg: 1rem;
+    --tblr-border-radius-xl: 1.25rem;
     --tblr-border-radius-xxl: 2rem;
     --tblr-border-radius-2xl: var(--tblr-border-radius-xxl);
     --tblr-border-radius-pill: 100rem;
@@ -3479,7 +3479,7 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type=checkbox] {
-    border-radius: var(--tblr-border-radius);
+    border-radius: 7px;
 }
 
 .form-check-input[type=radio] {
@@ -7260,7 +7260,7 @@ body[data-bs-theme=dark] .navbar[data-bs-theme=light] {
 
 .modal-backdrop {
     --tblr-backdrop-zindex: 1050;
-    --tblr-backdrop-bg: #182433;
+    --tblr-backdrop-bg: rgba(0,0,0,.8);
     --tblr-backdrop-opacity: 0.24;
     position: fixed;
     top: 0;

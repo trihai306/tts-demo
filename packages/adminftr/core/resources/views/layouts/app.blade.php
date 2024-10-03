@@ -31,11 +31,12 @@
     @vite([
         'packages/adminftr/core/resources/assets/sass/app.scss'
     ])
-    <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
+
 
     <script >
         !function(){try{var d=document.documentElement,n='data-theme',s='setAttribute';var e=localStorage.getItem('theme');if('system'===e||(!e&&true)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';d[s](n,'dark')}else{d.style.colorScheme = 'light';d[s](n,'light')}}else if(e){d[s](n,e|| '')}if(e==='light'||e==='dark')d.style.colorScheme=e}catch(e){}}()
     </script>
+    <script src="{{ asset('vendor/future/dist/js/demo-theme.js') }}"></script>
 </head>
 <body class="position-relative">
 <div class="page" id="page">
@@ -78,7 +79,7 @@
 <script src="{{ asset('vendor/future/dist/libs/nouislider/dist/nouislider.min.js') }}"></script>
 <script src="{{ asset('vendor/future/dist/libs/litepicker/dist/litepicker.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
-<script src="{{asset('vendor/future/dist/libs/tinymce/tinymce.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js" integrity="sha512-RUZ2d69UiTI+LdjfDCxqJh5HfjmOcouct56utQNVRjr90Ea8uHQa+gCxvxDTC9fFvIGP+t4TDDJWNTRV48tBpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('vendor/future/dist/libs/star-rating.js/dist/star-rating.min.js') }}"></script>
 <script src="{{ asset('vendor/future/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 

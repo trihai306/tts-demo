@@ -1621,3 +1621,13 @@ input.clr-color:focus {
 .card-filemanager{
     min-height: 100vh;
 }
+.show-file{
+    min-height: 100vh;
+}
+.files{
+    max-height: 100vh;
+    overflow-y: auto;
+}
+.table-loading{
+    background: var(--tblr-header-bg);
+}

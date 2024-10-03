@@ -13,7 +13,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasRoles, Notifiable;
     use HasMessages;
-    use HasRoles;
 
     protected $fillable = [
         'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password',
@@ -26,28 +25,5 @@ class User extends Authenticatable
 
     protected $dates = ['last_login_at', 'updated_at', 'created_at', 'birthday'];
 
-    public function sentMessages()
-    {
-        return $this->hasMany(Message::class, 'sender_id');
-    }
 
-    public function messageReactions()
-    {
-        return $this->hasMany(MessageReaction::class);
-    }
-
-    public function userConversations()
-    {
-        return $this->hasMany(UserConversation::class);
-    }
-
-    public function hasConversation($conversation_id)
-    {
-        return $this->conversations()->where('id', $conversation_id)->exists();
-    }
-
-    public function conversations()
-    {
-        return $this->belongsToMany(Conversation::class, 'user_conversations');
-    }
 }

@@ -29,7 +29,9 @@
 	if (selectedTheme === 'dark') {
 	  document.body.setAttribute("data-bs-theme", selectedTheme);
 	} else {
-	  document.body.removeAttribute("data-bs-theme");
+        if (document.body) {
+            document.body.removeAttribute("data-bs-theme");
+        }
 	}
 
 }));

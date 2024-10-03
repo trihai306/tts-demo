@@ -16,11 +16,17 @@ class Table extends BaseTable
     public string $title = 'Quản lý sản phẩm';
     protected string $model = Product::class;
     protected array $select = ['special_price_to', 'special_price_to', 'meta_keywords', 'meta_description', 'width', 'height', 'quantity', 'weight'];
-    protected array $searchable = ['name', 'sku', 'tax_category', 'brand', 'short_description', 'meta_title', 'price', 'special_price', 'status'];
+    protected array $searchable = ['name', 'sku', 'tax_category', 'short_description', 'meta_title', 'price', 'special_price', 'status'];
 
     protected function columns(): array
     {
-        return [TextColumn::make('id', __('ID'))->searchable()->sortable(), TextColumn::make('name', __('Name'))->sortable(), TextColumn::make('sku', __('Sku'))->sortable(), TextColumn::make('tax_category', __('Tax Category'))->sortable(), TextColumn::make('brand', __('Brand'))->sortable(), TextColumn::make('short_description', __('Short Description'))->sortable(), TextColumn::make('meta_title', __('Meta Title'))->sortable()->description(function (Product $product) {
+        return [
+            TextColumn::make('id', __('ID'))->searchable()->sortable(),
+            TextColumn::make('name', __('Name'))->sortable(),
+            TextColumn::make('sku', __('Sku'))->sortable(),
+            TextColumn::make('tax_category', __('Tax Category'))->sortable(),
+            TextColumn::make('short_description', __('Short Description'))->sortable(),
+            TextColumn::make('meta_title', __('Meta Title'))->sortable()->description(function (Product $product) {
             return new HtmlString('<p>Từ khóa: ' . $product->meta_keywords . '</p>
                                        <p>Mô tả: ' . $product->meta_description . '</p>');
         })->width('400px'), TextColumn::make('price', __('Price'))->sortable(), TextColumn::make('special_price', __('Special Price'))->width('400px')->sortable()->description(function (Product $product) {

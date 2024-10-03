@@ -16,6 +16,13 @@ trait FieldExtractionTrait
         });
     }
 
+    protected function findInputByRelationshipName($name)
+    {
+        return collect($this->getInputFields())->first(function ($field) use ($name) {
+            return $field->relationshipName === $name;
+        });
+    }
+
     protected function getRadioTreeFields()
     {
         return $this->extractFields($this->form->render(), RadioTree::class);
@@ -36,12 +43,11 @@ trait FieldExtractionTrait
     private function extractFields($fields, $type, $isRelationship = false)
     {
         return array_reduce($fields, function ($extractedFields, $field) use ($type, $isRelationship) {
-            if ($field instanceof $type && (!$isRelationship || str_contains($field->name, '.')) && !$field->canHide) {
+            if ($field instanceof $type && (!$isRelationship || $field->getRelationship()) && !$field->canHide) {
                 $extractedFields[] = $field;
             } elseif (method_exists($field, 'getFields')) {
                 $extractedFields = array_merge($extractedFields, $this->extractFields($field->getFields(), $type, $isRelationship));
             }
-
             return $extractedFields;
         }, []);
     }

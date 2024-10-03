@@ -8,6 +8,7 @@
         "php": "^8.2",
         "doctrine/dbal": "^4.1",
         "guzzlehttp/guzzle": "^7.9",
+        "kirschbaum-development/eloquent-power-joins": "^3.5",
         "kreait/laravel-firebase": "*",
         "laravel/framework": "^v11.23.5",
         "laravel/octane": "^2.5",

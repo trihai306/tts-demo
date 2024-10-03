@@ -1,4 +1,4 @@
-<form wire:submit.prevent="save" x-data x-wire-errors>
+<form wire:submit.prevent="save">
     <div class="d-flex justify-content-end mb-4 btn-list">
         @if($this->Actions())
             @foreach($this->Actions() as $action)

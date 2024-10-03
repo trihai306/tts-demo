@@ -11,6 +11,7 @@ use Adminftr\Form\Future\Components\Fields\Select;
 use Adminftr\Form\Future\Components\Fields\Text;
 use Adminftr\Form\Future\Components\Fields\TextArea;
 use Adminftr\Form\Future\Components\Fields\TextInput;
+use Adminftr\Form\Future\Components\Fields\TextNumber;
 use Adminftr\Form\Future\Components\Fields\Upload;
 use Adminftr\Form\Future\Components\Layouts\Card;
 use Adminftr\Form\Future\Components\Layouts\Col;
@@ -46,21 +47,17 @@ class Form extends BaseForm
                                 })->beforeValue(function () {
                                     return url('product/').'/';
                                 }),
-                            Select::make('brand')->label(__('Brand'))->options([
-                                ['id' => '1', 'name' => 'Brand 1'],
-                                ['id' => '2', 'name' => 'Brand 2'],
-                                ['id' => '3', 'name' => 'Brand 3'],
-                            ]),
+                            Select::make('id_brand')->label(__('Brand'))->relationship('brand', 'name'),
                         ]),
                     ]),
                 ])->md(8)->sm(12),
                 Col::make()->schema([
                     Card::make('Price')->schema([
                         Row::make()->schema([
-                            TextInput::make('price')->label(__('Price'))->required(),
-                            TextInput::make('special_price')->label(__('Special Price'))->required(),
-                            DateInput::make('special_price_from')->label(__('Special Price From'))->required(),
-                            DateInput::make('special_price_to')->label(__('Special Price To'))->required(),
+                            TextNumber::make('price')->label(__('Price'))->required(),
+                            TextNumber::make('special_price')->label(__('Special Price')),
+                            DateInput::make('special_price_from')->label(__('Special Price From')),
+                            DateInput::make('special_price_to')->label(__('Special Price To')),
                         ]),
                     ]),
                 ])->md(4)->sm(12),
@@ -71,18 +68,15 @@ class Form extends BaseForm
                         Row::make()->schema([
                             RichEditor::make('short_description')->label(__('Short Description'))->required(),
                             RichEditor::make('description')->label(__('Description'))->required(),
-                            Upload::make('fileManagers.file_path')->label(__('Image'))->beforeSave(function ($data) {
-                                return $data;
-                            }),
+                            Upload::make('fileManagers')->label(__('Image'))->relationship('images', 'file_path')
+                                ->maxFiles(5),
                         ]),
                     ]),
                 ])->md(8)->sm(12),
                 Col::make()->schema([
                     Row::make()->schema([
                         Card::make('Attributes')->schema([
-                            Checkbox::make('categories.name')->label(__('Categories'))->options(function (){
-                                return Category::select('id', 'name','description')->get()->toArray();
-                            }),
+                            Checkbox::make('categories')->label(__('Categories'))->relationship('categories', 'name'),
                         ]),
                     ]),
                 ])->md(4)->sm(12),
@@ -113,10 +107,10 @@ class Form extends BaseForm
                         'sub_title' => 'price',
                         'avatar' => [
                             'column' => function ($item) {
-                              $items = $item->media->first();
+                              $items = $item->fileManagers->first();
                                 return $item ? $item->file_path : null;
                             },
-                            'relation' => 'media',
+                            'relation' => 'fileManagers',
                         ],
                     ]),
                 ])->md(12)->sm(12),

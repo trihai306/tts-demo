@@ -3,6 +3,8 @@
 namespace Adminftr\Form\Future\Components\Fields;
 
 use Adminftr\Form\Future\Components\Field;
+use App\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class Select extends Field
@@ -19,17 +21,14 @@ class Select extends Field
 
     public bool $liveSearch = false;
 
+    public array $searchable = ['name'];
     public string $keySearch = 'name';
-
-    public Model $model;
-
     public int $limit = 50;
 
     public array $plugins = ['input_autogrow', 'caret_position'];
 
-    protected $callbackSearch;
-
-    public function options($options)
+    protected bool $isRelationship = false;
+    public function options(array|callable $options)
     {
         if (is_callable($options)) {
             $this->options = call_user_func($options);
@@ -38,6 +37,51 @@ class Select extends Field
         }
 
         return $this;
+    }
+
+    public function getRelationship()
+    {
+        return $this->isRelationship;
+    }
+
+    public function relationship(string $name, string $titleAttribute, callable $modifyQueryUsing = null)
+    {
+        $this->relationshipName = $name;
+        $this->labelField = $titleAttribute;
+        $this->modifyQueryUsing = $modifyQueryUsing;
+        $this->isRelationship = true;
+        $this->liveSearch = true;
+        return $this;
+    }
+
+    public function searchable(array $searchable)
+    {
+        $this->searchable = $searchable;
+
+        return $this;
+    }
+
+    public function getItemsRelation($model,string $value)
+    {
+        $model = new $model;
+        if (!method_exists($model, $this->relationshipName)) {
+            throw new Exception("The relationship {$this->relationshipName} does not exist on the model.");
+        }
+        $modelRelation = $model->{$this->relationshipName}();
+        $relatedModelName = $modelRelation->getRelated();
+        $query = $relatedModelName::query();
+        if ($this->modifyQueryUsing) {
+            $query = call_user_func($this->modifyQueryUsing, $query);
+        }
+        foreach ($this->searchable as $searchable) {
+            $query->orWhere($searchable, 'like', '%' . $value . '%');
+        }
+        return $query->limit($this->limit)->get()->map(function ($item) {
+            return [
+                'id' => $item->{$this->valueField},
+                'name' => $item->{$this->labelField},
+            ];
+        });
     }
 
     public function plugins($plugins)
@@ -61,16 +105,6 @@ class Select extends Field
         return $this;
     }
 
-    public function liveSearch(?callable $callback = null)
-    {
-        $this->liveSearch = true;
-        if ($callback) {
-            $this->callbackSearch = $callback;
-            $this->options = call_user_func($callback, '')->toArray();
-        }
-
-        return $this;
-    }
 
     public function keySearch(string $keySearch)
     {
@@ -79,38 +113,6 @@ class Select extends Field
         return $this;
     }
 
-    public function model(Model $model, string $valueField = 'id', string $labelField = 'name', string $keySearch = 'name')
-    {
-        $this->model = $model;
-        $this->valueField = $valueField;
-        $this->labelField = $labelField;
-        $this->keySearch = $keySearch;
-        $this->liveSearch = true;
-        $this->search('');
-        return $this;
-    }
-
-    public function search($value)
-    {
-        if ($this->callbackSearch) {
-            $this->options = call_user_func($this->callbackSearch, $value)->map(function ($model) {
-                return [
-                    $this->valueField => $model->id,
-                    $this->labelField => $model->name,
-                ];
-            })->toArray();
-
-            return $this;
-        }
-        $this->options = $this->model::where($this->keySearch, 'like', '%' . $value . '%')
-            ->limit($this->limit)->get()->map(function ($model) {
-                return [
-                    $this->valueField => $model->id,
-                    $this->labelField => $model->name,
-                ];
-            })->toArray();
-        return $this;
-    }
 
     public function limit(int $limit)
     {
@@ -125,6 +127,8 @@ class Select extends Field
 
         return $this;
     }
+
+
 
     public function render()
     {
@@ -145,6 +149,7 @@ class Select extends Field
             'keySearch' => $this->keySearch,
             'labelField' => $this->labelField,
             'plugins' => $this->plugins,
+            'isRelationship' => $this->isRelationship,
         ]);
     }
 }

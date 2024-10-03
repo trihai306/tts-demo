@@ -12,7 +12,9 @@
             <label class="form-label {{$required}}" for="{{ $name }}">{{ $label }}</label>
         @endif
 
-        <input type="number" name="{{ $name }}" wire:model="data.{{ $name }}"
+        <input  name="{{ $name }}" wire:model="data.{{ $name }}"
+               x-mask:dynamic="$money($input, ',')"
+                {{ $wireModelDirective }}="data.{{$name}}"
                {{ $required }} class="{{ $classes }}
                 @error('data.'.$name) is-invalid @enderror"
             {{ $attributes }} {{ $placeholder }}>

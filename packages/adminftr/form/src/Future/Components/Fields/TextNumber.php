@@ -35,6 +35,8 @@ class TextNumber extends Field
 
     public function render()
     {
+        $reactive = $this->reactive;
+        $wireModelDirective = $reactive ? 'wire:model.live.debounce.500ms' : 'wire:model';
         return view('form::base.form.textnumber', [
             'isRequired' => $this->isRequired,
             'classes' => $this->classes,
@@ -46,6 +48,7 @@ class TextNumber extends Field
             'label' => $this->label,
             'name' => $this->name,
             'canHide' => $this->canHide,
+            'wireModelDirective' => $wireModelDirective,
         ]);
     }
 }

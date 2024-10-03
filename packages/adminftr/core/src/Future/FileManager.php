@@ -17,10 +17,8 @@ class FileManager extends Component
             $folderPath = 'public/' . $folderName;
         }
         $folders = Storage::disk('public')->directories($folderName);
-        $offset = $this->limit - 20;
-        $files = \Adminftr\Core\Http\Models\FileManager
-            ::select('file_name', 'file_path', 'folder_path', 'file_type', 'file_size')->
-            where('folder_path', $folderPath)->offset($offset)->limit($this->limit)->get();
+        $offset = $this->limit - 48;
+        $files = \Adminftr\Core\Http\Models\FileManager::where('folder_path','=', $folderPath)->offset($offset)->limit($this->limit)->get();
         return [
             'folders' => $folders,
             'files' => $files

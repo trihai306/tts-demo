@@ -15,20 +15,26 @@ class Upload extends Field
     public string $namesave = '';
     public string $disk = 'public';
     protected bool $multiple = false;
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
-
-    public static function make(string $name): self
-    {
-        return new static($name);
-    }
+    public bool $isRelationship = false;
+    public $relationshipName = '';
+    public $filePath = '';
 
     public function multiple(bool $multiple = true)
     {
         $this->multiple = $multiple;
 
+        return $this;
+    }
+    public function getRelationship()
+    {
+        return $this->isRelationship;
+    }
+    public function relationship(string $name, string $path, callable $modifyQueryUsing = null)
+    {
+        $this->relationshipName = $name;
+        $this->filePath = $path;
+        $this->modifyQueryUsing = $modifyQueryUsing;
+        $this->isRelationship = true;
         return $this;
     }
 
@@ -66,6 +72,9 @@ class Upload extends Field
                 'wireModelDirective' => $wireModelDirective,
                 'maxfiles' => $this->maxfiles,
                 'acceptedFileTypes' => $this->acceptedFileTypes,
+                'isRelationship' => $this->isRelationship,
+                'relationshipName'=>$this->relationshipName,
+                'filePath'=>$this->filePath,
             ]);
         }
 

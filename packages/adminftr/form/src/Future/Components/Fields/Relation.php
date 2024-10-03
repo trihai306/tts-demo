@@ -116,7 +116,7 @@ class Relation extends Field
         }
 
         // Thực thi truy vấn
-        $results = $query->get();
+        $results = $query->limit($this->limit)->get();
 
         // Chuyển đổi kết quả
         return $results->map(function ($item) {

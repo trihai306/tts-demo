@@ -1,4 +1,5 @@
 <?php
+
 namespace Adminftr\Form\Future\Traits;
 
 trait SearchDataTrait
@@ -10,7 +11,9 @@ trait SearchDataTrait
 
         foreach ($selectFields as $selectField) {
             if ($selectField->name == $field) {
-                return $selectField->search($value)->options;
+                if ($selectField->getRelationship()) {
+                    return $selectField->getItemsRelation($this->model, $value);
+                }
             }
         }
 
@@ -21,6 +24,34 @@ trait SearchDataTrait
     {
         $this->skipRender();
         $radioTreeFields = $this->getRadioTreeField($name);
-      return $radioTreeFields->options;
+        return $radioTreeFields->options;
+    }
+
+    public function checkBoxOptions($name)
+    {
+        $this->skipRender();
+        $inputs = $this->getInputFields();
+        foreach ($inputs as $input) {
+            if ($input->name === $name) {
+              if ($input->getRelationship()) {
+                return $input->getOptionsInRelationship($this->model);
+              }else{
+                  return is_callable($input->options) ? call_user_func($input->options) : $input->options;
+              }
+            }
+        }
+        return [];
+    }
+
+    public function getItemsRelation($name, $search)
+    {
+        $this->skipRender();
+        $inputs = $this->getInputFields();
+        foreach ($inputs as $input) {
+            if ($input->name === $name) {
+                return $input->relation($search);
+            }
+        }
+        return [];
     }
 }

@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('url_key')->unique();
             $table->string('sku')->unique();
             $table->string('tax_category')->nullable();
-            $table->string('brand');
+            $table->string('id_brand')->nullable();
             $table->text('short_description')->nullable();
             $table->text('description');
             $table->string('meta_title');

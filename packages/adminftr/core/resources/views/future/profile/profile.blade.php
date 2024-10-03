@@ -5,7 +5,7 @@
             <h3 class="card-title">{{ __('future::profile.profile_details') }}</h3>
             <div class="row align-items-center">
                 <div class="col-auto">
-                    <span class="avatar avatar-xl" style="background-image: url({{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('static/avatars/001f.jpg') }})"></span>
+                    <span class="avatar avatar-xl" style="background-image: url({{ auth()->user()->avatar ? asset('storage/'.auth()->user()->avatar) : asset('static/avatars/001f.jpg') }})"></span>
                 </div>
                 <div class="col-auto">
                     <label class="btn" for="avatarUpload">

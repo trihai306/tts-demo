@@ -28,6 +28,13 @@
       'Image' => 'Intervention\\Image\\Laravel\\Facades\\Image',
     ),
   ),
+  'kirschbaum-development/eloquent-power-joins' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Kirschbaum\\PowerJoins\\PowerJoinsServiceProvider',
+    ),
+  ),
   'kreait/laravel-firebase' => 
   array (
     'providers' => 

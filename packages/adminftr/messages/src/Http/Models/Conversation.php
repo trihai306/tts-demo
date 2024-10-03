@@ -32,4 +32,9 @@ class Conversation extends Model
     {
         return $this->hasMany(UserConversation::class);
     }
+
+    public function lastSeenMessage()
+    {
+        return $this->hasOne(UserConversation::class)->latest();
+    }
 }

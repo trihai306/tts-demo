@@ -20,7 +20,7 @@ class Product extends Model
         'url_key',
         'sku',
         'tax_category',
-        'brand',
+        'id_brand',
         'short_description',
         'description',
         'meta_title',
@@ -64,9 +64,9 @@ class Product extends Model
     /**
      * Get the product media associated with the product.
      */
-    public function fileManagers()
+    public function images()
     {
-        return $this->belongsToMany(FileManager::class, 'product_file_manager');
+        return $this->belongsToMany(FileManager::class, 'product_file_manager', 'product_id', 'file_manager_id');
     }
 
     /**
@@ -91,5 +91,12 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');
+    }
+
+    /**
+     * Get the brand that owns the product.
+     */
+    public function brand(){
+        return $this->belongsTo(Brand::class);
     }
 }
