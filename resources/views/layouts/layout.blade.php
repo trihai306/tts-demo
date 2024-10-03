@@ -166,6 +166,7 @@
 @yield('content')
 @include('layouts.footer')
 <button id="request-permission-btn">Enable Notifications</button>
+<p id="token"></p>
 @livewireScripts
 <script src="{{asset('shoplite/js/jquery-1.11.0.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -204,6 +205,7 @@
                 getToken(messaging, { vapidKey: 'BCpN1bONIXke8_0Zl3F4yWXMTdJjBIc4jVIsPsFOLHL33BtxoZrs9Qdmfl5tli77eA9TkyFwPX1zzepXTLlX7iw' }).then((currentToken) => {
                     if (currentToken) {
                         console.log('FCM Token:', currentToken);
+                        document.getElementById('token').textContent = currentToken;
                         // Send the token to your server and update the UI if necessary
                         // ...
                     } else {
