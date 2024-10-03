@@ -121,7 +121,6 @@
 </svg>
 
 @include('components.loading')
-
 <div class="search-popup">
     <div class="search-popup-container">
 
@@ -166,6 +165,7 @@
 @include('layouts.header')
 @yield('content')
 @include('layouts.footer')
+<button id="request-permission-btn">Enable Notifications</button>
 @livewireScripts
 <script src="{{asset('shoplite/js/jquery-1.11.0.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -196,7 +196,7 @@
     const messaging = getMessaging(app);
 
     // Request permission and get token
-    function requestPermissionAndGetToken() {
+    function requestPermissionAndGetToken(message) {
         Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
                 console.log('Notification permission granted.');
@@ -221,7 +221,7 @@
     }
 
     // Call the function to request permission and get token
-    requestPermissionAndGetToken();
+    document.getElementById('request-permission-btn').addEventListener('click', requestPermissionAndGetToken);
 
     // Handle incoming messages
     onMessage(messaging, (payload) => {
