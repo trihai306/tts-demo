@@ -1,8 +1,10 @@
 {
-    "name": "Vườn an",
-    "short_name": "Vườn an",
-    "display": "standalone",
-    "start_url": "/",
-    "background_color": "#ffffff",
-    "description": "A description of your app",
+    "name": "Vuon an",
+    "icons": [
+        {
+            "src": "https://cms.cmsfuture.online/shoplite/images/banner-1.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
 }
