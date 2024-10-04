@@ -1,4 +1,21 @@
 <div x-data="filemanager">
+    <div x-show="contextMenuVisible"
+         @click.away="hideContextMenu()"
+         :style="'position: fixed; top: ' + contextMenuY + 'px; left: ' + contextMenuX + 'px; z-index: 1000;' + 'display: ' + (contextMenuVisible ? 'block' : 'none')"
+         class="dropdown-menu show">
+        <template x-if="contextMenuItemType === 'folder'">
+            <div>
+                <a class="dropdown-item" href="#" @click.prevent="renameFolder(contextMenuItem)">Đổi tên thư mục</a>
+                <a class="dropdown-item" href="#" @click.prevent="deleteFolder(contextMenuItem)">Xóa thư mục</a>
+            </div>
+        </template>
+        <template x-if="contextMenuItemType === 'file'">
+            <div>
+                <a class="dropdown-item" href="#" @click.prevent="renameFile(contextMenuItem)">Đổi tên tệp</a>
+                <a class="dropdown-item" href="#" @click.prevent="deleteFile(contextMenuItem)">Xóa tệp</a>
+            </div>
+        </template>
+    </div>
     <div class="card-body position-relative h-100">
         <div class="row justify-content-between">
             <div class="col-auto">
@@ -131,7 +148,8 @@
                         <div class="row files" x-sort >
                             <template x-for="item in folders">
                                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3">
-                                    <div class="card folder-card h-100">
+                                    <div class="card folder-card h-100"
+                                         @contextmenu="showContextMenu($event, item, 'folder')">
                                         <input type="checkbox" :value="item" x-model="selectedFolders" class="form-check-input mt-2 ms-2">
                                         <div class="card-body text-center" style="cursor: pointer;" @click="selectFolder(item)" x-sort:item>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-folder">
@@ -145,7 +163,8 @@
                             </template>
                             <template x-for="file in files">
                                 <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3" x-sort:item>
-                                    <div class="card folder-card" style="cursor: pointer;">
+                                    <div class="card folder-card" style="cursor: pointer;"
+                                         @contextmenu="showContextMenu($event, file, 'file')">
                                         <input type="checkbox" :value="file"  class="form-check-input mt-2 ms-2">
                                         <div class="card-body text-center">
                                             <template x-if="checkFileType(file) === 'Image'">
@@ -308,9 +327,12 @@
         folder:'',
         selectedFolders: [],
         folderName:'',
-        breadcrumbs: [
-            'Home',
-        ],
+        breadcrumbs: ['Home'],
+        contextMenuVisible: false,
+        contextMenuX: 0,
+        contextMenuY: 0,
+        contextMenuItem: null,
+        contextMenuItemType: '',
         init() {
             $wire.on('fileUploaded', () => {
                 this.getFileManager();
@@ -323,6 +345,43 @@
             });
             this.createBreadcrumbs();
             this.getFileManager();
+        },
+        showContextMenu(event, item, itemType) {
+            event.preventDefault(); // Ngăn chặn menu chuột phải mặc định
+            this.contextMenuVisible = true;
+            this.contextMenuX = event.clientX;
+            this.contextMenuY = event.clientY;
+            this.contextMenuItem = item;
+            this.contextMenuItemType = itemType;
+        },
+        hideContextMenu() {
+            this.contextMenuVisible = false;
+            this.contextMenuItem = null;
+            this.contextMenuItemType = '';
+        },
+        renameFolder(folder) {
+            // Thực hiện logic đổi tên thư mục
+            alert('Đổi tên thư mục: ' + folder);
+            this.hideContextMenu();
+        },
+        renameFile(file) {
+            // Thực hiện logic đổi tên tệp
+            alert('Đổi tên tệp: ' + file.file_name);
+            this.hideContextMenu();
+        },
+        deleteFile(file) {
+            // Thực hiện logic xóa tệp
+            $wire.call('deleteFile', file).then(() => {
+                this.files = this.files.filter(f => f !== file);
+            });
+            this.hideContextMenu();
+        },
+        deleteFolder(folder) {
+            // Thực hiện logic xóa thư mục
+            $wire.call('deleteFolder', folder).then(() => {
+                this.folders = this.folders.filter(item => item !== folder);
+            });
+            this.hideContextMenu();
         },
         renderUrl(file){
             return '{{asset('storage')}}/' + file.file_path.replace('public/','');

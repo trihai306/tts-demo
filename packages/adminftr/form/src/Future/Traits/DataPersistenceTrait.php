@@ -92,11 +92,16 @@ trait DataPersistenceTrait
      */
     private function storeUploadedFiles(array $files, $field)
     {
+        $isFileArray = false;
         $uploadedPaths = [];
         foreach ($files as $file) {
             if ($file instanceof UploadedFile) {
+                $isFileArray = true;
                 $uploadedPaths[] = $this->storeUploadedFile($file, $field);
             }
+        }
+        if (!$isFileArray) {
+            return $files;
         }
         return $uploadedPaths;
     }
@@ -173,7 +178,12 @@ trait DataPersistenceTrait
             if (is_callable($field->beforeSave)) {
                 $value = call_user_func($field->beforeSave, [$value]);
             }
-            $syncData[] = $value;
+            if (is_array($value)) {
+                $syncData[] = $value['id'];
+            }
+            else {
+                $syncData[] = $value;
+            }
         }
         $relation->attach($syncData);
     }

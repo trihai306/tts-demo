@@ -79,7 +79,6 @@
                     existingFiles.forEach(fileData => {
                         const fileUrl = "{{ asset('storage') }}/" + fileData['{{ $filePath ?? $keyName }}'];
                         pond.addFile(fileUrl).then(file => {
-                            // Đánh dấu tệp đã được xử lý
                             file.setMetadata('uploaded', true);
                         });
                     });

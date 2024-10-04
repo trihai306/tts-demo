@@ -31,6 +31,24 @@ class FileManager extends Component
         return \Adminftr\Core\Http\Models\FileManager::where('file_name', $file)->first();
     }
 
+    public function deleteFile($file)
+    {
+        $this->skipRender();
+        $file = \Adminftr\Core\Http\Models\FileManager::where('file_name', $file)->first();
+        if ($file) {
+            $file->delete();
+            return $file->file_name;
+        }
+        return;
+    }
+
+
+    public function deleteFolder($name)
+    {
+        $this->skipRender();
+        Storage::disk('public')->deleteDirectory($name);
+        return $name;
+    }
 
     public function createFolder($folderName, $path)
     {

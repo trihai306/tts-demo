@@ -17,6 +17,20 @@
       0 => 'Hammerstone\\FastPaginate\\FastPaginateProvider',
     ),
   ),
+  'imanghafoori/laravel-microscope' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Imanghafoori\\LaravelMicroscope\\LaravelMicroscopeServiceProvider',
+    ),
+  ),
+  'imanghafoori/smart-realtime-facades' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Imanghafoori\\RealtimeFacades\\SmartRealTimeFacadesProvider',
+    ),
+  ),
   'intervention/image-laravel' => 
   array (
     'providers' => 
