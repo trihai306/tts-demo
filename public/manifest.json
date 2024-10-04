@@ -1,6 +1,6 @@
 {
     "name": "Vuon an",
-    "display": "fullscreen",
+    "display": "standalone",
     "icons": [
         {
             "src": "https://cms.cmsfuture.online/shoplite/images/banner-1.png",
