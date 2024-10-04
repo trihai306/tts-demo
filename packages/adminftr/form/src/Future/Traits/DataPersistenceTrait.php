@@ -35,8 +35,8 @@ trait DataPersistenceTrait
         }
 
         foreach ($uploadFields as $field) {
-            if ($field->isRelationship) {
-                $name = $field->relationshipName;
+            if ($field->getRelationship()) {
+                $name = $field->getRelationshipName();
                 $dataItem = $this->relations[$name] ?? null;
             } else {
                 $name = $field->name;
@@ -46,13 +46,13 @@ trait DataPersistenceTrait
                 continue;
             }
             if ($dataItem instanceof UploadedFile) {
-                if ($field->isRelationship) {
+                if ($field->getRelationship()) {
                     $this->relations[$name] = $this->storeUploadedFile($dataItem, $field);
                 } else {
                     $this->data[$name] = $this->storeUploadedFile($dataItem, $field);
                 }
             } elseif (is_array($dataItem)) {
-                if ($field->isRelationship) {
+                if ($field->getRelationship()) {
                     $this->relations[$name] = $this->storeUploadedFiles($dataItem, $field);
                 } else {
                     $this->data[$name] = $this->storeUploadedFiles($dataItem, $field);
@@ -72,7 +72,7 @@ trait DataPersistenceTrait
     private function storeUploadedFile(UploadedFile $file, $field)
     {
         $filename = str_replace(' ', '_', $file->getClientOriginalName());
-        $file->storeAs($field->path, $filename, $field->disk);
+        $file->storeAs($field->disk.$field->path, $filename, $field->disk);
         return FileManager::updateOrCreate([
             'file_path' => $field->disk.$field->path . '/' . $filename,
             'file_name' => $filename,
@@ -175,8 +175,8 @@ trait DataPersistenceTrait
         $relation->detach();
         $syncData = [];
         foreach ($data as $value) {
-            if (is_callable($field->beforeSave)) {
-                $value = call_user_func($field->beforeSave, [$value]);
+            if (is_callable($field->getBeforeSave())) {
+                $value = call_user_func($field->getBeforeSave(), [$value]);
             }
             if (is_array($value)) {
                 $syncData[] = $value['id'];

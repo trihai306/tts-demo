@@ -4,7 +4,7 @@ namespace Adminftr\Form\Future\Components\Layouts;
 
 class Col
 {
-    public $canHide = false;
+    protected bool $canHide = false;
 
     protected $classes = '';
 
@@ -44,6 +44,12 @@ class Col
 
         return $this;
     }
+
+    public function canHide(): bool
+    {
+        return $this->canHide;
+    }
+
 
     public function schema(array $content)
     {
@@ -90,7 +96,7 @@ class Col
     {
         $htmlRender = '';
         foreach ($this->content as $content) {
-            if (!$content->canHide) {
+            if (!$content->canHide()) {
                 if(!empty($content->col)){
                    $this->classes = '';
                     $this->classes .= " col-{$content->col['sm']} col-md-{$content->col['md']} col-lg-{$content->col['lg']} mt-2";

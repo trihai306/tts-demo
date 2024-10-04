@@ -9,7 +9,7 @@ trait DataValidationTrait
         $inputs = $this->getInputFields();
         $rules = [];
         foreach ($inputs as $input) {
-            if ($input->rule) {
+            if ($input->getRules()) {
                 if (str_contains($input->rule, ',')) {
                     $input->rule = str_replace(',', '|', $input->rule);
                     $input->rule = preg_replace('/\s+/', '', $input->rule);
@@ -28,7 +28,7 @@ trait DataValidationTrait
         $inputs = $this->getInputFields();
         $messages = [];
         foreach ($inputs as $input) {
-            if (!empty($input->messages)) {
+            if (!empty($input->getMessages())) {
                 $messages["data.{$input->name}"] = $input->messages;
             }
         };

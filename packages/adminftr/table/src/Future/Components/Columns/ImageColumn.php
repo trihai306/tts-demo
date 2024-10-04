@@ -43,6 +43,13 @@ class ImageColumn extends Column
     protected $stacked;
 
     /**
+     * The callback to customize the model value before rendering.
+     *
+     * @var callable|null
+     */
+    protected $valueCallback;
+
+    /**
      * The width of the image in pixels.
      *
      * @var string|null
@@ -77,6 +84,19 @@ class ImageColumn extends Column
     public function stacked(callable $callback)
     {
         $this->stacked = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Set a callback to customize the model value before rendering.
+     *
+     * @param callable $callback
+     * @return $this
+     */
+    public function value(callable $callback)
+    {
+        $this->valueCallback = $callback;
 
         return $this;
     }
@@ -141,25 +161,31 @@ class ImageColumn extends Column
      */
     public function render(Model $model)
     {
+        // Apply the value callback if provided.
+        if ($this->valueCallback) {
+            $value = call_user_func($this->valueCallback, $model);
+        } else {
+            $value = $model->{$this->name};
+        }
+
         // If the image URL is not valid, use the default image URL.
-        if (! filter_var($model->{$this->name}, FILTER_VALIDATE_URL)) {
-            $model->{$this->name} = Storage::disk($this->disk)->url($model->{$this->name});
+        if (! filter_var($value, FILTER_VALIDATE_URL)) {
+            $value = Storage::disk($this->disk)->url($value);
         }
 
         // Use the render callback if provided, otherwise use the image URL from the model.
-        $url = $this->stacked ? call_user_func($this->stacked, $model) : $model->{$this->name};
+        $url = $this->stacked ? call_user_func($this->stacked, $model) : $value;
         $parsedUrl = parse_url($url);
 
         // Ensure the URL has a scheme.
         if (! isset($parsedUrl['scheme'])) {
-            $url = 'http://'.$url;
+            $url = 'http://' . $url;
         }
 
         // Determine the CSS class for the image based on its shape.
         $circularClass = $this->circular ? 'rounded-circle' : 'rounded';
 
         // Return the HTML string for the image.
-        return new HtmlString("<img src='{$url}' class='img-fluid {$circularClass}'
-style='height: {$this->height}px;width: {$this->width}px' alt=''/>");
+        return new HtmlString("<img src='{$url}' class='img-fluid {$circularClass}' style='height: {$this->height}px;width: {$this->width}px' alt='' />");
     }
 }

@@ -27,7 +27,7 @@ trait DataInitializationTrait
      * Load data from the model based on the provided inputs.
      *
      * @param array $inputs The input fields for the form.
-     * @return array The loaded data.
+     * @return array|mixed[] The loaded data.
      */
     private function loadModelData($inputs)
     {
@@ -56,11 +56,12 @@ trait DataInitializationTrait
     private function getRelationship($inputs)
     {
         $fieldNames = array_map(fn($input) => [
-            'name' => $input->relationshipName ?? $input->name,
+            'name' => $input->getRelationshipName() ?? $input->name,
             'isRelationship' => $input->getRelationship()
-        ], array_filter($inputs, fn($input) => $input->canHide !== true));
+        ], array_filter($inputs, fn($input) => $input->canHide() !== true));
         $fields = [];
         $with = [];
+
         foreach ($fieldNames as $fieldName) {
             if (str_contains($fieldName['name'], '_confirmation')) {
                 $fieldName['name'] = str_replace('_confirmation', '', $fieldName['name']);

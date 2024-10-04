@@ -5,6 +5,7 @@ namespace App\Future\ProductResource;
 use Adminftr\Table\Future\BaseTable;
 use Adminftr\Table\Future\Components\Actions\Action;
 use Adminftr\Table\Future\Components\Actions\Actions;
+use Adminftr\Table\Future\Components\Columns\ImageColumn;
 use Adminftr\Table\Future\Components\Columns\TextColumn;
 use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
 use Adminftr\Widgets\Future\Stat;
@@ -17,11 +18,16 @@ class Table extends BaseTable
     protected string $model = Product::class;
     protected array $select = ['special_price_to', 'special_price_to', 'meta_keywords', 'meta_description', 'width', 'height', 'quantity', 'weight'];
     protected array $searchable = ['name', 'sku', 'tax_category', 'short_description', 'meta_title', 'price', 'special_price', 'status'];
-
+    protected array $with = [
+        'images','brand'
+    ];
     protected function columns(): array
     {
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
+            ImageColumn::make('image',__('Image'))->value(function ($model){
+                return $model->images->first()->file_path ?? '';
+            }),
             TextColumn::make('name', __('Name'))->sortable(),
             TextColumn::make('sku', __('Sku'))->sortable(),
             TextColumn::make('tax_category', __('Tax Category'))->sortable(),

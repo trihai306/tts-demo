@@ -6,9 +6,9 @@ use Adminftr\Form\Future\Components\UrlHelper;
 
 class Text
 {
-    public bool $canHide = false;
+    protected bool $canHide = false;
 
-    protected string $name;
+    public string $name;
 
     protected string $tag = 'p'; // CSS classes
 
@@ -44,13 +44,6 @@ class Text
     public function tag(string $tag)
     {
         $this->tag = $tag;
-
-        return $this;
-    }
-
-    public function name(string $name)
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -98,6 +91,12 @@ class Text
 
         return $this;
     }
+
+    public function canHide(): bool
+    {
+        return $this->canHide;
+    }
+
 
     public function canUpdate($hide)
     {

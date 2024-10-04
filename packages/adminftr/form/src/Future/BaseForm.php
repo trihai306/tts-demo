@@ -117,8 +117,8 @@ abstract class BaseForm extends Component
     {
         $this->skipRender();
         foreach ($this->getInputFields() as $input) {
-            if ($input->afterStateUpdated && 'data.' . $input->name == $property) {
-                $this->data = call_user_func($input->afterStateUpdated, $this->data);
+            if ($input->getAfterStateUpdated() && 'data.' . $input->name == $property) {
+                $this->data = call_user_func($input->getAfterStateUpdated(), $this->data);
             }
         }
     }

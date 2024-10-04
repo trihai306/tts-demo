@@ -4,7 +4,7 @@ namespace Adminftr\Form\Future\Components\Layouts;
 
 class Row
 {
-    public $canHide = false;
+    protected bool $canHide = false;
     protected $classes = '';
     protected $attributes = [];
     protected $cols = [];
@@ -18,6 +18,11 @@ class Row
         return $this;
     }
 
+    public function canHide()
+    {
+        return $this->canHide;
+    }
+
     public function addAttribute(string $name, string $value)
     {
         $this->attributes[$name] = $value;
@@ -27,7 +32,7 @@ class Row
 
     public function addCol($col)
     {
-        if (!$col->canHide) {
+        if (!$col->canHide()) {
             if (!($col instanceof Col)) {
                 $col = Col::make()->schema([$col]);
                 $col->addClasses($this->defaultColClasses);

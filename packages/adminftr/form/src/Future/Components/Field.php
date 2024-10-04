@@ -5,42 +5,34 @@ namespace Adminftr\Form\Future\Components;
 class Field
 {
     public string $name;
-
-    public bool $isRequired = false;
-
-    public string $classes = '';
-
-    public array $StyleAttributes = [];
-
-    public string $rule = '';
-
-    public mixed $defaultValue = null;
-
     public string $label = '';
+    protected bool $isRequired = false;
+    protected string $classes = '';
+    protected array $StyleAttributes = [];
+    protected string $rule = '';
+    protected mixed $defaultValue = null;
+    protected bool $reactive = false;
+    protected array $messages = [];
+    protected string $helpText = '';
+    protected bool $canHide = false;
 
-    public bool $reactive = false;
+    protected array $col = [];
 
-    public array $messages = [];
+    protected string $placeholder = '';
 
-    public string $helpText = '';
+    protected ?string $url;
 
-    public bool $canHide = false;
+    protected $afterStateUpdated = null;
+    protected $beforeSave = null;
 
-    public array $col = [];
-
-    public string $placeholder = '';
-
-    public ?string $url;
-
-    public $afterStateUpdated = null;
-    public $beforeSave = null;
-
-    public $relationshipName;
-    public $modifyQueryUsing;
+    protected string $relationshipName;
+    protected $modifyQueryUsing;
+    protected $rules;
 
     public function __construct(string $name,string $label, ?string $url = null)
     {
-        $this->name = $name;
+        $this->name = trim($name);
+        $this->label = trim($label);
         $this->url = $url;
     }
 
@@ -51,9 +43,79 @@ class Field
         return $this;
     }
 
+    public function isRequired(): bool
+    {
+        return $this->isRequired;
+    }
+
+    public function getClasses(): string
+    {
+        return $this->classes;
+    }
+
+    public function getStyleAttributes(): array
+    {
+        return $this->StyleAttributes;
+    }
+
+    public function getRule()
+    {
+        return $this->rule;
+    }
+
+    public function isReactive(): bool
+    {
+        return $this->reactive;
+    }
+
+    public function getMessages(): array
+    {
+        return $this->messages;
+    }
+
+    public function canHide(): bool
+    {
+        return $this->canHide;
+    }
+
+    public function getCol(): array
+    {
+        return $this->col;
+    }
+
+    public function getPlaceholder(): string
+    {
+        return $this->placeholder;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function getAfterStateUpdated()
+    {
+        return $this->afterStateUpdated;
+    }
+
+    public function getBeforeSave()
+    {
+        return $this->beforeSave;
+    }
+
+    public function getRelationshipName(): ?string
+    {
+        return $this->relationshipName ?? null;
+    }
+
+    public function getModifyQueryUsing(): string
+    {
+        return $this->modifyQueryUsing;
+    }
+
     public static function make(string $name,string $label=''): self
     {
-        return new static($name,$label);
+        return new static(trim($name),trim($label));
     }
 
     public function getRelationship()
@@ -91,7 +153,7 @@ class Field
 
     public function label(string $label): self
     {
-        $this->label = $label;
+        $this->label = trim($label);
 
         return $this;
     }
@@ -159,7 +221,7 @@ class Field
         return $this;
     }
 
-    public function getRules(): string
+    public function getRules()
     {
         return $this->rules;
     }

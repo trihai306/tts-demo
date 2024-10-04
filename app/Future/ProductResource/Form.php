@@ -54,10 +54,10 @@ class Form extends BaseForm
                 Col::make()->schema([
                     Card::make('Price')->schema([
                         Row::make()->schema([
-                            TextNumber::make('price')->label(__('Price'))->required(),
-                            TextNumber::make('special_price')->label(__('Special Price')),
-                            DateInput::make('special_price_from')->label(__('Special Price From')),
-                            DateInput::make('special_price_to')->label(__('Special Price To')),
+                            TextNumber::make('price',__('Price'))->required(),
+                            TextNumber::make('special_price',__('Special Price')),
+                            DateInput::make('special_price_from',__('Special Price From')),
+                            DateInput::make('special_price_to',__('Special Price To')),
                         ]),
                     ]),
                 ])->md(4)->sm(12),

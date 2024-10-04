@@ -13,6 +13,8 @@ trait SearchDataTrait
             if ($selectField->name == $field) {
                 if ($selectField->getRelationship()) {
                     return $selectField->getItemsRelation($this->model, $value);
+                }else{
+
                 }
             }
         }
@@ -36,7 +38,7 @@ trait SearchDataTrait
               if ($input->getRelationship()) {
                 return $input->getOptionsInRelationship($this->model);
               }else{
-                  return is_callable($input->options) ? call_user_func($input->options) : $input->options;
+                  return is_callable($input->getOptions()) ? call_user_func($input->getOptions()) : $input->getOptions();
               }
             }
         }

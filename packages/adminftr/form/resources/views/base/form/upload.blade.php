@@ -11,7 +11,9 @@
     <input type="file"
            class="form-control"
            name="{{ $name }}"
+           @if($acceptedFileTypes)
            accept="{{$acceptedFileTypes}}"
+           @endif
            id="{{ $name }}"
            multiple="{{$multiple}}">
 </div>

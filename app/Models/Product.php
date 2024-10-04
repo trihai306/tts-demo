@@ -69,6 +69,10 @@ class Product extends Model
         return $this->belongsToMany(FileManager::class, 'product_file_manager', 'product_id', 'file_manager_id');
     }
 
+    public function image()
+    {
+        return $this->images()->first();
+    }
     /**
      * Get the related products for the product.
      */
@@ -99,4 +103,5 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
+
 }

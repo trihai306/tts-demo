@@ -11,21 +11,21 @@ class Select extends Field
 {
     public array $options = [];
 
-    public bool $multiple = false;
+    protected bool $multiple = false;
 
-    public string $valueField = 'id';
+    protected string $valueField = 'id';
 
-    public string $labelField = 'name';
+    protected string $labelField = 'name';
 
     public int $maxOptions = 50;
 
-    public bool $liveSearch = false;
+    protected bool $liveSearch = false;
 
-    public array $searchable = ['name'];
-    public string $keySearch = 'name';
-    public int $limit = 50;
+    protected array $searchable = ['name'];
+    protected string $keySearch = 'name';
+    protected int $limit = 50;
 
-    public array $plugins = ['input_autogrow', 'caret_position'];
+    protected array $plugins = ['input_autogrow', 'caret_position'];
 
     protected bool $isRelationship = false;
     public function options(array|callable $options)
