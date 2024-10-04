@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <link rel="manifest" href="{{asset('manifest.json')}}">
     <link rel="apple-touch-icon" href="
         {{asset('shoplite/images/banner-1.png')}}
     ">
