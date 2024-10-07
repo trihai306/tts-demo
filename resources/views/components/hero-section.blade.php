@@ -3,14 +3,12 @@
         <div class="container">
             <div class="row">
                 <div class="text-center">
-                    <h1>About Us</h1>
+                    <h1>{{$title}}</h1>
                     <div class="breadcrumbs">
                 <span class="item">
-                  <a href="{{route('home')}}">Home &gt; </a>
+                  <a href="{{route('home')}}">Home &gt;</a>
                 </span>
-                        <span class="item text-decoration-underline">
-                            {{ $title }}
-                        </span>
+                        <span class="item text-decoration-underline">{{ $title }}</span>
                     </div>
                 </div>
             </div>

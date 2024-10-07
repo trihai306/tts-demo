@@ -107,10 +107,10 @@ class Form extends BaseForm
                         'sub_title' => 'price',
                         'avatar' => [
                             'column' => function ($item) {
-                              $items = $item->fileManagers->first();
+                                $items = $item->images->first();
                                 return $item ? $item->file_path : null;
                             },
-                            'relation' => 'fileManagers',
+                            'relation' => 'images',
                         ],
                     ]),
                 ])->md(12)->sm(12),

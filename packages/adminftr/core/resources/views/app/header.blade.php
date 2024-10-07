@@ -10,16 +10,9 @@
                 <img src="{{ asset('static/FeatureCMS-logo/vector/default-monochrome.svg') }}" class="d-block"
                      loading="lazy" alt="">
             </a>
-
-            <div class="navbar-search position-relative">
-
-            </div>
         </div>
 
-        {{-- <div class="pe-0 pe-md-3" style="user-select: none;">
-        </div> --}}
         <div class="navbar-nav flex-row order-md-last mt-2">
-
             <div class="d-none d-md-flex">
                 <a href="?theme=dark" class="nav-link me-2 px-0 hide-theme-dark" title="Enable dark mode"
                    data-bs-toggle="tooltip" data-bs-placement="bottom" id="dark-mode-toggle">

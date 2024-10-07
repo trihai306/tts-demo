@@ -5,7 +5,6 @@ namespace Adminftr\Core;
 use Adminftr\Form\FormServiceProvider;
 use Adminftr\Form\Future\BaseForm;
 use Adminftr\Messages\MessagesServiceProvider;
-use Adminftr\Notifications\NotificationsServiceProvider;
 use Adminftr\Table\Future\BaseTable;
 use Adminftr\Table\TableServiceProvider;
 use Adminftr\Widgets\WidgetsServiceProvider;
@@ -65,7 +64,6 @@ class FutureServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(CoreServiceProvider::class);
-        $this->app->register(NotificationsServiceProvider::class);
         $this->app->register(FormServiceProvider::class);
         $this->app->register(TableServiceProvider::class);
         $this->app->register(MessagesServiceProvider::class);

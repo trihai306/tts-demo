@@ -12,7 +12,7 @@ class FormServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'future');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'future.form');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'form');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // Publishing is only necessary when using the CLI.

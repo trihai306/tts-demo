@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Adminftr\Core\Http\Models\Notification;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -28,15 +29,26 @@ class DatabaseSeeder extends Seeder
         }
         $this->call([
 //            Adm::class,
-            ProductsTableSeeder::class,
+//            ProductsTableSeeder::class,
         ]);
-//        UserFactory::new()->count(10000)->create();
-//        NotificationFactory::new()->count(1000)->create();
+        $users = User::all();
+        foreach ($users as $user) {
+            for ($i = 0; $i < 100; $i++) {
+                Notification::create([
+                    'type' => 'App\Notifications\SampleNotification',
+                    'notifiable_type' => get_class($user),
+                    'notifiable_id' => $user->id,
+                    'sender' => $user->id, // Assuming sender is also the user for this example
+                    'title' => 'Welcome Notification',
+                    'description' => 'This is a sample notification for user ' . $user->name,
+                    'data' => json_encode([
+                        'message' => 'Welcome to our platform! We are glad to have you here.',
+                        'action_url' => url('/home'),
+                    ]),
+                    'read_at' => null,
+                ]);
+            }
 
-        //        $this->call([
-        //            RolesTableSeeder::class,
-        //            PermissionsTableSeeder::class,
-        //            UserRolesTableSeeder::class,
-        //        ]);
+        }
     }
 }

@@ -13,6 +13,7 @@ return [
             'middleware' => [
                 'web',
                 'auth',
+                \Adminftr\Core\Http\Middleware\FutureMiddleware::class
             ],
         ],
         'messages' => true,

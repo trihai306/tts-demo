@@ -10,10 +10,9 @@ class FutureMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-
+        if (session()->has('locale')) {
+            App::setLocale(session('locale'));
+        }
+        return $next($request);
     }
-}
-
-{
-
 }

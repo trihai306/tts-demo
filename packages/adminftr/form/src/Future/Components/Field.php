@@ -21,10 +21,8 @@ class Field
     protected string $placeholder = '';
 
     protected ?string $url;
-
     protected $afterStateUpdated = null;
     protected $beforeSave = null;
-
     protected string $relationshipName;
     protected $modifyQueryUsing;
     protected $rules;

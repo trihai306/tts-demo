@@ -62,11 +62,21 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('admin/login', [AuthController::class, 'login'])->name('login');
     Route::get('admin/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('admin/forgot', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+
+    Route::get('/change-language/{lang}', function ($lang) {
+        if (in_array($lang, ['en', 'fr', 'es'])) {
+            session(['locale' => $lang]);
+        }
+        return redirect()->back();
+    })->name('change.language');
 });
 
 Route::get('/storage/avatars/{filename}', [StorageController::class, 'getFile']);
 
 Route::group(config('future.future.route'), function () {
+    Route::get('demo',function (){
+        return view('future::layouts.app-demo');
+    });
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('profile', [AuthController::class, 'profile'])->name('profile');
     Route::get('notifications', [AuthController::class, 'notifications'])->name('notifications');

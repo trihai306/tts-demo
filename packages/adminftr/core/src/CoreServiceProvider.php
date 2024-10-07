@@ -5,6 +5,7 @@ namespace Adminftr\Core;
 use Adminftr\Core\Commands\CreateFutureResource;
 use Adminftr\Core\Future\Admin\MenuHeader;
 use Adminftr\Core\Future\Admin\Notifications;
+use Adminftr\Core\Future\Admin\NotificationsHeader;
 use Adminftr\Core\Future\Admin\Profile;
 use Adminftr\Core\Future\Auth\ForgotPassword;
 use Adminftr\Core\Future\Auth\Login;
@@ -26,6 +27,7 @@ class CoreServiceProvider extends ServiceProvider
         Livewire::component('future::auth.login', Login::class);
         Livewire::component('future::forgot-password', ForgotPassword::class);
         Livewire::component('future::admin.menu-header', MenuHeader::class);
+        Livewire::component('future::admin.notifications.list', NotificationsHeader::class);
         Livewire::component('future::admin.profile', Profile::class);
         Livewire::component('future::admin.notifications', Notifications::class);
         Livewire::component('future::admin.dashboard', Dashboard::class);

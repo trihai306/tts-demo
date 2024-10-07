@@ -30,4 +30,6 @@
             </div>
         </div>
     </section>
+    @include('components.customers-reviews')
+    <livewire:latest-posts />
 @endsection

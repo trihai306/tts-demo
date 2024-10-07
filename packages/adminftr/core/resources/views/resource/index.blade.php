@@ -1,8 +1,8 @@
-@extends('future::layouts.app')
+@extends('future::layouts.app-demo')
 
 @section('content')
     <!--begin::Content-->
-    <div class="content flex-row-fluid">
+    <div class="container-fluid">
         <!--begin::Card-->
         @livewire($table)
 

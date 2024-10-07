@@ -76,7 +76,7 @@ class Product extends Model
     /**
      * Get the related products for the product.
      */
-    public function relatedProducts(){
+    public function products(){
         return $this->belongsToMany(Product::class, 'product_related', 'product_id', 'related_product_id');
     }
 

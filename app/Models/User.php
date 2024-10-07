@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
+use Adminftr\Core\Traits\Notifiable;
 use Adminftr\Messages\Http\Models\Traits\HasMessages;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable;
-    use HasMessages;
+    use HasApiTokens, HasFactory, HasRoles;
+    use HasMessages,Notifiable;
 
     protected $fillable = [
         'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password',

@@ -1,8 +1,8 @@
 @php
-    $path = explode('.', $name);
+    $path = $name;
 @endphp
 
-<div x-data="relation{{ $path[0] }}">
+<div x-data="relation{{ $path }}">
     <div class="card mt-3">
         <div class="card-header d-flex align-items-center">
             <h3 class="card-title">
@@ -14,7 +14,7 @@
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                     <path d="M12 5v14"></path>
                     <path d="M5 12h14"></path>
-                </svg> Add new
+                </svg> {{ __('future.form::form.add_new') }}
             </a>
         </div>
 
@@ -23,16 +23,17 @@
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col-auto" x-show="item.avatar">
-                            <span class="avatar" :style="'background-image: url(' + item.avatar + ')'"></span>
+                            <span class="avatar" :style="'background-image: url(' + item.avatar + ')'">
+                            </span>
                         </div>
                         <div class="col text-truncate">
-                            <p  class="text-reset d-block" x-text="item.name"></p>
+                            <p class="text-reset d-block" x-text="item.name"></p>
                             <div class="d-block text-secondary text-truncate mt-n1" x-text="item.description"></div>
                         </div>
                         <div class="col-auto">
                             <p class="text-secondary" x-text="item.sub_title"></p>
-                            <a @click="deleteItemRelation(item)"  class="btn btn-sm btn-danger">
-                                Delete
+                            <a @click="deleteItemRelation(item)" class="btn btn-sm btn-danger">
+                                {{ __('future.form::form.delete') }}
                             </a>
                         </div>
                     </div>
@@ -49,9 +50,9 @@
                     <circle cx="12" cy="16" r="1"></circle>
                 </svg>
             </div>
-            <p class="empty-title">No results found</p>
+            <p class="empty-title">{{ __('future.form::form.no_results_found') }}</p>
             <p class="empty-subtitle text-secondary">
-                Try adjusting your search or filter to find what you're looking for.
+                {{ __('future.form::form.adjust_search_filter') }}
             </p>
             <div class="empty-action">
                 <a href="#" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd{{ $name }}">
@@ -60,7 +61,7 @@
                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                         <path d="M12 5v14"></path>
                         <path d="M5 12h14"></path>
-                    </svg> Add New
+                    </svg> {{ __('future.form::form.add_new') }}
                 </a>
             </div>
         </div>
@@ -68,29 +69,25 @@
 
     <div class="offcanvas offcanvas-end offcanvas-relation" tabindex="-1" id="offcanvasEnd{{ $name }}" aria-labelledby="offcanvasEndLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasEndLabel">{{ $title }}</h5>
-            <a class="btn btn-primary" @click="addItems()"
-            >
+            <h5 class="offcanvas-title" id="offcanvasEndLabel">{{ $title  }}</h5>
+            <a class="btn btn-primary" @click="addItems()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                     <path d="M12 5v14"></path>
                     <path d="M5 12h14"></path>
-                </svg> Add items
+                </svg> {{ __('future.form::form.add_items') }}
             </a>
         </div>
         <div class="offcanvas-body">
             <form class="d-flex" role="search">
                 <div class="input-icon mb-3 w-100">
-                    <input type="text" x-model="search" class="form-control" placeholder="Search…">
-
-                    <span class="input-icon-addon" >
-                            <template x-if="loading">
-                            <!-- Loading icon -->
-                          <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
+                    <input type="text" x-model="search" class="form-control" placeholder="{{ __('future.form::form.search') }}">
+                    <span class="input-icon-addon">
+                        <template x-if="loading">
+                            <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
                         </template>
-                          <template x-if="!loading">
-                            <!-- Search icon -->
+                        <template x-if="!loading">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
@@ -98,30 +95,28 @@
                                 <line x1="21" y1="21" x2="15" y2="15"></line>
                             </svg>
                         </template>
-
                     </span>
                 </div>
             </form>
 
             <div class="list-group list-group-flush">
                 <template x-for="(item, index) in listItems" :key="index">
-                    <div class="list-group-item" >
+                    <div class="list-group-item">
                         <div class="row align-items-center" style="cursor: pointer;"
-                        x-on:click="item.active = !item.active"
-                        >
+                             x-on:click="item.active = !item.active">
                             <div class="col-auto">
                                 <input type="checkbox" class="form-check-input" x-model="item.active">
                             </div>
-                            <div class="col-auto" x-show="item.avatar" >
-                                <span class="avatar" :style="'background-image: url(' + item.avatar + ')'"></span>
+                            <div class="col-auto" x-show="item.avatar">
+                                <span class="avatar" :style="'background-image: url(' + item.avatar + ')'">
+                                </span>
                             </div>
                             <div class="col text-truncate">
                                 <p class="text-reset d-block d-flex justify-content-between">
                                     <span x-text="item.name"></span>
                                     <span x-text="item.sub_title"></span>
                                 </p>
-                                <div class="d-block text-secondary text-truncate mt-n1" x-text="item.description">
-                                </div>
+                                <div class="d-block text-secondary text-truncate mt-n1" x-text="item.description"></div>
                             </div>
                         </div>
                     </div>
@@ -135,9 +130,9 @@
                         <path d="M14 2a10 10 0 0 0-9.2 6" class="loading-path"></path>
                     </svg>
                 </div>
-                <p class="empty-title">Searching...</p>
+                <p class="empty-title">{{ __('future.form::form.searching') }}</p>
                 <p class="empty-subtitle text-secondary">
-                    Please wait while we search for results.
+                    {{ __('future.form::form.wait_search_results') }}
                 </p>
             </div>
             <div class="empty" x-show="!loading && listItems.length === 0">
@@ -149,9 +144,9 @@
                         <circle cx="12" cy="16" r="1"></circle>
                     </svg>
                 </div>
-                <p class="empty-title">No results found</p>
+                <p class="empty-title">{{ __('future.form::form.no_results_found') }}</p>
                 <p class="empty-subtitle text-secondary">
-                    Try adjusting your search or filter to find what you're looking for.
+                    {{ __('future.form::form.adjust_search_filter') }}
                 </p>
             </div>
         </div>
@@ -160,7 +155,7 @@
 
 <script>
     document.addEventListener('livewire:init', () => {
-        Alpine.data('relation{{ $path[0] }}', () => ({
+        Alpine.data('relation{{ $path }}', () => ({
             search: '',
             loading: false,
             bsOffcanvas: new bootstrap.Offcanvas(document.getElementById('offcanvasEnd{{ $name }}')),
@@ -180,35 +175,37 @@
                         });
                     }, 500);
                 });
+                this.items = @this.get('relations.{{$name}}');
             },
             addItems() {
                 this.items = [...this.items, ...this.listItems.filter(item => item.active)];
                 this.items = this.items.reduce((acc, current) => {
                     const x = acc.find(item => item.id === current.id);
                     if (!x) {
-                        acc.push(current);
+                        let { active, ...rest } = current;
+                        acc.push(rest);
                     }
                     return acc;
                 }, []);
+                @this.set('relations.{{$name}}',this.items);
                 this.listItems = [];
                 this.search = '';
                 this.bsOffcanvas.hide();
             },
             deleteItemRelation(item) {
                 this.items = this.items.filter(i => i.id !== item.id);
+                @this.set('relations.{{$name}}',this.items);
             },
             async filteredItems() {
-
-               if (this.search.length > 0) {
-                   try {
-                       this.loading = true;
-                       const response = await @this.call('getItemsRelation', '{{ $path[0] }}', this.search);
-                       this.listItems = response;
-                   } catch (error) {
-                       console.error('Error fetching filtered items:', error);
-                   } finally {
-                       this.loading = false;
-                   }
+                if (this.search.length > 0) {
+                    try {
+                        this.loading = true;
+                        this.listItems = await @this.call('getItemsRelation', '{{ $path }}', this.search);
+                    } catch (error) {
+                        console.error('Error fetching filtered items:', error);
+                    } finally {
+                        this.loading = false;
+                    }
                 } else {
                     this.listItems = [];
                 }

@@ -235,7 +235,7 @@ h4{
     font-size: 1.375rem;
 }
 h5{
-    font-size: 1.313rem;
+    font-size: 1rem;
     font-weight: 300;
     text-transform: capitalize;
     letter-spacing: 0.01rem;
@@ -312,10 +312,8 @@ aside .sidebar .section-title h3::after{
     font-weight: 200;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    color: var(--white-color);
-    background-color: var(--primary-color);
     border: none;
-    padding: 1.125rem 2.625rem;
+    padding: 0.5rem;
     font-size: 1rem;
     border-radius: 200px;
     cursor: pointer;
@@ -391,36 +389,35 @@ th{
 }
 
 /*--------------------------------------------------------------
-/** 3.4 Pagination
+/** 3.4 product
 --------------------------------------------------------------*/
-.page-link {
-    padding: 0;
-    font-size: 21px;
-    color: var(--black-color);
-    background: none;
-    border: none;
+.product-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.page-link:focus {
-    color: var(--primary-color);
-    background: none;
-    box-shadow: none;
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
-.page-link:hover {
-    color: var(--primary-color);
-    background: none;
-    border: none;
+.product-image {
+    transition: transform 0.3s;
 }
-.active>.page-link, .page-link.active {
-    color: var(--primary-color);
-    background: none;
-    border: none;
+.product-card:hover .product-image {
+    transform: scale(1.05);
 }
-.disabled>.page-link, .page-link.disabled {
-    color: var(--gray-color-500);
-    background: none;
-    border: none;
+.btn-add-cart {
+    opacity: 0;
+    transition: opacity 0.3s;
+    left: 33%;
+}
+.product-card:hover .btn-add-cart {
+    opacity: 1;
 }
 
+.pagination > li > a, .pagination > li > span {
+
+}
 /*--------------------------------------------------------------
 /** 3.5 Slash Divider
 --------------------------------------------------------------*/

@@ -55,13 +55,20 @@ trait DataInitializationTrait
      */
     private function getRelationship($inputs)
     {
+        $fields = [];
+        $with = [];
         $fieldNames = array_map(fn($input) => [
             'name' => $input->getRelationshipName() ?? $input->name,
             'isRelationship' => $input->getRelationship()
         ], array_filter($inputs, fn($input) => $input->canHide() !== true));
-        $fields = [];
-        $with = [];
-
+        $relationFields = $this->getFieldsRelation();
+        foreach ($fieldNames as $fieldName) {
+            $directColumns = [];
+            $withRelations = [];
+            $with[$fieldName->name] = function ($query){
+                $query->select();
+            };
+        }
         foreach ($fieldNames as $fieldName) {
             if (str_contains($fieldName['name'], '_confirmation')) {
                 $fieldName['name'] = str_replace('_confirmation', '', $fieldName['name']);

@@ -4,7 +4,6 @@ namespace Adminftr\Core\Future;
 
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
-#[Lazy]
 class Menu extends Component
 {
     public $menu;

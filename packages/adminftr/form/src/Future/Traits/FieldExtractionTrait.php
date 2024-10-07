@@ -4,6 +4,7 @@ namespace Adminftr\Form\Future\Traits;
 
 use Adminftr\Form\Future\Components\Field;
 use Adminftr\Form\Future\Components\Fields\RadioTree;
+use Adminftr\Form\Future\Components\Fields\Relation;
 use Adminftr\Form\Future\Components\Fields\Select;
 use Adminftr\Form\Future\Components\Fields\Upload;
 
@@ -72,5 +73,10 @@ trait FieldExtractionTrait
     protected function getUploadFields()
     {
         return $this->extractFields($this->form->render(), Upload::class);
+    }
+
+    protected function getFieldsRelation()
+    {
+        return $this->extractFields($this->form->render(), Relation::class);
     }
 }

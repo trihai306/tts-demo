@@ -17,6 +17,42 @@ class Relation extends Field
     protected string $order = 'ASC';
     protected int $limit = 20;
 
+    // Getter methods for protected properties
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getSearch(): string
+    {
+        return $this->search;
+    }
+
+    public function getModel(): string
+    {
+        return $this->model;
+    }
+
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    public function getOrderBy(): string
+    {
+        return $this->orderBy;
+    }
+
+    public function getOrder(): string
+    {
+        return $this->order;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
     /**
      * Cấu hình model và các tham số truy vấn liên quan.
      *
@@ -148,6 +184,11 @@ class Relation extends Field
     {
         $this->title = $title;
         return $this;
+    }
+
+    public function getRelationship()
+    {
+        return true;
     }
 
     /**

@@ -1,19 +1,7 @@
 <div class="page-header mb-5">
-    <div class="row align-items-center">
-        <div class="col">
-            @if($description)
-                <div class="page-pretitle">
-                    {{$description ?? ''}}
-                </div>
-            @endif
-            @if($title)
-                <h2 class="page-title">
-                    {{$title ?? ''}}
-                </h2>
-            @endif
-        </div>
+    <div class="row align-items-end">
         <div class="col-auto ms-auto d-print-none">
-            <div class="btn-list">
+            <div class="btn-showcase">
                 @foreach( $this->headerActions() as $headerAction)
                     {{ $headerAction->render()}}
                 @endforeach
@@ -24,7 +12,7 @@
                         </a>
                     @endif
                     <div x-data="{ isToggled: false }">
-                        <button type="button" class="btn btn-primary h-100"
+                        <button type="button" class="btn btn-primary h-100 ps-2"
                                 data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                 @click="isToggled = !isToggled">
                             <i x-bind:class="isToggled ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"></i>
