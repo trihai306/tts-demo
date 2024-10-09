@@ -46,9 +46,8 @@
     42 => 'Spatie\\Permission\\PermissionServiceProvider',
     43 => 'Staudenmeir\\LaravelCte\\DatabaseServiceProvider',
     44 => 'App\\Providers\\AppServiceProvider',
-    45 => 'Adminftr\\Core\\FutureServiceProvider',
-    46 => 'Spatie\\Permission\\PermissionServiceProvider',
-    47 => 'Barryvdh\\Debugbar\\ServiceProvider',
+    45 => 'Spatie\\Permission\\PermissionServiceProvider',
+    46 => 'Barryvdh\\Debugbar\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -81,9 +80,8 @@
     26 => 'Spatie\\Permission\\PermissionServiceProvider',
     27 => 'Staudenmeir\\LaravelCte\\DatabaseServiceProvider',
     28 => 'App\\Providers\\AppServiceProvider',
-    29 => 'Adminftr\\Core\\FutureServiceProvider',
-    30 => 'Spatie\\Permission\\PermissionServiceProvider',
-    31 => 'Barryvdh\\Debugbar\\ServiceProvider',
+    29 => 'Spatie\\Permission\\PermissionServiceProvider',
+    30 => 'Barryvdh\\Debugbar\\ServiceProvider',
   ),
   'deferred' => 
   array (

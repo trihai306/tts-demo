@@ -70,7 +70,9 @@ abstract class BaseForm extends Component
      * @var string $view The view file for rendering the form.
      */
     protected string $view = 'form::base-form';
+    public string $title;
 
+    public string $description;
     /**
      * Initialize the form data.
      */
@@ -135,9 +137,9 @@ abstract class BaseForm extends Component
         try {
             $url = $this->url;
             if (str_contains($url, 'edit')) {
-                $this->data = $this->beforeUpdate($this->data);
+                [$this->data,$this->relations] = $this->beforeUpdate($this->data,$this->relations);
             } else {
-                $this->data = $this->beforeSave($this->data);
+                [$this->data,$this->relations] = $this->beforeSave($this->data,$this->relations);
             }
             $this->persistData();
             if (function_exists('afterSave')) {
@@ -158,9 +160,9 @@ abstract class BaseForm extends Component
      * @param array $data The form data.
      * @return array The modified data.
      */
-    protected function beforeUpdate(array $data)
+    protected function beforeUpdate(array $data, array $relations)
     {
-        return $data;
+        return [$data, $relations];
     }
 
     /**
@@ -169,9 +171,9 @@ abstract class BaseForm extends Component
      * @param array $data The form data.
      * @return array The modified data.
      */
-    protected function beforeSave(array $data)
+    protected function beforeSave(array $data, array $relations)
     {
-        return $data;
+        return [$data, $relations];
     }
 
     /**

@@ -185,7 +185,7 @@
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
-        apiKey: "AIzaSyDoTxLGWoZWj6cgh2fAi2KYPW1N7FDvwbE",
+        apiKey: "AIzaSyDSa6fw7ECu1LpQUCmrklG8wSTHsiqz_d0",
         authDomain: "toanthinh-c4f70.firebaseapp.com",
         projectId: "toanthinh-c4f70",
         storageBucket: "toanthinh-c4f70.appspot.com",
@@ -209,15 +209,12 @@
                     if (currentToken) {
                         console.log('FCM Token:', currentToken);
                         document.getElementById('token').textContent = currentToken;
-                        // Send the token to your server and update the UI if necessary
-                        // ...
+
                     } else {
                         console.log('No registration token available. Request permission to generate one.');
-                        // Show permission UI or error message
                     }
                 }).catch((err) => {
                     console.error('An error occurred while retrieving token. ', err);
-                    // Show error message
                 });
             } else {
                 console.error('Unable to get permission to notify.');
@@ -227,14 +224,6 @@
 
     // Call the function to request permission and get token
     document.getElementById('request-permission-btn').addEventListener('click', requestPermissionAndGetToken);
-
-    // Handle incoming messages
-    onMessage(messaging, (payload) => {
-        new Notification("Sample Notification", {
-            body: "This is an example notification",
-            icon: "https://example.com/icon.png"
-        });
-    });
 </script>
 @yield('scripts')
 </body>

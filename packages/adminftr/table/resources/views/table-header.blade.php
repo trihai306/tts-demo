@@ -23,7 +23,8 @@
             <label class="form-label">
                 <input type="text" class="form-control form-control-solid" wire:model.live.debounce.300ms="search"
                        placeholder="{{ __('future::messages.search') }}">
-                <span class="input-icon-addon">
+            </label>
+            <span class="input-icon-addon">
                     <div class="spinner-border spinner-border-sm text-secondary" wire:loading
                          wire:target="search"></div>
                     <svg xmlns="http://www.w3.org/2000/svg" wire:loading.class="d-none" wire:target="search"
@@ -35,7 +36,6 @@
                         <line x1="21" y1="21" x2="15" y2="15"></line>
                     </svg>
                 </span>
-            </label>
         </div>
     </div>
 </div>

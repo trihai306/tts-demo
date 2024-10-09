@@ -16,8 +16,14 @@ document.addEventListener("DOMContentLoaded", function () {
     /*=====================
         01 Loader Js
     ==========================*/
-    $(".loader-wrapper").fadeOut("slow", function () {
-      $(this).remove();
+    $(window).on('load', function() {
+        setTimeout(function(){
+            $(".loader-wrapper").addClass("fadeout");
+
+            $(".loader-wrapper").on('transitionend', function() {
+                $(this).remove();
+            });
+        }, 1000);
     });
   /*=====================
         02 Tap to top js
@@ -69,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $(document).ready(function () {
     $(".full-screen").click(function (event) {
       var elem = document.documentElement;
-  
+
       if (
         (document.fullScreenElement && document.fullScreenElement !== null) ||
         (!document.mozFullScreen && !document.webkitIsFullScreen)
@@ -92,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-  
+
   /*=====================
        05. Header search js
      ==========================*/

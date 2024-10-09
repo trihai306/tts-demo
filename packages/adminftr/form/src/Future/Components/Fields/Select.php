@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Select extends Field
 {
-    public array $options = [];
+    protected array $options = [];
 
     protected bool $multiple = false;
 
@@ -17,26 +17,23 @@ class Select extends Field
 
     protected string $labelField = 'name';
 
-    public int $maxOptions = 50;
-
+    protected int $maxOptions = 50;
+    protected array $relationShipSelect = [];
     protected bool $liveSearch = false;
 
     protected array $searchable = ['name'];
     protected string $keySearch = 'name';
     protected int $limit = 50;
-
-    protected array $plugins = ['input_autogrow', 'caret_position'];
-
     protected bool $isRelationship = false;
-    public function options(array|callable $options)
+    public function options(array|callable $options): static
     {
-        if (is_callable($options)) {
-            $this->options = call_user_func($options);
-        } else {
-            $this->options = $options;
-        }
-
+        $this->options = is_callable($options) ? $options() : $options;
         return $this;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 
     public function getRelationship()
@@ -44,13 +41,14 @@ class Select extends Field
         return $this->isRelationship;
     }
 
-    public function relationship(string $name, string $titleAttribute, callable $modifyQueryUsing = null)
+    public function relationship(string $name, string $titleAttribute, callable $modifyQueryUsing = null, array $select = [])
     {
         $this->relationshipName = $name;
         $this->labelField = $titleAttribute;
         $this->modifyQueryUsing = $modifyQueryUsing;
         $this->isRelationship = true;
         $this->liveSearch = true;
+        $this->relationShipSelect = $select;
         return $this;
     }
 
@@ -61,6 +59,7 @@ class Select extends Field
         return $this;
     }
 
+
     public function getItemsRelation($model,string $value)
     {
         $model = new $model;
@@ -69,6 +68,8 @@ class Select extends Field
         }
         $modelRelation = $model->{$this->relationshipName}();
         $relatedModelName = $modelRelation->getRelated();
+        $select = [$this->valueField, $this->labelField];
+        $select =
         $query = $relatedModelName::query();
         if ($this->modifyQueryUsing) {
             $query = call_user_func($this->modifyQueryUsing, $query);
@@ -76,20 +77,9 @@ class Select extends Field
         foreach ($this->searchable as $searchable) {
             $query->orWhere($searchable, 'like', '%' . $value . '%');
         }
-        return $query->limit($this->limit)->get()->map(function ($item) {
-            return [
-                'id' => $item->{$this->valueField},
-                'name' => $item->{$this->labelField},
-            ];
-        });
+        return $query->limit($this->limit)->get();
     }
 
-    public function plugins($plugins)
-    {
-        $this->plugins = $plugins;
-
-        return $this;
-    }
 
     public function maxOptions(int $maxOptions)
     {
@@ -136,7 +126,6 @@ class Select extends Field
             'isRequired' => $this->isRequired,
             'classes' => $this->classes,
             'attributes' => $this->getAttributes(),
-            'options' => $this->options,
             'defaultValue' => $this->defaultValue,
             'label' => $this->label,
             'canHide' => $this->canHide,
@@ -148,7 +137,6 @@ class Select extends Field
             'liveSearch' => $this->liveSearch,
             'keySearch' => $this->keySearch,
             'labelField' => $this->labelField,
-            'plugins' => $this->plugins,
             'isRelationship' => $this->isRelationship,
         ]);
     }

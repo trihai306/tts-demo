@@ -1,40 +1,10 @@
 <div x-data="tableData" @data="updateData()" @reset-select.window="selectAll = false; selectedRows = [];">
-    <div class="container-fluid">
-        <div class="page-title">
-            <div class="row">
-                <div class="col-sm-6 col-12">
-                    <h2>{{$title ?? 'Table'}}</h2>
-                    @if($description)
-                        <p class="mb-0 text-title-gray">{{$description}}</p>
-                    @endif
-                </div>
-                <div class="col-sm-6 col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/admin"><i class="iconly-Home icli svg-color"></i></a></li>
-                        @foreach(request()->segments() as $key => $segment)
-                            @if($segment !== 'admin')
-                                @if($key + 1 < count(request()->segments()))
-                                    <li class="breadcrumb-item">
-                                        <a href="{{ url(implode('/', array_slice(request()->segments(), 0, $key + 1))) }}">
-                                            {{ ucfirst($segment) }}
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="breadcrumb-item active">{{ ucfirst($segment) }}</li>
-                                @endif
-                            @endif
-                        @endforeach
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
     @include('future::base.widgets')
     @include('future::base.header')
     @if($this->filters())
         @include('future::base.filter')
     @endif
-    <div class="card rounded position-relative rounded-2" style="font-size: 12px">
+    <div class="card rounded position-relative rounded-2" style="font-size: 14px">
         @include('future::table-header')
         <div class="table-responsive table-loading py-0">
             <table class="table card-table table-vcenter align-middle table-row-dashed gy-5 base-table">

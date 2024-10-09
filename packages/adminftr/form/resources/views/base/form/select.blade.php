@@ -1,101 +1,86 @@
 @php
     $required = $isRequired ? 'required' : '';
     $classes = !empty($classes) ? 'form-control ' . $classes : 'form-control';
+    $inputName = $isRelationship ? 'relations.' . $name : 'data.' . $name;
 @endphp
 
 @if(!$canHide)
-    <div wire:ignore>
+    <div wire:ignore x-data="tagify{{ $name }}()">
         @if($label)
-            <label class="form-label {{$required}}" for="{{$name}}">{{$label}}</label>
+            <label class="form-label {{ $required }}" for="{{ $name }}">{{ $label }}</label>
         @endif
-        <div id="dropdown{{$name}}" x-data="dropdown{{$name}}" class="dropdown">
-            <select id="{{$name}}"
-                    {{$multiple ? 'multiple' : ''}} {{$required}} class="form-select {{ $classes }}"></select>
-        </div>
-        @error('data.'.$name)
+        <input id="{{ $name }}" {{ $required }} class="form-input {{ $classes }}" x-ref="tagInput"/>
+        @error('data.' . $name)
         <div class="invalid-feedback d-block">
             {{ $message }}
         </div>
         @enderror
+
         <script>
             document.addEventListener('livewire:init', () => {
-                Alpine.data('dropdown{{$name}}', () => ({
+                Alpine.data('tagify{{ $name }}', () => ({
+                    multiple: {{ $multiple ? 'true' : 'false' }},
+                    whitelist: [],
+                    value: @this.entangle('{{ $inputName }}'),
                     init() {
-                        if (!document.querySelector("#{{$name}}").classList.contains("tomselected")) {
-                            const tomSelect{{$name}} = new TomSelect("#{{$name}}", {
-                                valueField: "{{$valueField}}",
-                                copyClassesToDropdown: false,
-                                dropdownParent: "body",
-                                onChange: value => this.onChange(value),
-                                searchField: ["{{$labelField}}"],
-                                plugins: {!! json_encode($plugins) !!},
-                                maxOptions: {{$maxOptions}},
-                                create: false,
-                                render: {
-                                    option: function (data, escape) {
-                                        return "<div>" + escape(data.{{$labelField}}) + "</div>";
-                                    },
-                                    item: function (data, escape) {
-                                        return "<div>" + escape(data.{{$labelField}}) + "</div>";
-                                    }
-                                },
-                                load: function (query, callback) {
-
-                                    if ({{$liveSearch ? 'true' : 'false'}}) {
-                                        @this.call('searchSelect', query, "{{$name}}")
-                                        .then(response => {
-                                            const data = response.map(item => ({
-                                            {{$valueField}}: item["{{$valueField}}"],
-                                            {{$labelField}}: item["{{$labelField}}"]
-                                            }));
-                                            callback(data);
-                                        })
-                                    } else {
-                                        callback();
-                                    }
+                        const inputElement = this.$refs.tagInput;
+                        const tagify{{$name}} = new Tagify(inputElement, {
+                            enforceWhitelist: true,
+                            tagTextProp: "{{$labelField}}",
+                            mode: this.multiple ? 'dropdown' : 'select',
+                            dropdown: {
+                                enabled: 0,
+                                maxItems: {{$maxOptions}},
+                                classname: '',
+                                position: 'all',
+                                highlightFirst: true,
+                            },
+                            templates: {
+                                dropdownItem: function(tagData) {
+                                    return `
+                                    <div ${this.getAttributes(
+                                        tagData
+                                    )} class='tagify__dropdown__item'>
+                                        <strong>${tagData.{{$labelField}}}</strong>
+                                    </div>
+                            `;
                                 }
-                            });
-
-
-                            let dataParts = @this.get("relations.{{$name}}") ? @this.get("relations.{{$name}}") : @this.get("data.{{$name}}");
-                            if (this.isRelationship) {
-                            @this.call('searchSelect', '', "{{$name}}")
-                                .then(response => {
-                                    const data = response.map(item => ({
-                                        {{$valueField}}: item["{{$valueField}}"],
-                                        {{$labelField}}: item["{{$labelField}}"]
-                                    }));
-                                    tomSelect{{$name}}.addOption(data);
-                                    if (Array.isArray(dataParts)) {
-                                        dataParts.forEach(item => {
-                                            tomSelect{{$name}}.addItem(item["{{$valueField}}"]);
-                                        });
-                                    }else{
-                                        tomSelect{{$name}}.addItem(dataParts);
-                                    }
-                                });
-                            } else {
-                                tomSelect{{$name}}.addOption(@json($options));
                             }
+                        });
 
-                            if (!Array.isArray(dataParts)) {
-                                tomSelect{{$name}}.addItem(@this.get("data.{{$name}}"));
-                            }
-                            document.querySelector("#{{$name}}").classList.add("tomselected");
+                        this.onGetWhiteList(tagify{{$name}});
+                        tagify{{$name}}.on('dropdown:select', (e) => this.onSelectSuggestion(e, tagify{{$name}}));
+                    },
+                    onSelectSuggestion(e, tagify) {
+                        if (e.detail.event.target.matches('.remove-all-tags')) {
+                            tagify.removeAllTags();
+                        } else if (e.detail.elm.classList.contains(`${tagify.settings.classNames.dropdownItem}__addAll`)) {
+                            tagify.dropdown.selectAll();
+                        }
+                        if (!this.multiple) {
+                           this.value = e.detail.data.value;
+                        }
+                        else {
+                            this.value = [...this.value, e.detail.data];
                         }
                     },
-                    onChange(value) {
-                        if (@this.get("relations.{{$name}}")) {
-                            @this.set("relations.{{$name}}", value,{{$reactive ? "true" : "false"}});
-                        } else {
-                            @this.set("data.{{$name}}", value,{{$reactive ? "true" : "false"}});
+                    async onGetWhiteList(tagify){
+                        this.whitelist = await @this.call('searchSelect','', '{{ $name }}');
+                        this.whitelist = this.whitelist.map(item => ({value: item.id, id: item.id, name: item.name}));
+                        tagify.settings.whitelist = this.whitelist;
+                        tagify.dropdown.hide();
+                        if (Array.isArray(this.value)) {
+                           tagify.addTags(this.value.map(item => ({value: item.id, id: item.id, name: item.name})));
                         }
-                    },
-                    isRelationship: {{$isRelationship ? 'true' : 'false'}},
+                        else {
+                            const value = this.whitelist.find(item => item.value === this.value);
+                            if (value) {
+                                tagify.addTags([value]);
+                            }
+                        }
+                    }
                 }));
             });
         </script>
     </div>
 @endif
-
-

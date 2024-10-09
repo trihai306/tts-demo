@@ -32,7 +32,7 @@
         @endforeach
         @if($this->getActions())
             @if($this->getActions()->actions)
-                <th id="actionsHeader" scope="col" style="z-index: 999" class="text-center position-sticky top-0 text-nowrap min-w-100px">
+                <th id="actionsHeader" scope="col" style="z-index: 2" class="text-center position-sticky top-0 text-nowrap min-w-100px">
                     {{ __('table::table.actions') }}
                 </th>
             @endif

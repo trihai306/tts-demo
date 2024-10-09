@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('admiro/assets/css/themify.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('admiro/assets/css/fontawesome-min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admiro/assets/css/app.css') }}"/>
     <!-- Weather Icon css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admiro/assets/css/vendors/weather-icons/weather-icons.min.css') }}">
     <!-- App css -->

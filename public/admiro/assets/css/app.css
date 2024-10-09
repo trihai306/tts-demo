@@ -1,0 +1,11 @@
+.input-icon-addon {
+    position: absolute;
+    right: 9px;
+    top: 9px;
+}
+.loader-wrapper {
+    transition: opacity 2s;
+}
+.loader-wrapper.fadeout {
+    opacity: 0;
+}

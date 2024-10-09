@@ -13,6 +13,8 @@ trait SearchDataTrait
             if ($selectField->name == $field) {
                 if ($selectField->getRelationship()) {
                     return $selectField->getItemsRelation($this->model, $value);
+                }else{
+                    return $selectField->getOptions();
                 }
             }
         }

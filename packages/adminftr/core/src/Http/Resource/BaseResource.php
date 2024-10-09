@@ -37,20 +37,24 @@ abstract class BaseResource extends Controller
     public function index(Request $request)
     {
         $table = $this->table;
-        return view('future::resource.index', compact('table'));
+        $title =  $table->title;
+        $description = $table->description ?? '';
+        return view('future::resource.index', compact('table','title','description'));
     }
 
     public function create()
     {
         $form = $this->form;
-
-        return view('future::resource.create', compact('form'));
+        $title =  $form->title ?? 'Form';
+        $description = $form->description ?? '';
+        return view('future::resource.create', compact('form','title','description'));
     }
 
     public function edit($id)
     {
         $form = $this->form;
-
-        return view('future::resource.edit', compact('form', 'id'));
+        $title =  $form->title ?? 'Form';
+        $description = $form->description ?? '';
+        return view('future::resource.edit', compact('form', 'id','title','description'));
     }
 }

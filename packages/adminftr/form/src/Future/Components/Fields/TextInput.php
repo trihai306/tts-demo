@@ -96,6 +96,7 @@ class TextInput extends Field
         return $this;
     }
 
+
     public function render()
     {
         $type = $this->isEmail ? 'email' : ($this->isPassword ? 'password' : 'text');
