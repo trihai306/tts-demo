@@ -37,9 +37,6 @@
 <div class="tap-top"><i class="iconly-Arrow-Up icli"></i></div>
 <!-- tap on tap ends-->
 <!-- loader-->
-<div class="loader-wrapper">
-    <div class="loader"><span></span><span></span><span></span><span></span><span></span></div>
-</div>
 <!-- login page start-->
 <div class="container-fluid">
     <div class="row">
@@ -56,17 +53,17 @@
     </div>
     @vite('resources/js/app.js')
     <!-- jquery-->
-    <script src="{{asset('admiro/assets/js/vendors/jquery/jquery.min.js')}}"></script>
+    <script data-navigate-once src="{{asset('admiro/assets/js/vendors/jquery/jquery.min.js')}}"></script>
     <!-- bootstrap js-->
-    <script src="{{asset('admiro/assets/js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}" defer=""></script>
-    <script src="{{asset('admiro/assets/js/vendors/bootstrap/dist/js/popper.min.js')}}" defer=""></script>
+    <script data-navigate-once src="{{asset('admiro/assets/js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}" defer=""></script>
+    <script data-navigate-once src="{{asset('admiro/assets/js/vendors/bootstrap/dist/js/popper.min.js')}}" defer=""></script>
     <!--fontawesome-->
-    <script src="{{asset('admiro/assets/js/vendors/font-awesome/fontawesome-min.js')}}"></script>
+    <script data-navigate-once src="{{asset('admiro/assets/js/vendors/font-awesome/fontawesome-min.js')}}"></script>
     <!-- password_show-->
-    <script src="{{asset('admiro/assets/js/password.js')}}"></script>
+    <script data-navigate-once src="{{asset('admiro/assets/js/password.js')}}"></script>
     <!-- custom script -->
-    <script src="{{asset('admiro/assets/js/script.js')}}"></script>
-    @livewireScripts
+    <script data-navigate-once src="{{asset('admiro/assets/js/script.js')}}"></script>
+    @livewireScriptConfig
 </div>
 </body>
 </html>

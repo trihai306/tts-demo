@@ -6,5 +6,4 @@ return [
     App\Providers\AppServiceProvider::class,
     FutureServiceProvider::class,
     Spatie\Permission\PermissionServiceProvider::class,
-    Barryvdh\Debugbar\ServiceProvider::class,
 ];

@@ -1,6 +1,6 @@
 @if(!$action->hide)
     <a class="{{$action->color}} w-100 text-start dropdown-item"
-       @if($action->link)   href='{{ $action->link }}' @endif
+       @if($action->link)   href='{{ $action->link }}' wire:navigate @endif
        @if($action->modal) data-bs-toggle="modal" x-on:click="$wire.dispatch('setModel',{id:{{$action->id}}})"
        data-bs-target="#{{ $action->name }}" @endif
        @if(!empty($action->sweetAlert))

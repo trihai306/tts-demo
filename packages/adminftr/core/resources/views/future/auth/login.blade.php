@@ -21,7 +21,7 @@
         </div>
         <div class="form-group mb-0 checkbox-checked">
             <div class="form-check checkbox-solid-info">
-                <input id="remember-me" type="checkbox" class="form-check-input" wire:model="remember">
+                <input id="remember-me" type="checkbox" class="form-check-input">
                 <label class="form-check-label" for="remember-me">{{ __('future::auth.remember_me_on_this_device') }}</label>
             </div>
             <a class="link" href="{{ route('forgot-password') }}">{{ __('future::auth.i_forgot_password') }}</a>

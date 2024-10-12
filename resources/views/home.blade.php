@@ -1,429 +1,422 @@
-@extends('layouts.layout')
+@extends('layouts.index')
 @section('content')
-    @include('components.billboard')
-    @include('components.services')
-    <livewire:categories />
-    <section id="best-selling-items" class="position-relative padding-large">
-        <div class="container">
-            <div class="section-title overflow-hidden mb-4">
-                <h3 class="d-flex align-items-center">Best selling items</h3>
-            </div>
-            <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
-                <svg class="chevron-forward-circle d-flex justify-content-center align-items-center border rounded-3 p-2"
-                     width="55" height="55">
-                    <use xlink:href="#alt-arrow-right-outline"></use>
-                </svg>
-            </div>
-            <div
-                class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev">
-                <svg class="chevron-back-circle d-flex justify-content-center align-items-center border rounded-3 p-2"
-                     width="55" height="55">
-                    <use xlink:href="#alt-arrow-left-outline"></use>
-                </svg>
-            </div>
-            <div class="swiper product-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item1.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">IPad (9th Gen)</a></h5>
-                            <span class="price text-primary fw-light mb-2">$870</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" data-bs-title="Tooltip on top">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </button>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item2.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Drone With Camera</a></h5>
-                            <span class="price text-primary fw-light mb-2">$600</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item3.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Apple Watch (2nd Gen)</a></h5>
-                            <span class="price text-primary fw-light mb-2">$400</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item4.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Ultra HD TV</a></h5>
-                            <span class="price text-primary fw-light mb-2">$2000</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item5.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Bluetooth Speaker</a></h5>
-                            <span class="price text-primary fw-light mb-2">$75</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item6.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">White Headset</a></h5>
-                            <span class="price text-primary fw-light mb-2">$99</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item7.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Black Bluetooth Speaker</a></h5>
-                            <span class="price text-primary fw-light mb-2">$80</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item8.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Large Speaker</a></h5>
-                            <span class="price text-primary fw-light mb-2">$450</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item9.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">White EarPods</a></h5>
-                            <span class="price text-primary fw-light mb-2">$600</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card position-relative text-center py-4 border rounded-3">
-                            <img src="{{asset('shoplite/images/product-item10.png')}}" class="img-fluid" alt="product item">
-                            <h5 class="mt-2"><a href="single-product.html">Laptop</a></h5>
-                            <span class="price text-primary fw-light mb-2">$1200</span>
-                            <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <a href="#" class="btn btn-dark">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="page-content">
 
-    <section id="limited-offer" class="bg-light padding-large">
-        <div class="container">
-            <div class="row d-flex align-items-center">
-                <div class="col-md-6 text-center">
-                    <div class="image-holder">
-                        <img src="{{asset('shoplite/images/banner-image3.png')}}" class="img-fluid" alt="banner">
-                    </div>
-                </div>
-                <div class="col-md-5 offset-md-1">
-                    <h2>30% Discount on apple collection</h2>
-                    <div id="countdown-clock" class="text-dark d-flex align-items-center my-3">
-                        <div class="time d-grid pe-3">
-                            <span class="days fs-1 fw-normal"></span>
-                            <small>Days</small>
-                        </div>
-                        <span class="fs-1 text-primary">:</span>
-                        <div class="time d-grid pe-3 ps-3">
-                            <span class="hours fs-1 fw-normal"></span>
-                            <small>Hrs</small>
-                        </div>
-                        <span class="fs-1 text-primary">:</span>
-                        <div class="time d-grid pe-3 ps-3">
-                            <span class="minutes fs-1 fw-normal"></span>
-                            <small>Min</small>
-                        </div>
-                        <span class="fs-1 text-primary">:</span>
-                        <div class="time d-grid ps-3">
-                            <span class="seconds fs-1 fw-normal"></span>
-                            <small>Sec</small>
-                        </div>
-                    </div>
-                    <a href="shop.html" class="btn mt-3">Shop Collection</a>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-    <section id="items-listing" class="padding-large">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
-                    <div class="featured border rounded-3 p-4">
-                        <div class="section-title overflow-hidden mb-4 mt-2">
-                            <h3 class="d-flex flex-column mb-0">Featured</h3>
-                        </div>
-                        <div class="items-lists">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image1.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Wireless headset</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$500</span>
-                                </div>
-                            </div>
-                            <hr class="gray-400">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image2.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Iphone x Pro Max</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$820</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image3.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Iphone 11 Pro</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$960</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
-                    <div class="latest-items border rounded-3 p-4">
-                        <div class="section-title overflow-hidden mb-4 mt-2">
-                            <h3 class="d-flex flex-column mb-0">Latest items</h3>
-                        </div>
-                        <div class="items-lists">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image4.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Apple airPod</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$450</span>
-                                </div>
-                            </div>
-                            <hr class="gray-400">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image5.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Screen touch watch</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$750</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image6.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Digital watch</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$660</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
-                    <div class="best-reviewed border rounded-3 p-4">
-                        <div class="section-title overflow-hidden mb-4 mt-2">
-                            <h3 class="d-flex flex-column mb-0">Best reviewed</h3>
-                        </div>
-                        <div class="items-lists">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image7.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Wireless Joysticks</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$350</span>
-                                </div>
-                            </div>
-                            <hr class="gray-400">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image8.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Apple White AirPod</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$330</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image9.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Gimbal stabilizer</a></h5>
-                                    <span class="price text-primary fw-light mb-2">$920</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4 mb-lg-0 col-lg-3">
-                    <div class="on-sale border rounded-3 p-4">
-                        <div class="section-title overflow-hidden mb-4 mt-2">
-                            <h3 class="d-flex flex-column mb-0">On sale</h3>
-                        </div>
-                        <div class="items-lists">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image10.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Iphone 15 pro max</a></h5>
-                                    <span class="price text-primary fw-light mb-2"><s class="fs-5 fw-lighter text-muted">$1666</s> $999</span>
-                                </div>
-                            </div>
-                            <hr class="gray-400">
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image11.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">White AirPods</a></h5>
-                                    <span class="price text-primary fw-light mb-2"><s class="fs-5 fw-lighter text-muted">$500</s> $410</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="item d-flex">
-                                <img src="{{asset('shoplite/images/item-image12.jpg')}}" class="img-fluid rounded-3"
-                                     alt="product item">
-                                <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">CCTV camera</a></h5>
-                                    <span class="price text-primary fw-light mb-2"><s class="fs-5 fw-lighter text-muted">$600</s> $500</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @include('components.customers-reviews')
+        <!-- Banner Start -->
+        @include('components.banner')
+        <!-- Banner End-->
 
-    <livewire:latest-posts />
-{{--    <livewire:brands />--}}
+        <!--category section-->
+        @include('components.category')
+        <!--category section-->
+
+
+        <!--About Section Start -->
+        @include('components.about')
+        <!--About Section End -->
+
+        <section class="content-inner position-relative z-1 overflow-hidden" id="Plant_section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-9 col-sm-12 m-b30">
+                        <div class="service-box wow zoomIn" data-wow-delay="1s"
+                             style="visibility: hidden; animation-delay: 1s; animation-name: none;">
+                            <ul class="nav nav-tabs Plant_row" id="Plant_row" style="--sr-total: 6" role="tablist">
+                                <li class="nav-item " style="--sr-item:1" role="presentation">
+                                    <button class="nav-link active" id="plant_1" data-bs-toggle="tab"
+                                            data-bs-target="#plant_1-pane" type="button" role="tab"
+                                            aria-controls="plant_1-pane" aria-selected="true">
+                                <span class="plant-bx ">
+                                    <span class="dz-media">
+                                        <img src="{{ asset('shop/images/pic1.png') }}" alt="">
+                                    </span>
+                                </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item " style="--sr-item:2" role="presentation">
+                                    <button class="nav-link" id="plant_2" data-bs-toggle="tab"
+                                            data-bs-target="#plant_2-pane" type="button" role="tab"
+                                            aria-controls="plant_2-pane" aria-selected="false" tabindex="-1">
+                                <span class="plant-bx ">
+                                    <span class="dz-media">
+                                        <img src="{{ asset('shop/images/pic2.png') }}" alt="">
+                                    </span>
+                                </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item " style="--sr-item:3" role="presentation">
+                                    <button class="nav-link" id="plant_3" data-bs-toggle="tab"
+                                            data-bs-target="#plant_3-pane" type="button" role="tab"
+                                            aria-controls="plant_3-pane" aria-selected="false" tabindex="-1">
+                                <span class="plant-bx ">
+                                    <span class="dz-media">
+                                        <img src="{{ asset('shop/images/pic3.png') }}" alt="">
+                                    </span>
+                                </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item " style="--sr-item:4" role="presentation">
+                                    <button class="nav-link" id="plant_4" data-bs-toggle="tab"
+                                            data-bs-target="#plant_4-pane" type="button" role="tab"
+                                            aria-controls="plant_4-pane" aria-selected="false" tabindex="-1">
+                                <span class="plant-bx ">
+                                    <span class="dz-media">
+                                        <img src="{{ asset('shop/images/pic4.png') }}" alt="">
+                                    </span>
+                                </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item " style="--sr-item:5" role="presentation">
+                                    <button class="nav-link" id="plant_5" data-bs-toggle="tab"
+                                            data-bs-target="#plant_5-pane" type="button" role="tab"
+                                            aria-controls="plant_5-pane" aria-selected="false" tabindex="-1">
+                                <span class="plant-bx ">
+                                    <span class="dz-media">
+                                        <img src="{{ asset('shop/images/pic5.png') }}" alt="">
+                                    </span>
+                                </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item " style="--sr-item:6" role="presentation">
+                                    <button class="nav-link" id="plant_6" data-bs-toggle="tab"
+                                            data-bs-target="#plant_6-pane" type="button" role="tab"
+                                            aria-controls="plant_6-pane" aria-selected="false" tabindex="-1">
+                                <span class="plant-bx ">
+                                    <span class="dz-media">
+                                        <img src="{{ asset('shop/images/pic6.png') }}" alt="">
+                                    </span>
+                                </span>
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <!-- Repeat content for each tab-pane with updated image paths -->
+                                <div class="tab-pane fade show active" id="plant_1-pane" role="tabpanel"
+                                     aria-labelledby="plant_1" tabindex="0">
+                                    <div class="content">
+                                        <div class="shop-card ">
+                                            <div class="dz-media">
+                                                <img src="{{ asset('shop/images/1(1).png') }}" alt="image">
+                                                <div class="shop-meta">
+                                                    <div class="btn btn-primary meta-icon dz-wishicon">
+                                                        <i class="icon feather icon-heart dz-heart"></i>
+                                                        <i class="icon feather icon-heart-on dz-heart-fill"></i>
+                                                    </div>
+                                                    <div class="btn btn-primary meta-icon dz-carticon">
+                                                        <i class="flaticon flaticon-basket"></i>
+                                                        <i class="flaticon flaticon-basket-on dz-heart-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="dz-content">
+                                                <h2 class="title"><a
+                                                        href="https://plantzone.dexignzone.com/xhtml/shop-list.html">Vineyard
+                                                        Reach (m)</a></h2>
+                                                <span class="price">
+                                            $659
+                                            <del>$1099</del>
+                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Other tab-panes updated similarly -->
+                                <div class="tab-pane fade show " id="plant_2-pane" role="tabpanel" aria-labelledby="plant_2"
+                                     tabindex="0">
+                                    <div class="content">
+                                        <div class="shop-card ">
+                                            <div class="dz-media">
+                                                <img src="{{ asset('shop/images/2(1).png') }}" alt="image">
+                                                <div class="shop-meta">
+                                                    <div class="btn btn-primary meta-icon dz-wishicon">
+                                                        <i class="icon feather icon-heart dz-heart"></i>
+                                                        <i class="icon feather icon-heart-on dz-heart-fill"></i>
+                                                    </div>
+                                                    <div class="btn btn-primary meta-icon dz-carticon">
+                                                        <i class="flaticon flaticon-basket"></i>
+                                                        <i class="flaticon flaticon-basket-on dz-heart-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="dz-content">
+                                                <h2 class="title"><a
+                                                        href="https://plantzone.dexignzone.com/xhtml/shop-list.html">TallStalk
+                                                        Gardens (m)</a></h2>
+                                                <span class="price">
+                                            $759
+                                            <del>$1199</del>
+                                        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Other sections follow similar updates -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom plant row content -->
+            <div class="plant-row">
+                <div class="tag-slider style-1 wow fadeInUp" data-wow-delay="0.2s" id="tagSlider"
+                     style="visibility: hidden; animation-delay: 0.2s; animation-name: none;">
+                    <div class="item-wrap">
+                        <div class="item"><span class="plant-text">Vườn</span></div>
+                        <div class="item"><span class="plant-text">An</span></div>
+                        <!-- Repeated items omitted for brevity -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products  Section Start-->
+        <section class="content-inner">
+            <div class="container">
+                <div class="row text-center m-auto">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="section-head style-1 m-b30 wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;">
+                            <div class="left-content">
+                                <h2 class="title">Most popular products</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="site-filters clearfix align-items-center wow fadeInUp m-b50" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;">
+                            <ul class="filters" data-bs-toggle="buttons">
+                                <li class="btn active">
+                                    <input type="radio">
+                                    <a href="javascript:void(0);">Trees</a>
+                                </li>
+                                <li data-filter=".shrubs" class="btn">
+                                    <input type="radio">
+                                    <a href="javascript:void(0);">Shrubs</a>
+                                </li>
+                                <li data-filter=".herbs" class="btn">
+                                    <input type="radio">
+                                    <a href="javascript:void(0);">Herbs</a>
+                                </li>
+                                <li data-filter=".vines" class="btn">
+                                    <input type="radio">
+                                    <a href="javascript:void(0);">Vines</a>
+                                </li>
+                                <li data-filter=".ferns" class="btn">
+                                    <input type="radio">
+                                    <a href="javascript:void(0);">Ferns</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <ul id="masonry" class="row g-xl-4 g-3" style="position: relative; height: 907.2px;">
+                        <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 herbs wow fadeInUp" data-wow-delay="0.6s" style="position: absolute; left: 0px; top: 0px; visibility: hidden; animation-delay: 0.6s; animation-name: none;">
+                            <div class="shop-card">
+                                <div class="dz-media">
+                                    <img src="{{ asset('shop/images/1(1).png') }}" alt="image">
+                                    <div class="shop-meta">
+                                        <div class="btn btn-primary meta-icon dz-wishicon">
+                                            <i class="icon feather icon-heart dz-heart"></i>
+                                            <i class="icon feather icon-heart-on dz-heart-fill"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="btn btn-primary meta-icon dz-wishicon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <i class="flaticon flaticon-eye d-md-none d-block"></i>
+                                            <span class="d-md-block d-none"><i class="flaticon flaticon-eye"></i></span>
+                                        </a>
+                                        <div class="btn btn-primary meta-icon dz-carticon">
+                                            <i class="flaticon flaticon-basket"></i>
+                                            <i class="flaticon flaticon-basket-on dz-heart-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dz-content">
+                                    <h2 class="title"><a href="https://plantzone.dexignzone.com/xhtml/shop-list.html">Vineyard Reach (m)</a></h2>
+                                    <span class="price">
+                                $1099
+                                <del>$659</del>
+                            </span>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Tương tự cho các phần tử khác -->
+                        <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 shrubs wow fadeInUp" data-wow-delay="0.8s" style="position: absolute; left: 330px; top: 0px; visibility: hidden; animation-delay: 0.8s; animation-name: none;">
+                            <div class="shop-card">
+                                <div class="dz-media">
+                                    <img src="{{ asset('shop/images/2(1).png') }}" alt="image">
+                                    <div class="shop-meta">
+                                        <div class="btn btn-primary meta-icon dz-wishicon">
+                                            <i class="icon feather icon-heart dz-heart"></i>
+                                            <i class="icon feather icon-heart-on dz-heart-fill"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="btn btn-primary meta-icon dz-wishicon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <i class="flaticon flaticon-eye d-md-none d-block"></i>
+                                            <span class="d-md-block d-none"><i class="flaticon flaticon-eye"></i></span>
+                                        </a>
+                                        <div class="btn btn-primary meta-icon dz-carticon">
+                                            <i class="flaticon flaticon-basket"></i>
+                                            <i class="flaticon flaticon-basket-on dz-heart-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dz-content">
+                                    <h2 class="title"><a href="https://plantzone.dexignzone.com/xhtml/shop-list.html">TallStalk Gardens (m)</a></h2>
+                                    <span class="price">
+                                <del>$659</del>
+                                $1099
+                            </span>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Tiếp tục cập nhật các phần tử khác với hàm asset() -->
+                        <!-- Đối với các phần tử khác, thay đổi đường dẫn hình ảnh để phù hợp -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section Start-->
+
+        <!-- Blog Start -->
+        @include('components.blog')
+        <!-- Blog End -->
+
+        <!-- Newsletter Start-->
+        <section class="content-inner-1  overflow-hidden position-relative border-top">
+            <div class="collection1 style-1 up-down">
+                <img src="{{ asset('shop/images/1(4).png') }}" alt="">
+            </div>
+            <div class="collection3 style-1 up-down">
+                <img src="{{ asset('shop/images/2(4).png') }}" alt="">
+            </div>
+            <div class="container">
+                <div class="section-head style-1 d-block wow fadeInUp text-center" data-wow-delay="0.1s"
+                     style="visibility: hidden; animation-delay: 0.1s; animation-name: none;">
+                    <div class="max-w900 mx-auto">
+                        <h2 class="title mb-4">Subscribe Newsletter &amp; Get Plant News</h2>
+                    </div>
+                </div>
+                <form class="dzSubscribe style-2" action="{{ url('shop/script/mailchamp.php') }}" method="post">
+                    <div class="dzSubscribeMsg"></div>
+                    <div class="form-group">
+                        <div class="input-group mb-0">
+                            <input name="dzEmail" required="required" type="email" class="form-control h-70"
+                                   placeholder="Your Email Address">
+                            <div class="sub-btn">
+                                <button name="submit" value="Submit" type="submit" class="btn btn-secondary">Subscribe Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Newsletter End -->
+
+        <!-- Feature Box -->
+        <div class="content-inner py-0 image-wrapper">
+            <div class="container-fluid px-0">
+                <div class="row gx-0">
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4 wow fadeIn" data-wow-delay="0.1s" style="visibility: hidden; animation-delay: 0.1s; animation-name: none;">
+                        <div class="insta-post dz-media box-hover">
+                            <img src="{{ asset('shop/images/1(5).png') }}" alt="">
+                            <a href="https://www.instagram.com/dexignzone/" class="instagram-link" target="_blank">
+                                <div class="follow-link">
+                                    <div class="follow-link-icon">
+                                        <img src="{{ asset('shop/images/insta-follow.png') }}" alt="">
+                                    </div>
+                                    <div class="follow-link-content">
+                                        <h6>Share with #PlantZone</h6>
+                                        <p class="m-0">Follow <span>@PlantZone </span>for inspiration.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4 wow fadeIn" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;">
+                        <div class="insta-post dz-media box-hover">
+                            <img src="{{ asset('shop/images/2(5).png') }}" alt="">
+                            <a href="https://www.instagram.com/dexignzone/" class="instagram-link" target="_blank">
+                                <div class="follow-link">
+                                    <div class="follow-link-icon">
+                                        <img src="{{ asset('shop/images/insta-follow.png') }}" alt="">
+                                    </div>
+                                    <div class="follow-link-content">
+                                        <h6>Share with #PlantZone</h6>
+                                        <p class="m-0">Follow <span>@PlantZone </span>for inspiration.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4 wow fadeIn" data-wow-delay="0.3s" style="visibility: hidden; animation-delay: 0.3s; animation-name: none;">
+                        <div class="insta-post dz-media box-hover">
+                            <img src="{{ asset('shop/images/3(4).png') }}" alt="">
+                            <a href="https://www.instagram.com/dexignzone/" class="instagram-link" target="_blank">
+                                <div class="follow-link">
+                                    <div class="follow-link-icon">
+                                        <img src="{{ asset('shop/images/insta-follow.png') }}" alt="">
+                                    </div>
+                                    <div class="follow-link-content">
+                                        <h6>Share with #PlantZone</h6>
+                                        <p class="m-0">Follow <span>@PlantZone </span>for inspiration.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4 wow fadeIn" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;">
+                        <div class="insta-post dz-media box-hover">
+                            <img src="{{ asset('shop/images/4(3).png') }}" alt="">
+                            <a href="https://www.instagram.com/dexignzone/" class="instagram-link" target="_blank">
+                                <div class="follow-link">
+                                    <div class="follow-link-icon">
+                                        <img src="{{ asset('shop/images/insta-follow.png') }}" alt="">
+                                    </div>
+                                    <div class="follow-link-content">
+                                        <h6>Share with #PlantZone</h6>
+                                        <p class="m-0">Follow <span>@PlantZone </span>for inspiration.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4 wow fadeIn" data-wow-delay="0.5s" style="visibility: hidden; animation-delay: 0.5s; animation-name: none;">
+                        <div class="insta-post dz-media box-hover">
+                            <img src="{{ asset('shop/images/5(2).png') }}" alt="">
+                            <a href="https://www.instagram.com/dexignzone/" class="instagram-link" target="_blank">
+                                <div class="follow-link">
+                                    <div class="follow-link-icon">
+                                        <img src="{{ asset('shop/images/insta-follow.png') }}" alt="">
+                                    </div>
+                                    <div class="follow-link-content">
+                                        <h6>Share with #PlantZone</h6>
+                                        <p class="m-0">Follow <span>@PlantZone </span>for inspiration.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4 wow fadeIn" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;">
+                        <div class="insta-post dz-media box-hover">
+                            <img src="{{ asset('shop/images/6(1).png') }}" alt="">
+                            <a href="https://www.instagram.com/dexignzone/" class="instagram-link" target="_blank">
+                                <div class="follow-link">
+                                    <div class="follow-link-icon">
+                                        <img src="{{ asset('shop/images/insta-follow.png') }}" alt="">
+                                    </div>
+                                    <div class="follow-link-content">
+                                        <h6>Share with #PlantZone</h6>
+                                        <p class="m-0">Follow <span>@PlantZone </span>for inspiration.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Box End -->
+
+    </div>
+
 @endsection

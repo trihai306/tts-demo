@@ -51,11 +51,12 @@
 <!-- page-wrapper Start-->
 <!-- tap on top starts-->
 <div class="tap-top"><i class="iconly-Arrow-Up icli"></i></div>
+
 <!-- tap on tap ends-->
 <!-- loader-->
-<div class="loader-wrapper">
-    <div class="loader"><span></span><span></span><span></span><span></span><span></span></div>
-</div>
+{{--<div class="loader-wrapper">--}}
+{{--    <div class="loader"><span></span><span></span><span></span><span></span><span></span></div>--}}
+{{--</div>--}}
 <div class="page-wrapper compact-wrapper" id="pageWrapper">
     @include('future::app.demo.header')
     <!-- Page Body Start-->
@@ -205,44 +206,42 @@
 </div>
 
 @vite(['resources/js/app.js'])
-@vite(['packages/adminftr/core/resources/assets/js/app.js'])
 <!-- jquery-->
-<script src="{{ asset('admiro/assets/js/vendors/jquery/jquery.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/jquery/jquery.min.js') }}"></script>
 <!-- bootstrap js-->
-<script src="{{ asset('admiro/assets/js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}" defer=""></script>
-<script src="{{ asset('admiro/assets/js/vendors/bootstrap/dist/js/popper.min.js') }}" defer=""></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}" defer=""></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/bootstrap/dist/js/popper.min.js') }}" defer=""></script>
 <!-- fontawesome -->
-<script src="{{ asset('admiro/assets/js/vendors/font-awesome/fontawesome-min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/font-awesome/fontawesome-min.js') }}"></script>
 <!-- feather -->
-<script src="{{ asset('admiro/assets/js/vendors/feather-icon/feather.min.js') }}"></script>
-<script src="{{ asset('admiro/assets/js/vendors/feather-icon/custom-script.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/feather-icon/feather.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/feather-icon/custom-script.js') }}"></script>
 <!-- sidebar -->
-<script src="{{ asset('admiro/assets/js/sidebar.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/sidebar.js') }}"></script>
 <!-- select2 -->
-<script src="{{ asset('admiro/assets/js/vendors/@yaireo/tagify/dist/tagify.js') }}"></script>
-<script src="{{ asset('admiro/assets/js/vendors/@yaireo/tagify/dist/tagify.polyfills.min.js') }}"></script>
-<script src="{{ asset('admiro/assets/js/vendors/@yaireo/tagify/dist/intlTelInput.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/@yaireo/tagify/dist/tagify.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/@yaireo/tagify/dist/tagify.polyfills.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/vendors/@yaireo/tagify/dist/intlTelInput.min.js') }}"></script>
 <!-- height_equal -->
-<script src="{{ asset('admiro/assets/js/height-equal.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/height-equal.js') }}"></script>
 <!-- config -->
-<script src="{{ asset('admiro/assets/js/config.js') }}"></script>
+<script data-navigate-track src="{{ asset('admiro/assets/js/config.js') }}"></script>
 <!-- apex -->
-<script src="{{ asset('admiro/assets/js/chart/apex-chart/stock-prices.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/chart/apex-chart/stock-prices.js') }}"></script>
 <!-- scrollbar -->
-<script src="{{ asset('admiro/assets/js/scrollbar/simplebar.js') }}"></script>
-<script src="{{ asset('admiro/assets/js/scrollbar/custom.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/scrollbar/simplebar.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/scrollbar/custom.js') }}"></script>
 <!-- slick -->
-<script src="{{ asset('admiro/assets/js/slick/slick.min.js') }}"></script>
-<script src="{{ asset('admiro/assets/js/slick/slick.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/slick/slick.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/slick/slick.js') }}"></script>
 <!-- theme_customizer -->
-<script src="{{ asset('admiro/assets/js/theme-customizer/customizer.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/theme-customizer/customizer.js') }}"></script>
 <!-- tilt -->
-<script src="{{ asset('admiro/assets/js/animation/tilt/tilt.jquery.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/animation/tilt/tilt.jquery.js') }}"></script>
 <!-- page_tilt -->
-<script src="{{ asset('admiro/assets/js/animation/tilt/tilt-custom.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/animation/tilt/tilt-custom.js') }}"></script>
 <!-- custom script -->
-<script src="{{ asset('admiro/assets/js/script.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/script.js') }}"></script>
 @livewireScriptConfig
-
 </body>
 </html>

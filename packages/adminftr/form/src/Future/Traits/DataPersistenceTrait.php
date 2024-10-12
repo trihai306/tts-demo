@@ -169,10 +169,10 @@ trait DataPersistenceTrait
      */
     private function processBelongsToMany($relation, $data, $field)
     {
+        $relation->detach();
         if (empty($data)) {
             return;
         }
-        $relation->detach();
         $syncData = [];
         foreach ($data as $value) {
             if (is_callable($field->getBeforeSave())) {

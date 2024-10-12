@@ -61,28 +61,28 @@ class Table extends BaseTable
     {
 
         return [
-            TextFilter::make('name', __('user_name'), 'like'),
-            TextFilter::make('email', __('user_email')),
-            TextFilter::make('phone', __('user_phone')),
-            SelectFilter::make('status', __('user_status'))->options([
-                ['id' => 'active', 'name' => 'active'],
-                ['id' => 'inactive', 'name' => 'inactive'],
-                ['id' => 'blocked', 'name' => 'blocked'],
-            ]),
-            SelectFilter::make('gender', __('user_gender'))->options(
-                [
-                    ['id' => 'male', 'name' => 'nam'],
-                    ['id' => 'female', 'name' => 'nữ'],
-                    ['id' => 'non-binary', 'name' => 'không nhị phân'],
-                    ['id' => 'genderqueer', 'name' => 'giới tính lập dị'],
-                    ['id' => 'transgender', 'name' => 'chuyển giới'],
-                    ['id' => 'genderfluid', 'name' => 'giới tính linh hoạt'],
-                    ['id' => 'agender', 'name' => 'không giới tính'],
-                ]
-            ),
-            DateFilter::make('birthday', __('user_birthday')),
-            DateFilter::make('created_at', __('user_created_at')),
-            DateFilter::make('updated_at', __('user_updated_at')),
+//            TextFilter::make('name', __('user_name'), 'like'),
+//            TextFilter::make('email', __('user_email')),
+//            TextFilter::make('phone', __('user_phone')),
+//            SelectFilter::make('status', __('user_status'))->options([
+//                ['id' => 'active', 'name' => 'active'],
+//                ['id' => 'inactive', 'name' => 'inactive'],
+//                ['id' => 'blocked', 'name' => 'blocked'],
+//            ]),
+//            SelectFilter::make('gender', __('user_gender'))->options(
+//                [
+//                    ['id' => 'male', 'name' => 'nam'],
+//                    ['id' => 'female', 'name' => 'nữ'],
+//                    ['id' => 'non-binary', 'name' => 'không nhị phân'],
+//                    ['id' => 'genderqueer', 'name' => 'giới tính lập dị'],
+//                    ['id' => 'transgender', 'name' => 'chuyển giới'],
+//                    ['id' => 'genderfluid', 'name' => 'giới tính linh hoạt'],
+//                    ['id' => 'agender', 'name' => 'không giới tính'],
+//                ]
+//            ),
+//            DateFilter::make('birthday', __('user_birthday')),
+//            DateFilter::make('created_at', __('user_created_at')),
+//            DateFilter::make('updated_at', __('user_updated_at')),
         ];
     }
 

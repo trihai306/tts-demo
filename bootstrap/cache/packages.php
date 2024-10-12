@@ -1,15 +1,4 @@
 <?php return array (
-  'barryvdh/laravel-debugbar' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Debugbar' => 'Barryvdh\\Debugbar\\Facades\\Debugbar',
-    ),
-  ),
   'hammerstone/fast-paginate' => 
   array (
     'providers' => 
@@ -162,6 +151,13 @@
     'providers' => 
     array (
       0 => 'Staudenmeir\\LaravelCte\\DatabaseServiceProvider',
+    ),
+  ),
+  'wire-elements/wire-spy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'WireElements\\WireSpy\\WireSpyServiceProvider',
     ),
   ),
 );

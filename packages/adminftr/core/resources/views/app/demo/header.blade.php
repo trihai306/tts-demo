@@ -1,6 +1,6 @@
 <header class="page-header row">
     <div class="logo-wrapper d-flex align-items-center col-auto">
-        <a href="index.html">
+        <a href="{{url('admin/')}}">
             <img class="light-logo img-fluid" width="50" src="{{ asset('logo.png') }}" alt="logo"/>
             <img class="dark-logo img-fluid" src="{{ asset('logo.png') }}" alt="logo"/>
         </a>

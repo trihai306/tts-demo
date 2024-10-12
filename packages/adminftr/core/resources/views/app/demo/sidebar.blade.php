@@ -30,7 +30,9 @@
                         @else
                             {{url($menu->url)}}
                         @endif
-                        ">
+                        " @if(!count($menu->children) > 0)
+                            wire:navigate
+                            @endif>
                             @if($menu->icon)
                                 {{$menu->icon}}
                             @else
@@ -46,9 +48,9 @@
                         </a>
                         @if (count($menu->children) > 0)
                             <ul class="sidebar-submenu">
-                                <li><a href="{{ url($menu->url) }}">{{ $menu->title }}</a></li>
+                                <li><a href="{{ url($menu->url) }}" wire:navigate>{{ $menu->title }}</a></li>
                                 @foreach ($menu->children as $child)
-                                    <li><a href="{{ url($child->url) }}">{{ $child->title }}</a></li>
+                                    <li><a href="{{ url($child->url) }}" wire:navigate>{{ $child->title }}</a></li>
                                 @endforeach
                             </ul>
                         @endif

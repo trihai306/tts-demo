@@ -143,36 +143,13 @@ async function handleFiles(files) {
         }
     }
 }
-// Tạo một biến tên theme từ tham số URL hoặc từ localStorage
-var themeName = "tablerTheme";
-var urlParams = new URLSearchParams(window.location.search);
-var theme;
 
-// Kiểm tra xem có tham số theme trong URL không
-if (urlParams.has('theme')) {
-    theme = urlParams.get('theme');
-    localStorage.setItem(themeName, theme); // Lưu vào localStorage
-} else {
-    // Nếu không có trong URL, lấy từ localStorage
-    theme = localStorage.getItem(themeName) || "light";
-}
 
-// Áp dụng theme
-// if (theme === "dark") {
-//     document.body.setAttribute('data-bs-theme', 'dark');
-// } else {
-//     document.body.removeAttribute('data-bs-theme');
-// }
 Alpine.plugin(mask)
 Alpine.plugin(sort)
 Alpine.plugin(intersect)
 Alpine.plugin(ValidationErrors);
 Livewire.start()
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allow your team to quickly build robust real-time web applications.
- */
 
 import './echo';

@@ -2,7 +2,7 @@
   'use strict';
   var _currentSpinnerId = 0;
   function _scopedEventName(name, id) {
-    return name + '.touchspin_' + id; 
+    return name + '.touchspin_' + id;
   }
   function _scopeEventNames(names, id) {
     return $.map(names, function(name) {
@@ -166,15 +166,15 @@
         prefixhtml = '<span class="input-group-text bootstrap-touchspin-prefix">' + settings.prefix + '</span>',
         postfixhtml = '<span class="input-group-text bootstrap-touchspin-postfix">' + settings.postfix + '</span>';
         if (prev.hasClass('input-group-btn')) {
-          downhtml = '<button class="' + settings.buttondown_class + ' bootstrap-touchspin-down" type="button">' + settings.buttondown_txt + '</button>';
+          downhtml = '<button class="' + settings.buttondown_class + ' bootstrap-touchspin-down d-none" type="button">' + settings.buttondown_txt + '</button>';
           prev.append(downhtml);
         }
         else {
-          downhtml = '<button class="' + settings.buttondown_class + ' bootstrap-touchspin-down" type="button">' + settings.buttondown_txt + '</button>';
+          downhtml = '<button class="' + settings.buttondown_class + ' bootstrap-touchspin-down d-none" type="button">' + settings.buttondown_txt + '</button>';
           $(downhtml).insertBefore(originalinput);
         }
         if (next.hasClass('input-group-btn')) {
-          uphtml = '<button class="' + settings.buttonup_class + ' bootstrap-touchspin-up" type="button">' + settings.buttonup_txt + '</button>';
+          uphtml = '<button class="' + settings.buttonup_class + ' bootstrap-touchspin-up d-none" type="button">' + settings.buttonup_txt + '</button>';
           next.prepend(uphtml);
         }
         else {

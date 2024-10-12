@@ -26,5 +26,5 @@
     @foreach($this->form->render() as $input)
         {!! $input->render() !!}
     @endforeach
-
 </form>
+

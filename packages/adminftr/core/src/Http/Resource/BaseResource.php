@@ -37,7 +37,7 @@ abstract class BaseResource extends Controller
     public function index(Request $request)
     {
         $table = $this->table;
-        $title =  $table->title;
+        $title =  $table->title ?? 'Table';
         $description = $table->description ?? '';
         return view('future::resource.index', compact('table','title','description'));
     }

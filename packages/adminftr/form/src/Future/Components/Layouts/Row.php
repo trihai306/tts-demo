@@ -10,6 +10,7 @@ class Row
     protected $cols = [];
     protected $defaultColClasses = '';
     protected $url;
+    public $name;
 
     public function classes(string $classes)
     {

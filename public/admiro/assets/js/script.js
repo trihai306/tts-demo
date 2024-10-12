@@ -10,21 +10,19 @@
 // 03. Header DropDown Toggle js
 // 04. Full screen js
 // 05. Header search js
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("livewire:navigated", function () {
   const body = document.querySelector("body");
   const html = document.querySelector("html");
     /*=====================
         01 Loader Js
     ==========================*/
-    $(window).on('load', function() {
-        setTimeout(function(){
-            $(".loader-wrapper").addClass("fadeout");
-
-            $(".loader-wrapper").on('transitionend', function() {
-                $(this).remove();
-            });
-        }, 1000);
-    });
+    // setTimeout(function(){
+    //     $(".loader-wrapper").addClass("fadeout");
+    //
+    //     $(".loader-wrapper").on('transitionend', function() {
+    //         $(this).remove();
+    //     });
+    // }, 200);
   /*=====================
         02 Tap to top js
     ==========================*/

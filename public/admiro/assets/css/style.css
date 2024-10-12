@@ -16871,8 +16871,8 @@ body.modal-open .select2-container--open .select2-dropdown {
 }
 
 .card {
-    border: unset;
-    border-radius: 1.5rem;
+    /*border: unset;*/
+    border-radius: 0.7rem;
     letter-spacing: .5px;
     margin-bottom: 30px;
     transition: all .3s ease

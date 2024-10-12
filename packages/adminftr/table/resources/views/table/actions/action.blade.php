@@ -1,5 +1,5 @@
 @if($can)
-    <a class="btn btn-{{$color ?:'light-primary'}}" @if($url)href="{{$url}}" @endif
+    <a class="btn btn-{{$color ?:'light-primary'}}" @if($url)href="{{$url}}"  wire:navigate @endif
     @if($modal)data-bs-toggle="modal" x-on:click="$wire.dispatch('setModel',{id:null})"
        data-bs-target="#{{$name}}"@endif>
         @if($icon)
