@@ -5,24 +5,7 @@ $(function () {
             shop.resetFilterProduct();
             shop.getFeaturedProducts();
             shop.showSizesWithProduct();
-
-            $(document).ready(function() {
-                $('#show_product_detail').on('show.bs.modal', function (event) {
-                    var button = $(event.relatedTarget); // Nút được nhấn để mở modal
-                    var name = button.data('name'); // Lấy giá trị từ data-name
-                    var price = button.data('price');
-                    var specialPrice = button.data('special-price');
-                    var image = button.data('image');
-                    var description = button.data('description');
-
-                    var modal = $(this);
-                    modal.find('#show_product_detail .modal-body .title').text(name); // Cập nhật tên sản phẩm
-                    modal.find('#show_product_detail .modal-body .price').text('$' + (specialPrice ? specialPrice : price)); // Cập nhật giá sản phẩm
-                    modal.find('.modal-body img').attr('src', image); // Cập nhật hình ảnh
-                     modal.find(' .modal-body .para-text').text(description); // Cập nhật mô tả sản phẩm
-                });
-            });
-
+            shop.showProductDetail();
 
         },
 
@@ -210,6 +193,25 @@ $(function () {
                 error: function(error) {
                     console.log('Error:', error);
                 }
+            });
+        },
+
+        showProductDetail: function () {
+            $(document).ready(function() {
+                $('#show_product_detail').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var name = button.data('name');
+                    var price = button.data('price');
+                    var specialPrice = button.data('special-price');
+                    var image = button.data('image');
+                    var description = button.data('description');
+
+                    var modal = $(this);
+                    modal.find('#show_product_detail .modal-body .title').text(name);
+                    modal.find('#show_product_detail .modal-body .price').text('$' + (specialPrice ? specialPrice : price));
+                    modal.find('.modal-body img').attr('src', image);
+                    modal.find(' .modal-body .para-text').text(description);
+                });
             });
         },
     }
