@@ -26,7 +26,7 @@
                             <a href="https://plantzone.dexignzone.com/xhtml/index.html"><span>Home</span><i class="fas fa-chevron-down tabindex"></i></a>
                         </li>
                         <li class="has-mega-menu sub-menu-down">
-                            <a href="javascript:void(0);"><span>Shop</span><i class="fas fa-chevron-down tabindex"></i></a>
+                            <a href="/shop-list"><span>Shop</span><i class="fas fa-chevron-down tabindex"></i></a>
                             <div class="mega-menu shop-menu">
                                 <ul>
                                     <li class="side-left">

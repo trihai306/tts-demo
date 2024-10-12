@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
             $table->string('url_key')->unique();
             $table->string('sku')->unique();
             $table->string('tax_category')->nullable();
@@ -34,6 +35,7 @@ class CreateProductsTable extends Migration
             $table->decimal('width', 10, 2)->nullable();
             $table->decimal('height', 10, 2)->nullable();
             $table->decimal('weight', 10, 2)->nullable();
+            $table->integer('quantity_sold')->default(0);
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

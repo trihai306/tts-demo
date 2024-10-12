@@ -39,9 +39,9 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input name="dzSearch" required="required" type="search"
-                                                       class="form-control" placeholder="Search Here">
+                                                       class="form-control" id="search" placeholder="Search Here">
                                                 <div class="input-group-addon">
-                                                    <button name="submit" value="Submit" type="submit" class="btn">
+                                                    <button name="submit" value="Submit" type="submit" id="submit-search" class="btn">
                                                         <i class="icon feather icon-search"></i>
                                                     </button>
                                                 </div>
@@ -52,78 +52,16 @@
                                     <div class="widget widget_categories">
                                         <h3 class="widget-title">Product Category</h3>
                                         <ul>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_01">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_01">Bonsai</label>(10)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_02">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_02">House Plants</label>(5)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_03">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_03">indoor Living</label>(17)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_04">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_04">Perennials</label>(13)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_05">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_05">Plant For Gift</label>(06)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_06">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_06">garden Tools</label>(17)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_07">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_07">Best Sellers</label>(13)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_08">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_08">Blossom Haven</label>(06)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_09">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_09">Small Plants</label>(22)
-                                                </div>
-                                            </li>
+                                            @foreach($categories as $category)
+                                                <li class="cat-item cat-item-{{ $category->id }}">
+                                                    <div class="custom-control custom-checkbox d-flex">
+                                                        <input type="checkbox" class="form-check-input square category-filter"
+                                                               id="category_{{ $category->id }}" value="{{ $category->id }}">
+                                                        <label class="form-check-label text-start flex-1"
+                                                               for="category_{{ $category->id }}">{{ $category->name }}</label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
 
@@ -132,78 +70,49 @@
                                         <div class="price-slide range-slider">
                                             <div class="price">
                                                 <div class="range-slider style-1">
-                                                    <div id="slider-tooltips"
-                                                         class="mb-3 noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr">
+                                                    <div id="slider-tooltips" class="mb-3 noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr">
                                                         <div class="noUi-base">
                                                             <div class="noUi-connects">
-                                                                <div class="noUi-connect"
-                                                                     style="transform: translate(10%, 0px) scale(0.765, 1);"></div>
+                                                                <div class="noUi-connect" style="transform: translate(10%, 0px) scale(0.765, 1);"></div>
                                                             </div>
-                                                            <div class="noUi-origin"
-                                                                 style="transform: translate(-90%, 0px); z-index: 5;">
-                                                                <div class="noUi-handle noUi-handle-lower"
-                                                                     data-handle="0" tabindex="0" role="slider"
-                                                                     aria-orientation="horizontal" aria-valuemin="0.0"
-                                                                     aria-valuemax="346.0" aria-valuenow="40.0"
-                                                                     aria-valuetext="40">
+                                                            <div class="noUi-origin" style="transform: translate(-90%, 0px); z-index: 5;">
+                                                                <div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider"
+                                                                     aria-orientation="horizontal" aria-valuemin="{{ $minPrice }}"
+                                                                     aria-valuemax="{{ $maxPrice }}" aria-valuenow="{{ $minPrice }}"
+                                                                     aria-valuetext="{{ $minPrice }}">
                                                                     <div class="noUi-touch-area"></div>
-                                                                    <div class="noUi-tooltip">40.0</div>
+                                                                    <div class="noUi-tooltip">{{ $minPrice }}</div>
                                                                 </div>
                                                             </div>
-                                                            <div class="noUi-origin"
-                                                                 style="transform: translate(-13.5%, 0px); z-index: 4;">
-                                                                <div class="noUi-handle noUi-handle-upper"
-                                                                     data-handle="1" tabindex="0" role="slider"
-                                                                     aria-orientation="horizontal" aria-valuemin="40.0"
-                                                                     aria-valuemax="400.0" aria-valuenow="346.0"
-                                                                     aria-valuetext="346">
+                                                            <div class="noUi-origin" style="transform: translate(-13.5%, 0px); z-index: 4;">
+                                                                <div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider"
+                                                                     aria-orientation="horizontal" aria-valuemin="{{ $minPrice }}"
+                                                                     aria-valuemax="{{ $maxPrice }}" aria-valuenow="{{ $maxPrice }}"
+                                                                     aria-valuetext="{{ $maxPrice }}">
                                                                     <div class="noUi-touch-area"></div>
-                                                                    <div class="noUi-tooltip">346</div>
+                                                                    <div class="noUi-tooltip">{{ $maxPrice }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span class="example-val" id="slider-margin-value-min">Min Price: $40</span>
-                                                    <span class="example-val" id="slider-margin-value-max">Max Price: $346</span>
+                                                    <span class="example-val" id="slider-margin-value-min">Min Price: ${{ number_format($minPrice, 2) }}</span>
+                                                    <span class="example-val" id="slider-margin-value-max">Max Price: ${{ number_format($maxPrice, 2) }}</span>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
                                     <div class="widget product-size">
                                         <h3 class="widget-title">Size</h3>
                                         <ul>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_Small1">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_Small1">Small</label>(10)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_medium1">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_medium1">Medium</label>(5)
-                                                </div>
-                                            </li>
-                                            <li class="cat-item cat-item-26">
-                                                <div class="custom-control custom-checkbox d-flex">
-                                                    <input type="checkbox" class="form-check-input square"
-                                                           id="basic_checkbox_large1">
-                                                    <label class="form-check-label text-start flex-1"
-                                                           for="basic_checkbox_large1">large</label>(17)
-                                                </div>
-                                            </li>
                                         </ul>
                                     </div>
 
 
                                     <div class="widget recent-posts-entry">
                                         <h3 class="widget-title">Featured Products</h3>
-                                        <div class="widget-post-bx">
+                                        <div class="widget-post-bx" id="product-featured-list">
                                             <div class="widget-post clearfix">
                                                 <div class="dz-media">
                                                     <a href="post-standard.html"><img
@@ -252,9 +161,9 @@
                                             <a href="blog-tag.html">Plant Paradise</a>
                                         </div>
                                     </div>
-                                    <a href="javascript:void(0);"
-                                       class="btn btn-lg font-14 btn-secondary btn-sharp btn-block text-uppercase">Reset
-                                        ALL FILTERS</a>
+                                    <a href="javascript:void(0);" id="reset-filters" class="btn btn-lg font-14 btn-secondary btn-sharp btn-block text-uppercase">
+                                        Reset ALL FILTERS
+                                    </a>
                                 </aside>
                             </div>
                         </div>
@@ -262,7 +171,7 @@
                     <div class="col-80 col-xl-9">
                         <div class="filter-wrapper">
                             <div class="filter-left-area">
-                                <span>Showing 1–5 Of 50 Results</span>
+{{--                                <span>Showing 1–5 Of 50 Results</span>--}}
                             </div>
                             <div class="filter-right-area">
                                 <a href="javascript:void(0);" class="panel-btn me-2">
@@ -289,15 +198,15 @@
                                             <option>Low to high</option>
                                             <option>high to Low</option>
                                         </select>
-                                        <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light"
-                                                data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1"
-                                                aria-haspopup="listbox" aria-expanded="false" title="Default sorting">
-                                            <div class="filter-option">
-                                                <div class="filter-option-inner">
-                                                    <div class="filter-option-inner-inner">Default sorting</div>
-                                                </div>
-                                            </div>
-                                        </button>
+{{--                                        <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light"--}}
+{{--                                                data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1"--}}
+{{--                                                aria-haspopup="listbox" aria-expanded="false" title="Default sorting">--}}
+{{--                                            <div class="filter-option">--}}
+{{--                                                <div class="filter-option-inner">--}}
+{{--                                                    <div class="filter-option-inner-inner">Default sorting</div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </button>--}}
                                         <div class="dropdown-menu ">
                                             <div class="inner show" role="listbox" id="bs-select-1" tabindex="-1">
                                                 <ul class="dropdown-menu inner show" role="presentation"></ul>
@@ -315,15 +224,15 @@
                                             <option>Low to high</option>
                                             <option>high to Low</option>
                                         </select>
-                                        <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light"
-                                                data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-2"
-                                                aria-haspopup="listbox" aria-expanded="false" title="Categories">
-                                            <div class="filter-option">
-                                                <div class="filter-option-inner">
-                                                    <div class="filter-option-inner-inner">Categories</div>
-                                                </div>
-                                            </div>
-                                        </button>
+{{--                                        <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light"--}}
+{{--                                                data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-2"--}}
+{{--                                                aria-haspopup="listbox" aria-expanded="false" title="Categories">--}}
+{{--                                            <div class="filter-option">--}}
+{{--                                                <div class="filter-option-inner">--}}
+{{--                                                    <div class="filter-option-inner-inner">Categories</div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </button>--}}
                                         <div class="dropdown-menu ">
                                             <div class="inner show" role="listbox" id="bs-select-2" tabindex="-1">
                                                 <ul class="dropdown-menu inner show" role="presentation"></ul>
@@ -417,31 +326,37 @@
                             </div>
                         </div>
 
-                        <div class="row">
-
-                            @include('partials.product_list', ['products' => $products])
-
+                        <div class="row" id="product-list">
+                            @include('screen.client.partials.product_list', ['products' => $products])
                         </div>
 
-                        <div class="row page ">
-                            <div class="col-md-6">
-                                <p class="page-text">Showing 1–5 Of 50 Results</p>
-                            </div>
-                            <div class="col-md-6">
-                                <nav aria-label="Blog Pagination">
-                                    <ul class="pagination style-1">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                                        <li class="page-item"><a class="page-link next"
-                                                                 href="javascript:void(0);">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+{{--                        <div class="row page ">--}}
+{{--                            <div class="col-md-6">--}}
+{{--                                <p class="page-text">Showing 1–5 Of 50 Results</p>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-6">--}}
+{{--                                <nav aria-label="Blog Pagination">--}}
+{{--                                    <ul class="pagination style-1">--}}
+{{--                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link next"--}}
+{{--                                                                 href="javascript:void(0);">Next</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </nav>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
         </section>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        var minPrice = {{ $minPrice }};  // Minimum price from the backend
+        var maxPrice = {{ $maxPrice }};  // Maximum price from the backend
+    </script>
+    <script src="{{ URL::asset('shop/page_js/shop.js') }}"></script>
 @endsection
