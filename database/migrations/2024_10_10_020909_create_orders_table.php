@@ -15,8 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('total_amount', 10, 2);
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('company')->nullable();
+            $table->string('country')->nullable();
+            $table->string('street_address')->nullable();
+            $table->string('zip_code')->nullable();
             $table->string('status');
-            $table->text('shipping_address');
+            $table->text('shipping_address')->nullable();
             $table->text('billing_address')->nullable();
             $table->string('payment_method');
             $table->timestamp('order_date')->useCurrent();

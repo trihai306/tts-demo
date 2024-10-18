@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ]);
         }
-        $this->call([
+//        $this->call([
 //            Adm::class,
 //            ProductsTableSeeder::class,
-        ]);
+//        ]);
         $users = User::all();
 //        foreach ($users as $user) {
 //            for ($i = 0; $i < 100; $i++) {

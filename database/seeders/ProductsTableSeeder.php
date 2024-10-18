@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Concurrency;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
 
@@ -17,8 +16,14 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
+        // Truncate the products table
         DB::table('products')->truncate();
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $imagePaths = [
             "shop/product/1.png",
@@ -33,24 +38,19 @@ class ProductsTableSeeder extends Seeder
             "shop/product/10.png",
             "shop/product/11.png",
             "shop/product/12.png",
-
         ];
 
-
-
         $faker = Faker::create();
-
         $totalRecords = 1000;
         $batchSize = 100; // Size of each batch
 
-        // Use Concurrency to handle multiple batches
-        $batches = array_fill(0, ceil($totalRecords / $batchSize), null);
-
-        Concurrency::run(array_map(function ($_, $index) use ($faker, $batchSize, $totalRecords, $imagePaths) {
+        // Chunk data insertion for better performance
+        for ($batch = 0; $batch < ceil($totalRecords / $batchSize); $batch++) {
             $products = [];
+
             for ($i = 0; $i < $batchSize; $i++) {
-                $id = $index * $batchSize + $i;
-                if ($id >= $totalRecords) break; // Stop if the calculated ID exceeds total records
+                $id = $batch * $batchSize + $i;
+                if ($id >= $totalRecords) break;
 
                 $productName = $faker->unique()->words(3, true);
                 $urlKey = Str::slug($productName) . '-' . $id;
@@ -84,9 +84,9 @@ class ProductsTableSeeder extends Seeder
                 ];
             }
 
-            // Insert batch
+            // Insert products in chunks
             DB::table('products')->insert($products);
-        }, $batches, array_keys($batches)));
+        }
 
         // Reset unique generation for Faker
         $faker->unique(true);

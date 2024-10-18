@@ -11,15 +11,13 @@ $(function () {
 
         getFilterProduct: function () {
 
-            // filter theo search
             $('#submit-search').on('click', function() {
                 shop.loadProducts("/shop-list");
             });
 
-            // filter theo categories
             $('.category-filter').on('change', function() {
-                var url = '/shop-list'; // URL đến shop
-                shop.loadProducts(url); // Gọi hàm load sản phẩm khi thay đổi category
+                var url = '/shop-list';
+                shop.loadProducts(url);
             });
 
             // filter theo page
@@ -74,7 +72,7 @@ $(function () {
 
                 var slider = document.getElementById('slider-tooltips');
 
-                slider.noUiSlider.set([minPrice, maxPrice]); // Đặt lại về giá trị ban đầu
+                slider.noUiSlider.set([minPrice, maxPrice]);
 
                 $('#slider-margin-value-min').text('Min Price: ' + minPrice);
                 $('#slider-margin-value-max').text('Max Price: ' + maxPrice);
@@ -102,7 +100,7 @@ $(function () {
 
             var attributes = {};
             $('.size-filter:checked').each(function() {
-                var attributeName = $(this).data('attribute-name');  // e.g., 'Size', 'Color'
+                var attributeName = $(this).data('attribute-name');
                 if (!attributes[attributeName]) {
                     attributes[attributeName] = [];
                 }
@@ -128,7 +126,7 @@ $(function () {
                 success: function(data) {
                     $('#overlay').hide();
                     $('#loading').hide();
-                    $('#product-list').html(data.products); // Update the product list
+                    $('#product-list').html(data.products);
                     // window.history.pushState("", "", url); // Update the browser URL
                 },
                 error: function() {
@@ -145,7 +143,7 @@ $(function () {
                 type: 'GET',
                 success: function(response) {
                     var productList = $('#product-featured-list');
-                    productList.empty(); // Clear the existing content
+                    productList.empty();
 
                     response.products.forEach(function(product) {
                         var productHtml = `
@@ -159,7 +157,7 @@ $(function () {
                             </div>
                         </div>
                     `;
-                        productList.append(productHtml); // Append new products
+                        productList.append(productHtml);
                     });
                 },
                 error: function() {
@@ -170,11 +168,10 @@ $(function () {
 
         showSizesWithProduct: function () {
             $.ajax({
-                url: '/size-product', // Your route for getting sizes data
+                url: '/size-product',
                 method: 'GET',
                 success: function(response) {
                     let sizeList = '';
-                    // Loop through the response data and build the HTML structure
                     $.each(response, function(index, size) {
                         sizeList += `
                         <li class="cat-item cat-item-${size.size}">
@@ -187,7 +184,6 @@ $(function () {
                         </li>`;
                     });
 
-                    // Update the size list in the DOM
                     $('.widget.product-size ul').html(sizeList);
                 },
                 error: function(error) {

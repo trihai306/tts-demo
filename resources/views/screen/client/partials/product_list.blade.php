@@ -173,10 +173,13 @@
                                 <i class="icon feather icon-heart dz-heart"></i>
                                 <i class="icon feather icon-heart-on dz-heart-fill"></i>
                             </div>
-                            <div class="btn btn-primary meta-icon dz-carticon">
+                            <button class="btn btn-primary meta-icon dz-carticon add-to-cart"
+                                    data-id="{{ $product->id }}"
+
+                            >
                                 <i class="flaticon flaticon-shopping-cart-1 dz-cart"></i>
                                 <i class="flaticon flaticon-shopping-cart-1-on dz-cart-fill"></i>
-                            </div>
+                            </button>
                         </div>
                         <div class="dz-content">
                             <h2 class="title"><a href="">{{ $product->name }}</a></h2>
