@@ -37,7 +37,7 @@ class Form extends BaseForm
                             TextInput::make('email')->required()->label('Email')->placeholder('Email'),
                             TextInput::make('password')->required()->password()->label('Mật khẩu')
                                 ->placeholder('Password')->canUpdate(false),
-//                            DateInput::make('birthday')->label('Ngày sinh'),
+                            DateInput::make('birthday')->label('Ngày sinh'),
                             TextInput::make('phone')->label('Số điện thoại')->placeholder('Phone')
                                 ->rules('required, max:10, min:10')->messages(
                                     [
@@ -69,7 +69,7 @@ class Form extends BaseForm
                                 ]
                             )->required(),
                             Radio::make('status')->label('Trạng thái')->options([['value' => 'active', 'label' => 'Hoạt động'], ['value' => 'inactive', 'label' => 'Không hoạt động']])->required(),
-//                            Upload::make('avatar')->label('Ảnh đại diện')->storeAs('public', 'avatar', 'public')->multiple()->maxFiles(4),
+                            Upload::make('avatar')->label('Ảnh đại diện')->storeAs('public', 'avatar', 'public')->multiple()->maxFiles(4),
                         ]),
                     ]),
                 ])->sm(12)->md(6)->lg(4),

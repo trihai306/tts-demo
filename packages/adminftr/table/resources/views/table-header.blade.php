@@ -8,8 +8,8 @@
             </select>
             @if($this->bulkActions())
                 <div class="dropdown" :class="{'d-none': selectedRows.length === 0 ? 'd-none' : ''}">
-                    <button class='btn align-text-top dropdown-toggle' type='button' data-bs-auto-close="outside" data-bs-toggle='dropdown'>{{ __('table::table.bulk_actions') }}</button>
-                        <ul class='dropdown-menu'>
+                    <button class='btn align-text-top btn-primary dropdown-toggle text-white' type='button' data-bs-auto-close="outside" data-bs-toggle='dropdown'>{{ __('table::table.bulk_actions') }}</button>
+                        <ul class='dropdown-menu dropdown-block'>
                             @foreach($this->bulkActions() as $bulkAction)
                                 <li>{{ $bulkAction->render() }}</li>
                             @endforeach

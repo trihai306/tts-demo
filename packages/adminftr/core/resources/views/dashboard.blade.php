@@ -1,7 +1,21 @@
 @extends('future::layouts.app-demo')
 
 @section('content')
-   <div class="container mt-2">
-       <livewire:future::admin.dashboard/>
-   </div>
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                    <h2>Dashboard</h2>
+                    <p class="mb-0 text-title-gray">Chào mừng bạn quay trở lại</p>
+                </div>
+                <div class="col-sm-6 col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><i class="iconly-Home icli svg-color"></i></li>
+                        <li class="breadcrumb-item">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <livewire:future::admin.dashboard/>
 @endsection

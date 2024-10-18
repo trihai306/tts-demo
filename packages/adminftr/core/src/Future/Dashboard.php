@@ -6,17 +6,12 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public string $dateStart = '';
-
-    public string $dateEnd = '';
+    public string $currentDay = '';
 
     public function mount()
     {
-        $this->dateStart = now()->subDays(7)->format('Y-m-d');
-        $this->dateEnd = now()->format('Y-m-d');
+        $this->currentDay = now()->format('l j, M Y');
     }
-
-    public function filter() {}
 
     public function render()
     {

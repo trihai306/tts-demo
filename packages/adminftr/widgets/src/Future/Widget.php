@@ -4,7 +4,7 @@ namespace Adminftr\Widgets\Future;
 
 class Widget
 {
-    public array $col = [
+    protected array $col = [
         'sm' => 6,
         'md' => 3,
         'xl' => 3,

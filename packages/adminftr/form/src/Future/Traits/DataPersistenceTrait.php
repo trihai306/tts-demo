@@ -47,9 +47,9 @@ trait DataPersistenceTrait
             }
             if ($dataItem instanceof UploadedFile) {
                 if ($field->getRelationship()) {
-                    $this->relations[$name] = $this->storeUploadedFile($dataItem, $field);
+                    $this->relations[$name] = $this->storeUploadedFile($dataItem, $field)->id;
                 } else {
-                    $this->data[$name] = $this->storeUploadedFile($dataItem, $field);
+                    $this->data[$name] = $this->storeUploadedFile($dataItem, $field)->file_path ?? '';
                 }
             } elseif (is_array($dataItem)) {
                 if ($field->getRelationship()) {
@@ -72,15 +72,15 @@ trait DataPersistenceTrait
     private function storeUploadedFile(UploadedFile $file, $field)
     {
         $filename = str_replace(' ', '_', $file->getClientOriginalName());
-        $file->storeAs($field->disk.$field->path, $filename, $field->disk);
+        $file->storeAs($field->getDisk().'/'.$field->getPath(), $filename, $field->getDisk());
         return FileManager::updateOrCreate([
-            'file_path' => $field->disk.$field->path . '/' . $filename,
+            'file_path' => $field->getDisk().'/'.$field->getPath() . '/' . $filename,
             'file_name' => $filename,
-            'folder_path' => $field->disk.'/'.$field->path,
+            'folder_path' => $field->getDisk().'/'.$field->getPath(),
             'user_id' => auth()->id() ?? null,
-            'file_type' => Storage::disk($field->disk)->mimeType($field->path . '/' . $filename),
+            'file_type' => Storage::disk($field->getDisk())->mimeType($field->getPath() . '/' . $filename),
             'file_size' => $file->getSize(),
-        ])->id;
+        ]);
     }
 
     /**
@@ -119,8 +119,6 @@ trait DataPersistenceTrait
         }
         $modelData = $this->data;
         $relationshipData = $this->relations;
-        // Remove null values
-        $modelData = array_filter($modelData, fn($value) => $value !== null && $value !== '');
         $model->update($modelData);
         $this->processRelationships($model, $relationshipData);
         $this->refreshData();

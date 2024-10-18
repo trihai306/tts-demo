@@ -11,6 +11,8 @@
     ->orderBy('order')
     ->get()
     ->groupBy('sidebar_title');
+
+    $currentUrl = request()->path();
 @endphp
 
 <aside class="page-sidebar">
@@ -24,11 +26,16 @@
                     </div>
                 </li>
                 @foreach ($menuGroup as $menu)
-                    <li class="sidebar-list">
+                    @php
+                        $isActive = Request::is(trim($menu->url, '/')) || $menu->children->contains(function ($child) use ($currentUrl) {
+                            return Request::is(trim($child->url, '/'));
+                        });
+                    @endphp
+                    <li class="sidebar-list @if($isActive) active @endif">
                         <a class="sidebar-link" href="@if(count($menu->children) > 0)
                         javascript:void(0)
                         @else
-                            {{url($menu->url)}}
+                            {{ url($menu->url) }}
                         @endif
                         " @if(!count($menu->children) > 0)
                             wire:navigate
@@ -47,10 +54,12 @@
                             @endif
                         </a>
                         @if (count($menu->children) > 0)
-                            <ul class="sidebar-submenu">
+                            <ul class="sidebar-submenu @if($isActive) active @endif">
                                 <li><a href="{{ url($menu->url) }}" wire:navigate>{{ $menu->title }}</a></li>
                                 @foreach ($menu->children as $child)
-                                    <li><a href="{{ url($child->url) }}" wire:navigate>{{ $child->title }}</a></li>
+                                    <li class="@if(Request::is(trim($child->url, '/'))) active @endif">
+                                        <a href="{{ url($child->url) }}" wire:navigate>{{ $child->title }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         @endif

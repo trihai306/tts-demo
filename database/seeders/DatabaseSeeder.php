@@ -32,24 +32,24 @@ class DatabaseSeeder extends Seeder
 //            ProductsTableSeeder::class,
 //        ]);
         $users = User::all();
-        foreach ($users as $user) {
-            for ($i = 0; $i < 100; $i++) {
-                Notification::create([
-                    'type' => 'App\Notifications\SampleNotification',
-                    'notifiable_type' => get_class($user),
-                    'notifiable_id' => $user->id,
-                    'sender' => $user->id, // Assuming sender is also the user for this example
-                    'title' => 'Welcome Notification',
-                    'description' => 'This is a sample notification for user ' . $user->name,
-                    'data' => json_encode([
-                        'message' => 'Welcome to our platform! We are glad to have you here.',
-                        'action_url' => url('/home'),
-                    ]),
-                    'read_at' => null,
-                ]);
-            }
-
-        }
+//        foreach ($users as $user) {
+//            for ($i = 0; $i < 100; $i++) {
+//                Notification::create([
+//                    'type' => 'App\Notifications\SampleNotification',
+//                    'notifiable_type' => get_class($user),
+//                    'notifiable_id' => $user->id,
+//                    'sender' => $user->id, // Assuming sender is also the user for this example
+//                    'title' => 'Welcome Notification',
+//                    'description' => 'This is a sample notification for user ' . $user->name,
+//                    'data' => json_encode([
+//                        'message' => 'Welcome to our platform! We are glad to have you here.',
+//                        'action_url' => url('/home'),
+//                    ]),
+//                    'read_at' => null,
+//                ]);
+//            }
+//
+//        }
 
         $this->call([
             CategorySeeder::class,

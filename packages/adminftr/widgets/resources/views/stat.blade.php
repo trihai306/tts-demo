@@ -1,46 +1,25 @@
-<div class="col
-    @if($data->col)
-     @foreach($data->col as $key=>$value)
-        col-{{$key}}-{{$value}}
-     @endforeach
-     @else col-md-6 @endif
-">
-    <div class="card @if($data->isHover)card-hover @endif">
+<div class="col-sm-{{$col['sm']}} col-md-{{$col['md']}} col-xl-{{$col['xl']}} box-col-6">
+    <div class="card widget-1">
         <div class="card-body">
-            <div class="d-flex align-items-center">
-                <div class="subheader">{{$data->title ?? ''}}</div>
-                @if($data->dropdown)
-                    @include('widget::components.dropdown', ['dropdown' => $data->dropdown])
-                @endif
-            </div>
-            <div class="d-flex align-items-baseline mb-2 mt-2">
-                <div class="h2 me-2">
-                    {{$data->value ?? ''}}
-                </div>
-                @if (!empty($data->subDescription))
-                    <div class="ms-auto">
-                        <span
-                            class="text-{{ $data->subDescription['color'] ?? 'green' }} d-inline-flex align-items-center lh-1">
-                            {{ $data->subDescription['title'] ?? 'No Title' }} &nbsp;
-                            @if (!empty($data->subDescription['icon']))
-                                <i class="{{ $data->subDescription['icon'] }}"></i>
+            <div class="widget-content">
+                <div class="widget-round {{$color}}">
+                    <div class="bg-round">
+                        <svg class="svg-fill">
+                          @if($icon)
+                            <i class="{{$icon}}"></i>
+                          @else
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-databricks"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17l9 5l9 -5v-3l-9 5l-9 -5v-3l9 5l9 -5v-3l-9 5l-9 -5l9 -5l5.418 3.01" /></svg>
                             @endif
-                        </span>
+                        </svg>
+                        <svg class="half-circle svg-fill">
+                            <use href="{{ asset('admiro/assets/svg/icon-sprite.svg#halfcircle') }}"></use>
+                        </svg>
                     </div>
-                @endif
-
-            </div>
-            @if($data->description)
-                <div class="d-flex mb-2">
-                    <div>{{$data->description ?? ''}}</div>
                 </div>
-            @endif
-{{--            <div class="progress progress-sm">--}}
-{{--                <div class="progress-bar bg-primary" style="width: 75%" role="progressbar" aria-valuenow="75"--}}
-{{--                     aria-valuemin="0" aria-valuemax="100" aria-label="75% Complete">--}}
-{{--                    <span class="visually-hidden">75% Complete</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                <div>
+                    <h4>{{$value ?? ''}}</h4><span class="f-light">{{$description ?? ''}}</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

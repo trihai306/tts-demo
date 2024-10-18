@@ -66,9 +66,6 @@ class Table extends BaseTable
     protected function widgets()
     {
         return [
-            Stat::make(__('total_product'))->callback(function ($stat) {
-                $stat->value = Product::count();
-                return $stat;
-        }),];
+       ];
     }
 }

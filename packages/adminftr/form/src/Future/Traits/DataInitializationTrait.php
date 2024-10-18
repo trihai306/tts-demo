@@ -81,8 +81,12 @@ trait DataInitializationTrait
      */
     private function loadDefaultData($inputs)
     {
-        foreach ($inputs as $input) {
+        foreach ($this->getInputFields() as $input) {
             $this->data[$input->name] = $input->getDefaultValue();
         }
+        foreach ($this->getRelationshipFields() as $input){
+            $this->relations[$input->name] = [];
+        }
+
     }
 }
