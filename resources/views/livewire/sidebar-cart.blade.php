@@ -52,7 +52,7 @@
                         <h5 class="mb-0 cart-total-price">${{ $totalAmount }}</h5>
                     </div>
                     <div class="mt-auto">
-                        <a href="/checkout" class="btn btn-outline-secondary btn-block m-b20">Checkout</a>
+                        <a href="/shop-checkout" class="btn btn-outline-secondary btn-block m-b20">Checkout</a>
                         <a href="/cart" class="btn btn-secondary btn-block">View Cart</a>
                     </div>
                 </div>
