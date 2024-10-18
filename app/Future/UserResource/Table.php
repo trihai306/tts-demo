@@ -61,7 +61,7 @@ class Table extends BaseTable
     {
 
         return [
-//            TextFilter::make('name', __('user_name'), 'like'),
+            TextFilter::make('name', __('user_name'), 'like'),
 //            TextFilter::make('email', __('user_email')),
 //            TextFilter::make('phone', __('user_phone')),
 //            SelectFilter::make('status', __('user_status'))->options([
@@ -92,7 +92,7 @@ class Table extends BaseTable
             Action::make('edit', __('edit'), 'fas fa-edit')->link(function ($data) {
                 return route('admin.users.edit', $data->id);
             })->size('font-size:20px;'),
-            Action::make('password', __('change password'), 'fa fa-key')
+            Action::make('password', __('change password'), 'ti ti-key')
                 ->modal(ChangePassword::class)->size('font-size:20px;'),
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->confirm('Xóa', function ($data) {
                 $name = $data->name;
@@ -131,9 +131,7 @@ class Table extends BaseTable
     protected function widgets()
     {
         return [
-            Stat::make(__('user_cont'),function (){
-                return User::count();
-            })
+            Stat::make(100,'demo')
         ];
     }
 }

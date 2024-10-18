@@ -1,76 +1,45 @@
-<div class="col-12 col-md-9 d-flex flex-column" x-data="{ isEdit: false }">
-    <form wire:submit="">
-        <div class="card-body">
-            <h2 class="mb-4">{{ __('future::profile.my_account') }}</h2>
-            <h3 class="card-title">{{ __('future::profile.profile_details') }}</h3>
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <span class="avatar avatar-xl" style="background-image: url({{ auth()->user()->avatar ? asset('storage/'.auth()->user()->avatar) : asset('static/avatars/001f.jpg') }})"></span>
-                </div>
-                <div class="col-auto">
-                    <label class="btn" for="avatarUpload">
-                        {{ __('future::profile.change_avatar') }}
-                    </label>
-                    <input type="file" id="avatarUpload" accept="image/*" wire:model.live="avatar" style="display: none;">
-                    @error('photo')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
+<div class="row g-0">
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-header card-no-border pb-0">
+                <h3 class="card-title mb-0">My Profile</h3>
+                <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i
+                            class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#"
+                                                                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
                 </div>
             </div>
-            <h3 class="card-title mt-4">{{ __('future::profile.profile') }}</h3>
-            <div class="row g-3">
-                <div class="col-md">
-                    <div class="form-label">{{ __('future::profile.name') }}</div>
-                    <input type="text" class="form-control" x-show="isEdit" value="{{ Auth::user()->name ?? 'chưa có tên' }}">
-                    <p x-show="!isEdit">{{ Auth::user()->name ?? 'chưa có tên' }}</p>
-                </div>
-                <div class="col-md">
-                    <div class="form-label">{{ __('future::profile.phone') }}</div>
-                    <input type="text" class="form-control" x-show="isEdit" value="{{ Auth::user()->phone ?? 'chưa có số điện thoại' }}">
-                    <p x-show="!isEdit">{{ Auth::user()->phone ?? 'chưa có số điện thoại' }}</p>
-                </div>
-                <div class="col-md">
-                    <div class="form-label">{{ __('future::profile.birthday') }}</div>
-                    <input type="text" class="form-control" x-show="isEdit" value="{{ Auth::user()->birthday ?? 'chưa cập nhập ngày' }}">
-                    <p x-show="!isEdit">{{ Auth::user()->birthday ?? 'chưa cập nhập ngày' }}</p>
-                </div>
-            </div>
+            <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="profile-title">
+                            <div class="d-flex gap-3">
+                                <img class="img-70 rounded-circle" alt="Profile Picture"
+                                     src="{{ asset(Auth::user()->avatar ?'storage/'. Auth::user()->avatar: 'admiro/assets/images/user/7.jpg') }}">
+                                <div class="flex-grow-1">
+                                    <h3 class="mb-1">{{ Auth::user()->name }}</h3>
+                                    <p>{{ Auth::user()->role }}</p>
+                                </div>
+                            </div>
+                        </div>
 
-            <h3 class="card-title mt-4">{{ __('future::profile.email') }}</h3>
-            <p class="card-subtitle">{{ __('future::profile.email_subtitle') }}</p>
-            <div>
-                <div class="row g-2">
-                    <div class="col-auto">
-                        <input type="text" class="form-control w-auto" wire:model="email" value="{{ auth()->user()->email }}">
-                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn" wire:click="updateEmail">
-                            {{ __('future::profile.change') }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <h3 class="card-title mt-4">{{ __('future::profile.password') }}</h3>
-            <p class="card-subtitle">{{ __('future::profile.password_subtitle') }}</p>
-            <div>
-                <a href="#" class="btn">
-                    {{ __('future::profile.set_new_password') }}
-                </a>
+                    <form wire:submit.prevent="updatePassword">
+                        <div class="mb-3">
+                            <label class="form-label">Current Password</label>
+                            <input class="form-control" type="password" wire:model.defer="currentPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input class="form-control" type="password" wire:model.defer="newPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm New Password</label>
+                            <input class="form-control" type="password" wire:model.defer="confirmNewPassword">
+                        </div>
+                        <div class="form-footer">
+                            <button class="btn btn-primary btn-block" type="submit">Save</button>
+                        </div>
+                    </form>
             </div>
         </div>
-        <div class="card-footer bg-transparent mt-auto">
-            <div class="btn-list justify-content-start">
-                <button type="submit" class="btn btn-primary" x-show="isEdit == true">
-                    {{ __('future::profile.submit') }}
-                </button>
-                <button type="button" class="btn btn-secondary" x-show="isEdit == true" x-on:click="isEdit = !isEdit">
-                    {{ __('future::profile.close') }}
-                </button>
-                <button type="button" class="btn btn-primary" x-show="isEdit == false" x-on:click="isEdit = !isEdit">
-                    {{ __('future::profile.edit') }}
-                </button>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>

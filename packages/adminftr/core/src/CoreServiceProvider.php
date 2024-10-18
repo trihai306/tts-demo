@@ -7,6 +7,7 @@ use Adminftr\Core\Future\Admin\MenuHeader;
 use Adminftr\Core\Future\Admin\Notifications;
 use Adminftr\Core\Future\Admin\NotificationsHeader;
 use Adminftr\Core\Future\Admin\Profile;
+use Adminftr\Core\Future\Admin\SidebarMenu;
 use Adminftr\Core\Future\Auth\ForgotPassword;
 use Adminftr\Core\Future\Auth\Login;
 use Adminftr\Core\Future\Dashboard;
@@ -33,6 +34,7 @@ class CoreServiceProvider extends ServiceProvider
         Livewire::component('future::admin.dashboard', Dashboard::class);
         Livewire::component('future::admin.menu', Menu::class);
         Livewire::component('future::admin.file-manager', FileManager::class);
+        Livewire::component('future::admin.sidebar', SidebarMenu::class);
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'future');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

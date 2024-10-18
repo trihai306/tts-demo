@@ -8917,7 +8917,7 @@ textarea.form-control-lg {
 
 .text-white {
     --bs-text-opacity: 1;
-    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important
+    color: #fff !important
 }
 
 .text-body {
@@ -13245,8 +13245,8 @@ textarea.form-control-lg {
 }
 
 :root {
-    --white: #fff;
-    --black: #000;
+    --white: #FFFFFF;
+    --black: #000000;
     --body-font-color: #292929;
     --shape-border: #e5e5e5;
     --scrollbar-color: #aeaeae;
@@ -13289,7 +13289,7 @@ textarea.form-control-lg {
     --pitch-color: #fe8a7d;
     --categorie-hover: #f4f5f8;
     --color-fiord: #455a64;
-    --dropdown-menu: #2b2b2b;
+    --dropdown-menu: #000000;
     --dropdown-bg-color: #f9f9f9;
     --dropdown-content-color: #f2f2f2;
     --dropdown-toggle: #308e87;
@@ -13334,8 +13334,8 @@ textarea.form-control-lg {
 .dark-only, .dark-sidebar .logo-wrapper, .dark-sidebar .page-sidebar {
     --black: #fff;
     --white: #24303f;
-    --font-color: #7c7a7a;
-    --dark: #9d9999;
+    --font-color: #6c7a91;
+    --dark: #d6d8e2;
     --body-font-color: #e2e2e2;
     --light-gray-color: #f1f1f1;
     --gray-700: #a7a7a7;
@@ -13364,7 +13364,7 @@ textarea.form-control-lg {
     --bs-body-bg: rgb(36 48 63);
     --bs-heading-color: #c6c6c6;
     --bs-body-color: #b6b0b0;
-    --bs-border-color: #474545;
+    --bs-border-color: #fff;
     --bs-white-rgb: #0e0f0f;
     --bs-popover-header-bg: #0e0f0f;
     --bs-toast-header-bg: #0e0f0f;
@@ -15788,7 +15788,7 @@ input:focus {
 
 .custom-menu {
     background: var(--white);
-    border-radius: 20px;
+    border-radius: 0.375rem;
     margin-top: 20px;
     opacity: 0;
     position: absolute;
@@ -15819,11 +15819,11 @@ input:focus {
 
 .dropdown .dropdown-toggle {
     background-color: rgba(48, 142, 135, .08);
-    border-radius: 10px;
+    border-radius: 0.375rem;
     color: var(--theme-default);
     padding: 5px 10px;
     text-align: left;
-    width: 100px
+    width:150px
 }
 
 .dropdown .dropdown-toggle:after {
@@ -15844,7 +15844,7 @@ input:focus {
 
 .dropdown-menu {
     border: none;
-    box-shadow: 0 0 20px rgba(89, 102, 122, .1);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.07),0 6px 30px 5px rgba(0, 0, 0, 0.06),0 8px 10px -5px rgba(0, 0, 0, 0.1);
     font-family: Rubik, sans-serif
 }
 
@@ -16872,7 +16872,7 @@ body.modal-open .select2-container--open .select2-dropdown {
 
 .card {
     /*border: unset;*/
-    border-radius: 0.7rem;
+    border-radius: 0.375rem;
     letter-spacing: .5px;
     margin-bottom: 30px;
     transition: all .3s ease
@@ -29110,7 +29110,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
 }
 
 .sidebar-menu {
-    display: flex;
+    /*display: flex;*/
     height: calc(100vh - 70px);
     overflow: auto;
     padding: 15px 25px;
@@ -34769,7 +34769,6 @@ footer p .footer-icon {
 .default-dashboard .welcome-banner .welcome-card {
     align-items: center;
     background-color: var(--theme-default);
-    border-radius: 24px 24px 0 0;
     display: flex;
     height: 180px;
     overflow: hidden;
@@ -45634,7 +45633,6 @@ pre {
 }
 
 .general-widget .widget-1 {
-    background-image: url(images/widget-bg.png);
     background-size: cover;
     margin-bottom: 25px
 }

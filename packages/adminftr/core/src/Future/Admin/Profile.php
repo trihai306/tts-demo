@@ -3,50 +3,45 @@
 namespace Adminftr\Core\Future\Admin;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class Profile extends Component
 {
-    public $avatar;
-    public $email;
-    use WithFileUploads;
+    public $currentPassword;
+    public $newPassword;
+    public $confirmNewPassword;
 
     public function mount()
     {
-        $user = auth()->user();
-        $this->email = $user->email;
+        $this->avatar = Auth::user()->avatar;
+        $this->email = Auth::user()->email;
     }
 
-    public function updatedAvatar()
+    public function updatePassword()
     {
-        $this->validate(['avatar' => 'image|max:2048']);
-        if ($this->avatar && $this->avatar->isValid()) {
-            $fileName = $this->avatar->store('avatars', 'private');
-            auth()->user()->update(['avatar' => $fileName]);
-            $this->dispatch('swalSuccess',[
-                'message' => 'Avatar updated successfully!'
-            ]);
-        }
-    }
-
-    public function updateEmail()
-    {
-        $this->validate(['email' => 'required|email|unique:users,email,' . auth()->id(),]);
         try {
-            auth()->user()->update(['email' => $this->email]);
-            $this->dispatch('swalSuccess',[
-                'message' => 'Email updated successfully!'
+            $this->validate([
+                'currentPassword' => 'required',
+                'newPassword' => 'required|min:8',
+                'confirmNewPassword' => 'required|same:newPassword',
             ]);
-        }catch (\Exception $e) {
-            $this->dispatch('swalError',[
-                'message' => $e->getMessage()
+
+            if (!Hash::check($this->currentPassword, Auth::user()->password)) {
+                $this->addError('currentPassword', 'Your current password does not match our records.');
+                return;
+            }
+
+            Auth::user()->update([
+                'password' => Hash::make($this->newPassword)
             ]);
+
+            $this->currentPassword = '';
+            $this->newPassword = '';
+            $this->confirmNewPassword = '';
+        }catch(\Exception $e){
+            $this->addError('currentPassword', $e->getMessage());
         }
-    }
-
-    public function updateProfile()
-    {
-
     }
 
     public function render()

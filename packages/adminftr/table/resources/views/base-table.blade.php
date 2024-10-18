@@ -6,7 +6,7 @@
     @endif
     <div class="card rounded position-relative rounded-2" style="font-size: 14px">
         @include('future::table-header')
-        <div class="table-responsive table-loading py-0">
+        <div class="table-loading py-0">
             <table class="table card-table table-vcenter align-middle table-row-dashed gy-5 base-table">
                 @include('future::table-head')
                 @include('future::table-body')

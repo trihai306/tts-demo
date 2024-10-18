@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="{{ asset('admiro/assets/css/vendors/tagify.css') }}"/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('admiro/assets/css/fontawesome-min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('admiro/assets/css/vendors/filepond.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('admiro/assets/css/vendors/flatpickr/flatpickr.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('admiro/assets/css/vendors/filepond-plugin-image-preview.css') }}"/>
     <!-- Weather Icon css -->
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admiro/assets/css/vendors/weather-icons/weather-icons.min.css') }}"/>
@@ -44,6 +47,7 @@
           integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     @livewireStyles
 </head>
 
@@ -53,10 +57,6 @@
 <div class="tap-top"><i class="iconly-Arrow-Up icli"></i></div>
 
 <!-- tap on tap ends-->
-<!-- loader-->
-{{--<div class="loader-wrapper">--}}
-{{--    <div class="loader"><span></span><span></span><span></span><span></span><span></span></div>--}}
-{{--</div>--}}
 <div class="page-wrapper compact-wrapper" id="pageWrapper">
     @include('future::app.demo.header')
     <!-- Page Body Start-->
@@ -242,6 +242,13 @@
 <script data-navigate-once src="{{ asset('admiro/assets/js/animation/tilt/tilt-custom.js') }}"></script>
 <!-- custom script -->
 <script data-navigate-once src="{{ asset('admiro/assets/js/script.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/filepond/filepond-plugin-image-preview.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/filepond/filepond-plugin-file-rename.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/filepond/filepond-plugin-image-transform.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/filepond/filepond.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/filepond/custom-filepond.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/sweetalert/sweetalert2.min.js') }}"></script>
+<script data-navigate-once src="{{ asset('admiro/assets/js/flat-pickr/flatpickr.js') }}"></script>
 @livewireScriptConfig
 </body>
 </html>
