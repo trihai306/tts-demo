@@ -26,6 +26,7 @@
 	 where style seamlessly meets functionality, ensuring a captivating and user-friendly eCommerce journey through the lush world of plants.">
 
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- TWITTER META -->
     <meta name="twitter:title" content="PlantZone: Shop &amp; eCommerce Bootstrap HTML Template | DexignZone">
     <meta name="twitter:description" content="Elevate your online retail presence with PlantZone Shop &amp; eCommerce HTML Template. Meticulously crafted, this responsive and feature-rich template offers a seamless and visually stunning shopping
@@ -61,6 +62,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('shop/libs/toastr/toastr.min.css') }}">
+
+    @yield('page-style')
+
     @livewireStyles
 </head>
 <body id="bg" class="">
@@ -261,6 +266,8 @@
 <script src="{{ asset('shop/js/lg-zoom.min.js') }}"></script>
 <script src="{{ asset('shop/js/dz.ajax.js') }}"></script><!-- AJAX -->
 <script src="{{ asset('shop/js/custom.js') }}"></script><!-- CUSTOM JS -->
+<script src="{{ asset('shop/libs/toastr/toastr.min.js') }}"></script><!-- CUSTOM JS -->
+<script src="{{ URL::asset('shop/page_js/home.js') }}"></script>
 @yield('script')
 @livewireScripts
 <div class="lg-container  " id="lg-container-1" tabindex="-1" aria-modal="true" role="dialog">

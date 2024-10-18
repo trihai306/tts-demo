@@ -49,7 +49,7 @@
                     </ul>
                     <div class="cart-total">
                         <h5 class="mb-0">Subtotal:</h5>
-                        <h5 class="mb-0">${{ $totalAmount }}</h5>
+                        <h5 class="mb-0 cart-total-price">${{ $totalAmount }}</h5>
                     </div>
                     <div class="mt-auto">
                         <a href="/checkout" class="btn btn-outline-secondary btn-block m-b20">Checkout</a>

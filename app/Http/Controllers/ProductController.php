@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -94,5 +98,90 @@ class ProductController extends Controller
         return response()->json([
             'products' => Product::orderBy('created_at', 'desc')->take(3)->get(),
         ]);
+    }
+
+    public function getCartProducts(Request $request)
+    {
+        $cart = $request->input('cart');
+
+        if (!$cart) {
+            return response()->json([
+                'success' => true,
+                'products' => [],
+            ]);
+        }
+
+        $productIds = array_column($cart, 'id');
+        $products = Product::whereIn('id', $productIds)->get();
+        return response()->json([
+            'success' => true,
+            'products' => $products
+        ]);
+    }
+
+    public function checkout(Request $request)
+    {
+        return view('screen.client.checkout.checkout');
+    }
+
+    public function postCheckout(CheckoutRequest $request)
+    {
+            DB::beginTransaction();
+
+            try {
+
+                $totalAmount = 0;
+
+                foreach ($request->products as $cartProduct) {
+                    $product = Product::find($cartProduct['id']);
+
+                    if (!$product) {
+                        return response()->json(['error' => 'Failed to create order', 'message' => $e->getMessage()], 400);
+                    }
+
+                    $price = $product->price;
+                    if ($product->special_price && $product->special_price_from <= Carbon::now() && $product->special_price_to >= Carbon::now()) {
+                        $price = $product->special_price;
+                    }
+
+                    $totalAmount += $price * $cartProduct['quantity'];
+                }
+
+                $order = Order::create([
+                    'user_id' => 1,
+                    'firstname' => $request->firstname,
+                    'lastname' => $request->lastname,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'total_amount' => $totalAmount,
+                    'status' => 1,
+                    'payment_method' => $request->payment_method,
+                    'shipping_address' => 1,
+                    'billing_address' => 1,
+                    'order_date' => now()
+                ]);
+
+                foreach ($request->products as $cartProduct) {
+                    $product = Product::findOrFail($cartProduct['id']);
+
+                    $price = $product->price;
+                    if ($product->special_price && $product->special_price_from <= Carbon::now() && $product->special_price_to >= Carbon::now()) {
+                        $price = $product->special_price;
+                    }
+
+                    $order->products()->attach($product->id, [
+                        'quantity' => $cartProduct['quantity'],
+                        'price' => $price * $cartProduct['quantity'],  // Giá nhân số lượng
+                    ]);
+                }
+                DB::commit();
+
+                return $this->sendSuccess('', 200, 'Order created successfully');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::error("Error checkout: " . $e->getMessage());
+                return $this->sendError('', 400, "Failed to create order");
+            }
     }
 }
